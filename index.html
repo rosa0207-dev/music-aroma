@@ -1,0 +1,2871 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MUSIC AROMA · 音乐香氛疗愈</title>
+  <meta name="description" content="一瓶精油 · 一首音乐 · 一段护肤操 —— 在香气与旋律中,给身心一场温柔的疗愈。" />
+  <link rel="stylesheet" href="styles.css?v=601" />
+  <!-- 全站手写体: 霞鹜文楷(随性放松,治愈感) —— 异步加载, CDN 不通时自动用系统字体兜底, 页面绝不白屏 -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/dancing-script@5/700.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant@5/600.css" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/dancing-script@5/700.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant@5/600.css" />
+  </noscript>
+  <!-- 疗愈社区: Supabase 云端(群聊 · 好友 · 私聊), 加载失败会自动降级为「社区准备中」 -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <!-- 水彩手绘滤镜 / 渐变(共享 defs) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <radialGradient id="wnight" cx="50%" cy="40%" r="75%">
+        <stop offset="0" stop-color="#8C7BC8" stop-opacity="0.55" />
+        <stop offset="1" stop-color="#8C7BC8" stop-opacity="0" />
+      </radialGradient>
+      <radialGradient id="wbreeze" cx="50%" cy="50%" r="75%">
+        <stop offset="0" stop-color="#8FC3A8" stop-opacity="0.5" />
+        <stop offset="1" stop-color="#8FC3A8" stop-opacity="0" />
+      </radialGradient>
+      <radialGradient id="wsun" cx="50%" cy="50%" r="75%">
+        <stop offset="0" stop-color="#F4B85F" stop-opacity="0.6" />
+        <stop offset="1" stop-color="#F4B85F" stop-opacity="0" />
+      </radialGradient>
+      <radialGradient id="wtea" cx="50%" cy="50%" r="75%">
+        <stop offset="0" stop-color="#B98B5E" stop-opacity="0.5" />
+        <stop offset="1" stop-color="#B98B5E" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+  </svg>
+
+  <!-- 顶部导航 -->
+  <header class="topbar">
+    <a href="#home" class="brand-mini" aria-label="返回首页">
+      <svg class="mini-bottle" viewBox="0 0 24 30" aria-hidden="true">
+        <defs>
+          <linearGradient id="miniLiquid" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#B49AF0" />
+            <stop offset="1" stop-color="#5FD0CE" />
+          </linearGradient>
+          <radialGradient id="miniOrb" cx="35%" cy="30%" r="80%">
+            <stop offset="0" stop-color="#FFFFFF" />
+            <stop offset="60%" stop-color="#D8C0F5" />
+            <stop offset="100%" stop-color="#9A78E0" />
+          </radialGradient>
+        </defs>
+        <!-- 发光瓶塞宝珠 -->
+        <circle cx="12" cy="2.6" r="2" fill="url(#miniOrb)" />
+        <!-- 瓶颈 + 圆瓶身 -->
+        <path d="M10.6 4.6 L13.4 4.6 L13.9 9.2 C17.6 10.6 20 13.8 20 17.6 C20 23.3 16.4 27.4 12 27.4 C7.6 27.4 4 23.3 4 17.6 C4 13.8 6.4 10.6 10.1 9.2 Z"
+              fill="rgba(255,255,255,0.55)" />
+        <!-- 魔法液体 -->
+        <path d="M5.3 13.6 C5.3 12.8 6 12.3 6.8 12.5 C10.2 13.3 13.8 13.3 17.2 12.5 C18 12.3 18.7 12.8 18.7 13.6 L18.7 17.6 C18.7 22.5 15.7 26.4 12 26.4 C8.3 26.4 5.3 22.5 5.3 17.6 Z"
+              fill="url(#miniLiquid)" />
+        <!-- 气泡 -->
+        <circle cx="9.4" cy="19.2" r="1" fill="#fff" opacity="0.85" />
+        <circle cx="14.6" cy="21.4" r="0.8" fill="#fff" opacity="0.75" />
+        <!-- 闪光星 -->
+        <path d="M19.6 5.2 L20.2 7 L22 7.6 L20.2 8.2 L19.6 10 L19 8.2 L17.2 7.6 L19 7 Z" fill="#F0D08C" />
+      </svg>
+      <span class="brand-mini-text">MUSIC&nbsp;AROMA</span>
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="#home" class="nav-link active">首页</a>
+      <a href="#shop" class="nav-link">购买方案</a>
+      <a href="#healing" class="nav-link">疗愈之旅</a>
+      <a href="#games" class="nav-link">解压游戏</a>
+      <a href="#asmr" class="nav-link">ASMR</a>
+      <a href="#account" class="nav-link">我的</a>
+      <a href="#community" class="nav-link">疗愈社区<i class="cm-navdot" id="cmNavDot" hidden></i></a>
+      <a href="#pets" class="nav-link">疗愈小宠</a>
+      <a href="#settings" class="nav-link">设置</a>
+      <a href="#about" class="nav-link">关于</a>
+      <a href="#account" class="nav-avatar" id="navAvatar" aria-label="我的账号">🌙</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============== 首页 / Hero ============== -->
+    <section id="home" class="view active" aria-label="首页">
+      <div class="hero">
+        <!-- 玻璃瓶 Logo -->
+        <div class="logo-wrap is-empty" role="img" aria-label="MUSIC AROMA 玻璃瓶 Logo">
+                    <svg viewBox="0 0 440 700" class="bottle-svg" aria-hidden="true">
+                      <defs>
+                        <!-- ===== 无边界烟雾 mask:瓶口最实,向上无限消散 ===== -->
+                        <!-- ===== 烟雾消散遮罩: 上下+左右均无硬边界 ===== -->
+                        <!-- 纵向: 瓶口处浓, 向上渐隐(飘出感) -->
+                        <linearGradient id="fadeV" x1="0" y1="288" x2="0" y2="16" gradientUnits="userSpaceOnUse">
+                          <stop offset="0"    stop-color="#ffffff" stop-opacity="1" />
+                          <stop offset="0.55" stop-color="#ffffff" stop-opacity="0.82" />
+                          <stop offset="0.82" stop-color="#ffffff" stop-opacity="0.4" />
+                          <stop offset="1"    stop-color="#ffffff" stop-opacity="0" />
+                        </linearGradient>
+                        <!-- 横向: 中央浓, 两侧渐隐(去左右边界, 加宽容带) -->
+                        <linearGradient id="fadeH" x1="40" y1="0" x2="400" y2="0" gradientUnits="userSpaceOnUse">
+                          <stop offset="0"    stop-color="#ffffff" stop-opacity="0" />
+                          <stop offset="0.16" stop-color="#ffffff" stop-opacity="1" />
+                          <stop offset="0.84" stop-color="#ffffff" stop-opacity="1" />
+                          <stop offset="1"    stop-color="#ffffff" stop-opacity="0" />
+                        </linearGradient>
+                        <mask id="maskV" maskUnits="userSpaceOnUse" x="0" y="0" width="440" height="700">
+                          <rect x="0" y="0" width="440" height="700" fill="url(#fadeV)" />
+                        </mask>
+                        <mask id="maskH" maskUnits="userSpaceOnUse" x="0" y="0" width="440" height="700">
+                          <rect x="0" y="0" width="440" height="700" fill="url(#fadeH)" />
+                        </mask>
+
+                        <!-- ===== 液体:紫→青魔法渐变(饱和) ===== -->
+                        <linearGradient id="potion" x1="0" y1="392" x2="0" y2="585" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stop-color="#CFA6F2" />
+                          <stop offset="0.35" stop-color="#9F86EC" />
+                          <stop offset="0.68" stop-color="#7D9BE8" />
+                          <stop offset="1" stop-color="#5FD0CE" />
+                        </linearGradient>
+                        <!-- 液面亮色 -->
+                        <linearGradient id="surfaceG" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0" stop-color="#F2E4FC" />
+                          <stop offset="1" stop-color="#DCC8F8" />
+                        </linearGradient>
+                        <!-- ===== 玻璃本体:横向折射(边缘聚光-中央透) ===== -->
+                        <linearGradient id="glassGrad" x1="0" y1="0" x2="100%" y2="0">
+                          <stop offset="0" stop-color="#ffffff" stop-opacity="0.95" />
+                          <stop offset="12%" stop-color="#ffffff" stop-opacity="0.28" />
+                          <stop offset="26%" stop-color="#ffffff" stop-opacity="0.07" />
+                          <stop offset="74%" stop-color="#ffffff" stop-opacity="0.07" />
+                          <stop offset="88%" stop-color="#ffffff" stop-opacity="0.3" />
+                          <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95" />
+                        </linearGradient>
+                        <!-- ===== 瓶塞宝珠:发光球体 ===== -->
+                        <radialGradient id="orbGrad" cx="35%" cy="30%" r="80%">
+                          <stop offset="0" stop-color="#FFFFFF" />
+                          <stop offset="30%" stop-color="#E2D0FA" />
+                          <stop offset="70%" stop-color="#B490EC" />
+                          <stop offset="100%" stop-color="#8A66D8" />
+                        </radialGradient>
+                        <radialGradient id="orbHalo" cx="50%" cy="50%" r="50%">
+                          <stop offset="0" stop-color="#D8BCF5" stop-opacity="0.85" />
+                          <stop offset="60%" stop-color="#D8BCF5" stop-opacity="0.28" />
+                          <stop offset="100%" stop-color="#D8BCF5" stop-opacity="0" />
+                        </radialGradient>
+                        <!-- ===== 整体光晕:让瓶子从背景里"亮"出来 ===== -->
+                        <radialGradient id="auraGrad" cx="50%" cy="50%" r="50%">
+                          <stop offset="0" stop-color="#E6DCF8" stop-opacity="0.75" />
+                          <stop offset="45%" stop-color="#DCEEF2" stop-opacity="0.4" />
+                          <stop offset="100%" stop-color="#DCEEF2" stop-opacity="0" />
+                        </radialGradient>
+                        <!-- 液体内部光斑 -->
+                        <radialGradient id="innerGlow" cx="50%" cy="50%" r="50%">
+                          <stop offset="0" stop-color="#ffffff" stop-opacity="0.5" />
+                          <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                        </radialGradient>
+                        <!-- ===== 发光滤镜 ===== -->
+                        <filter id="smokeBlur" x="-80%" y="-40%" width="260%" height="180%">
+                          <feGaussianBlur stdDeviation="7" />
+                        </filter>
+                        <filter id="hlBlur" x="-60%" y="-60%" width="220%" height="220%">
+                          <feGaussianBlur stdDeviation="2.4" />
+                        </filter>
+                        <filter id="noteGlow" x="-80%" y="-80%" width="260%" height="260%">
+                          <feGaussianBlur stdDeviation="2.6" result="b" />
+                          <feMerge>
+                            <feMergeNode in="b" />
+                            <feMergeNode in="SourceGraphic" />
+                          </feMerge>
+                        </filter>
+                        <filter id="shBlur" x="-50%" y="-50%" width="200%" height="200%">
+                          <feGaussianBlur stdDeviation="4" />
+                        </filter>
+                        <!-- ===== 瓶身裁剪(液体贴形) ===== -->
+                        <clipPath id="bodyClip">
+                          <path d="M 202 300
+                                   C 196 302, 168 314, 146 336
+                                   C 122 360, 108 396, 108 434
+                                   C 108 486, 128 540, 170 566
+                                   C 190 578, 205 582, 220 582
+                                   C 235 582, 250 578, 270 566
+                                   C 312 540, 332 486, 332 434
+                                   C 332 396, 318 360, 294 336
+                                   C 272 314, 244 302, 238 300
+                                   C 232 298, 208 298, 202 300 Z" />
+                        </clipPath>
+
+                        <!-- ===== 一股彩烟:垂直渐变(底紫→中蓝→顶青) ===== -->
+                        <linearGradient id="smokeG" x1="0" y1="265" x2="0" y2="30" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stop-color="#B89AF0" />
+                          <stop offset="0.45" stop-color="#92ACEC" />
+                          <stop offset="1" stop-color="#7CD8D2" />
+                        </linearGradient>
+                        <!-- 上涌烟团渐变(紫) -->
+                        <radialGradient id="puffP" cx="50%" cy="50%" r="50%">
+                          <stop offset="0" stop-color="#C6ABF2" stop-opacity="0.85" />
+                          <stop offset="70%" stop-color="#C6ABF2" stop-opacity="0.35" />
+                          <stop offset="100%" stop-color="#C6ABF2" stop-opacity="0" />
+                        </radialGradient>
+                        <!-- 上涌烟团渐变(青) -->
+                        <radialGradient id="puffT" cx="50%" cy="50%" r="50%">
+                          <stop offset="0" stop-color="#8FDCD6" stop-opacity="0.8" />
+                          <stop offset="70%" stop-color="#8FDCD6" stop-opacity="0.3" />
+                          <stop offset="100%" stop-color="#8FDCD6" stop-opacity="0" />
+                        </radialGradient>
+                        <!-- 烟雾第二色(淡紫→樱粉→暖桃) -->
+                        <linearGradient id="smokeG2" x1="0" y1="265" x2="0" y2="30" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stop-color="#D9C2F2" />
+                          <stop offset="0.5" stop-color="#F0C2DE" />
+                          <stop offset="1" stop-color="#F6D9C8" />
+                        </linearGradient>
+                        <!-- 烟雾第三色(青→冰蓝→白) -->
+                        <linearGradient id="smokeG3" x1="0" y1="265" x2="0" y2="30" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stop-color="#8FDCD6" />
+                          <stop offset="0.5" stop-color="#AEE9EC" />
+                          <stop offset="1" stop-color="#DDF6F4" />
+                        </linearGradient>
+                        <!-- 上涌烟团渐变(粉) -->
+                        <radialGradient id="puffPk" cx="50%" cy="50%" r="50%">
+                          <stop offset="0" stop-color="#F0BBD8" stop-opacity="0.78" />
+                          <stop offset="70%" stop-color="#F0BBD8" stop-opacity="0.3" />
+                          <stop offset="100%" stop-color="#F0BBD8" stop-opacity="0" />
+                        </radialGradient>
+                        <!-- 上涌烟团渐变(金) -->
+                        <radialGradient id="puffC" cx="50%" cy="50%" r="50%">
+                          <stop offset="0" stop-color="#EAD9A8" stop-opacity="0.75" />
+                          <stop offset="70%" stop-color="#EAD9A8" stop-opacity="0.28" />
+                          <stop offset="100%" stop-color="#EAD9A8" stop-opacity="0" />
+                        </radialGradient>
+                        <!-- 水晶音符渐变 -->
+                        <radialGradient id="crystalGrad" cx="35%" cy="32%" r="75%">
+                          <stop offset="0" stop-color="#FFFFFF" />
+                          <stop offset="55%" stop-color="#EADFFA" />
+                          <stop offset="100%" stop-color="#C4A8EE" />
+                        </radialGradient>
+                        <!-- 淡蓝色水晶音符渐变(挂在五线谱上方的清爽色调) -->
+                        <radialGradient id="crystalBlueGrad" cx="35%" cy="32%" r="75%">
+                          <stop offset="0" stop-color="#EAF6FE" />
+                          <stop offset="55%" stop-color="#7AB8E0" />
+                          <stop offset="100%" stop-color="#3F84C2" />
+                        </radialGradient>
+                        <!-- 五线谱丝带渐变(左白→中淡紫→右白) -->
+                        <linearGradient id="ribbonG" x1="46" y1="0" x2="394" y2="0" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stop-color="#FFFFFF" />
+                          <stop offset="0.5" stop-color="#E6D8FA" />
+                          <stop offset="1" stop-color="#FFFFFF" />
+                        </linearGradient>
+                        <!-- 五线谱向上延伸: 竖向淡出(底实→顶虚, 飘入烟雾) -->
+                        <linearGradient id="tailGrad" x1="220" y1="388" x2="220" y2="262" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stop-color="#FBF4FF" stop-opacity="0.95" />
+                          <stop offset="0.55" stop-color="#E6D8FA" stop-opacity="0.6" />
+                          <stop offset="1" stop-color="#C4A8EE" stop-opacity="0" />
+                        </linearGradient>
+
+                        <!-- ===== 高级质感增强: 体积 / 镜面 / 焦散 / 投影 ===== -->
+                        <!-- 玻璃体积: 边缘冷调内阴影(厚度 / 圆润立体, 浅冷不发黑) -->
+                        <radialGradient id="thickGrad" cx="46%" cy="40%" r="66%">
+                          <stop offset="0" stop-color="#7C6FA8" stop-opacity="0" />
+                          <stop offset="72%" stop-color="#7C6FA8" stop-opacity="0" />
+                          <stop offset="100%" stop-color="#6E5F9C" stop-opacity="0.14" />
+                        </radialGradient>
+                        <!-- 液体深度: 底部加深为更饱和的靛蓝(体积感, 彩色不发黑) -->
+                        <linearGradient id="liquidDepth" x1="0" y1="466" x2="0" y2="584" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stop-color="#6655B8" stop-opacity="0" />
+                          <stop offset="1" stop-color="#5A4CB0" stop-opacity="0.30" />
+                        </linearGradient>
+                        <!-- 焦散亮斑(底部受光汇聚) -->
+                        <radialGradient id="caustic" cx="50%" cy="50%" r="50%">
+                          <stop offset="0" stop-color="#ffffff" stop-opacity="0.72" />
+                          <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                        </radialGradient>
+                        <!-- 宝珠底部冷色反光(环境光) -->
+                        <radialGradient id="orbRim" cx="50%" cy="76%" r="56%">
+                          <stop offset="0" stop-color="#BFE6F0" stop-opacity="0.6" />
+                          <stop offset="100%" stop-color="#BFE6F0" stop-opacity="0" />
+                        </radialGradient>
+                        <!-- 瓶身柔影(漂浮立体, 浅冷灰紫不发黑) -->
+                        <radialGradient id="bodyShadowGrad" cx="50%" cy="50%" r="50%">
+                          <stop offset="0" stop-color="#8B84AD" stop-opacity="0.13" />
+                          <stop offset="68%" stop-color="#8B84AD" stop-opacity="0.05" />
+                          <stop offset="100%" stop-color="#8B84AD" stop-opacity="0" />
+                        </radialGradient>
+                        <!-- 镜面高光锐化模糊 -->
+                        <filter id="specBlur" x="-60%" y="-60%" width="220%" height="220%">
+                          <feGaussianBlur stdDeviation="1.3" />
+                        </filter>
+                        <radialGradient id="dropGrad" cx="38%" cy="32%" r="70%">
+                          <stop offset="0" stop-color="#FFFFFF" />
+                          <stop offset="45%" stop-color="#CFF3EF" />
+                          <stop offset="100%" stop-color="#7CD8D2" />
+                        </radialGradient>
+                        <!-- 水晶切面棱镜色散(钻石火彩) -->
+                        <linearGradient id="prismGrad" x1="140" y1="310" x2="310" y2="570" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stop-color="#FFD9E8" stop-opacity="0.55" />
+                          <stop offset="0.35" stop-color="#D9E4FF" stop-opacity="0.45" />
+                          <stop offset="0.7" stop-color="#D9FFF2" stop-opacity="0.45" />
+                          <stop offset="1" stop-color="#FFF3C8" stop-opacity="0.4" />
+                        </linearGradient>
+                      </defs>
+
+                      <!-- ========= 整体光晕(吸睛底光) ========= -->
+                      <g class="aura-reveal">
+                      <ellipse class="aura" cx="220" cy="430" rx="196" ry="215" fill="url(#auraGrad)" />
+                      </g>
+
+                      <!-- ========= 魔法烟雾: 无上下左右边界, 飘逸涌出 ========= -->
+                      <g class="smoke-reveal">
+                      <g class="smoke-group" filter="url(#smokeBlur)">
+                        <g mask="url(#maskV)">
+                          <g mask="url(#maskH)">
+                            <!-- ===== 丝带烟体: 连续大 S 弯上升, 多层叠出厚度与卷曲 ===== -->
+                            <!-- 外层柔雾包络(最宽最淡) -->
+                            <path class="ribbon rb-outer" d="M 220 264 C 236 246, 242 214, 238 186 C 234 158, 204 144, 198 118 C 192 90, 216 54, 222 16"
+                                  stroke="url(#smokeG)" stroke-width="80" stroke-linecap="round" fill="none" opacity="0.2" />
+                            <!-- 中层 -->
+                            <path class="ribbon rb-mid" d="M 220 264 C 236 246, 242 214, 238 186 C 234 158, 204 144, 198 118 C 192 90, 216 54, 222 16"
+                                  stroke="url(#smokeG2)" stroke-width="40" stroke-linecap="round" fill="none" opacity="0.4" />
+                            <!-- 回声层(控制点整体右移, 形成丝带卷曲的另一面) -->
+                            <path class="ribbon rb-echo" d="M 228 264 C 244 246, 250 214, 246 186 C 242 158, 212 144, 206 118 C 200 90, 224 54, 230 16"
+                                  stroke="url(#smokeG3)" stroke-width="24" stroke-linecap="round" fill="none" opacity="0.34" />
+                            <!-- 锐利丝带芯(亮, 让 S 弯形状可读) -->
+                            <path class="ribbon rb-core" d="M 220 264 C 236 246, 242 214, 238 186 C 234 158, 204 144, 198 118 C 192 90, 216 54, 222 16"
+                                  stroke="#F3ECFF" stroke-width="13" stroke-linecap="round" fill="none" opacity="0.62" />
+
+                            <!-- ===== 流动光带: 沿丝带 S 弯向上涌动(飘出感) ===== -->
+                            <path class="plume-flow flow1" d="M 220 264 C 236 246, 242 214, 238 186 C 234 158, 204 144, 198 118 C 192 90, 216 54, 222 16"
+                                  stroke="url(#smokeG)" stroke-width="30" stroke-linecap="round" fill="none" opacity="0.58" />
+                            <path class="plume-flow flow2" d="M 220 264 C 236 246, 242 214, 238 186 C 234 158, 204 144, 198 118 C 192 90, 216 54, 222 16"
+                                  stroke="url(#smokeG3)" stroke-width="16" stroke-linecap="round" fill="none" opacity="0.55" />
+
+                            <!-- ===== 云雾 / 墨晕: 沿烟体分布的柔晕, 像墨滴入水化开的朵, 又像高空云絮 ===== -->
+                            <g class="puffs">
+                              <!-- 瓶口涌出 -->
+                              <ellipse class="puff pf1" cx="220" cy="250" rx="30" ry="34" fill="url(#puffP)" />
+                              <ellipse class="puff pf2" cx="236" cy="246" rx="22" ry="26" fill="url(#puffT)" />
+                              <ellipse class="puff pf3" cx="206" cy="248" rx="24" ry="28" fill="url(#puffPk)" />
+                              <ellipse class="puff pf4" cx="228" cy="252" rx="18" ry="22" fill="url(#puffC)" />
+                              <!-- 第一弯(右)墨晕 -->
+                              <ellipse class="puff pf5" cx="244" cy="200" rx="26" ry="30" fill="url(#puffP)" />
+                              <ellipse class="puff pf6" cx="250" cy="190" rx="18" ry="22" fill="url(#puffT)" />
+                              <!-- 第二弯(左)墨晕 -->
+                              <ellipse class="puff pf7" cx="196" cy="122" rx="26" ry="30" fill="url(#puffPk)" />
+                              <ellipse class="puff pf8" cx="190" cy="114" rx="18" ry="22" fill="url(#puffC)" />
+                              <!-- 上升中段墨晕(升入顶部消散) -->
+                              <ellipse class="puff pf9" cx="212" cy="78" rx="28" ry="32" fill="url(#puffP)" />
+                              <ellipse class="puff pf10" cx="232" cy="68" rx="22" ry="26" fill="url(#puffT)" />
+                            </g>
+
+                            <!-- ===== 墨丝: 极细飘散的丝缕, 像墨水在水中化开的须 ===== -->
+                            <g class="wisps" opacity="0.5">
+                              <path class="wisp w1" d="M 244 196 C 266 176, 272 146, 258 118" stroke="url(#smokeG3)" stroke-width="4" fill="none" stroke-linecap="round" />
+                              <path class="wisp w2" d="M 196 120 C 174 104, 168 78, 184 54" stroke="url(#smokeG2)" stroke-width="4" fill="none" stroke-linecap="round" />
+                              <path class="wisp w3" d="M 216 72 C 238 56, 246 38, 236 20" stroke="url(#smokeG)" stroke-width="3" fill="none" stroke-linecap="round" />
+                            </g>
+                          </g>
+                        </g>
+                      </g>
+                      </g>
+
+                      <!-- ========= 地面落影 ========= -->
+                      <ellipse cx="220" cy="552" rx="100" ry="13" fill="#B8A892" opacity="0.4" filter="url(#shBlur)" />
+                      <!-- ========= 瓶身柔影(漂浮立体感) ========= -->
+                      <ellipse cx="220" cy="415" rx="124" ry="145" fill="url(#bodyShadowGrad)" filter="url(#shBlur)" />
+
+                      <!-- ========= 圆魔法药水瓶 ========= -->
+                      <g class="bottle-scale" transform="matrix(1.06,0,0,0.85,-13.2,45)">
+                      <g class="bottle">
+                        <!-- 瓶塞宝珠光晕 -->
+                        <circle class="orb-glow" cx="220" cy="228" r="30" fill="url(#orbHalo)" />
+
+                        <!-- ===== 五线谱丝带 · 后段(绕到瓶后,被液体与玻璃隐约遮住) ===== -->
+                        <g class="ribbon-reveal">
+                        <g class="ribbon-back" opacity="0.5">
+                          <!-- 斜绕一圈 · 瓶后(左低右高, 与前段连成一整环) -->
+                          <path d="M 394 452 C 340 442, 298 416, 220 436 C 142 455, 100 502, 46 543"
+                                stroke="#D8C8F0" stroke-width="1.5" fill="none" opacity="0.55" />
+                          <path d="M 394 458.5 C 340 448.5, 298 422.5, 220 442.5 C 142 461.5, 100 508.5, 46 549.5"
+                                stroke="#D8C8F0" stroke-width="1.5" fill="none" opacity="0.55" />
+                          <path d="M 394 465 C 340 455, 298 429, 220 449 C 142 468, 100 515, 46 556"
+                                stroke="#D8C8F0" stroke-width="1.5" fill="none" opacity="0.55" />
+                          <path d="M 394 471.5 C 340 461.5, 298 435.5, 220 455.5 C 142 474.5, 100 521.5, 46 562.5"
+                                stroke="#D8C8F0" stroke-width="1.5" fill="none" opacity="0.55" />
+                          <path d="M 394 478 C 340 468, 298 442, 220 462 C 142 481, 100 528, 46 569"
+                                stroke="#D8C8F0" stroke-width="1.5" fill="none" opacity="0.55" />
+                        </g>
+                        </g>
+
+                        <!-- ===== 瓶内液体(贴形裁剪) ===== -->
+                        <g clip-path="url(#bodyClip)">
+                          <g class="liquid-rise">
+                          <rect x="100" y="392" width="240" height="200" fill="url(#potion)" opacity="0.9" />
+                          <!-- 液面 -->
+                          <ellipse cx="220" cy="392" rx="116" ry="15" fill="url(#surfaceG)" opacity="0.95" />
+                          <ellipse cx="220" cy="392" rx="116" ry="15" fill="none" stroke="#ffffff" stroke-opacity="0.65" stroke-width="1.6" />
+                          <!-- 液面高光弧 -->
+                          <path d="M 148 391 Q 220 384 292 391" stroke="#ffffff" stroke-opacity="0.8" stroke-width="2.4" fill="none" stroke-linecap="round" />
+                          <!-- 内部光斑 -->
+                          <ellipse cx="220" cy="470" rx="88" ry="78" fill="url(#innerGlow)" />
+                          <!-- 液体深度 + 底部焦散(体积感) -->
+                          <rect x="100" y="466" width="240" height="120" fill="url(#liquidDepth)" />
+                          <ellipse cx="220" cy="560" rx="66" ry="15" fill="url(#caustic)" />
+                          <!-- 瓶内上升气泡 -->
+                          <g class="bubbles">
+                            <circle class="bubble bb1" cx="182" cy="520" r="5" fill="#ffffff" opacity="0.6" />
+                            <circle class="bubble bb2" cx="242" cy="532" r="4" fill="#ffffff" opacity="0.55" />
+                            <circle class="bubble bb3" cx="212" cy="548" r="6" fill="#ffffff" opacity="0.5" />
+                            <circle class="bubble bb4" cx="256" cy="512" r="3.5" fill="#ffffff" opacity="0.6" />
+                            <circle class="bubble bb5" cx="162" cy="536" r="4.5" fill="#ffffff" opacity="0.5" />
+                            <circle class="bubble bb6" cx="228" cy="500" r="3" fill="#ffffff" opacity="0.6" />
+                          </g>
+                          <!-- 液面下星星微光 -->
+                          <g class="liquid-stars">
+                            <g transform="translate(188 448)">
+                              <path class="sparkle sp5" d="M0 -7 C0.8 -2.5,2.5 -0.8,7 0 C2.5 0.8,0.8 2.5,0 7 C-0.8 2.5,-2.5 0.8,-7 0 C-2.5 -0.8,-0.8 -2.5,0 -7 Z" fill="#ffffff" opacity="0.9" />
+                            </g>
+                            <g transform="translate(252 486)">
+                              <path class="sparkle sp6" d="M0 -6 C0.7 -2.1,2.1 -0.7,6 0 C2.1 0.7,0.7 2.1,0 6 C-0.7 2.1,-2.1 0.7,-6 0 C-2.1 -0.7,-0.7 -2.1,0 -6 Z" fill="#ffffff" opacity="0.85" />
+                            </g>
+                            <g transform="translate(206 516)">
+                              <path class="sparkle sp7" d="M0 -5 C0.6 -1.8,1.8 -0.6,5 0 C1.8 0.6,0.6 1.8,0 5 C-0.6 1.8,-1.8 0.6,-5 0 C-1.8 -0.6,-0.6 -1.8,0 -5 Z" fill="#ffffff" opacity="0.8" />
+                            </g>
+                          </g>
+                          </g>
+                        </g>
+
+                        <!-- ===== 瓶身玻璃(无描边,靠边缘聚光表现) ===== -->
+                        <path d="M 202 300
+                                 C 196 302, 168 314, 146 336
+                                 C 122 360, 108 396, 108 434
+                                 C 108 486, 128 540, 170 566
+                                 C 190 578, 205 582, 220 582
+                                 C 235 582, 250 578, 270 566
+                                 C 312 540, 332 486, 332 434
+                                 C 332 396, 318 360, 294 336
+                                 C 272 314, 244 302, 238 300
+                                 C 232 298, 208 298, 202 300 Z"
+                              fill="url(#glassGrad)" fill-opacity="0.72" />
+                        <!-- 玻璃体积: 边缘内阴影(厚度 / 圆润) -->
+                        <path d="M 202 300
+                                 C 196 302, 168 314, 146 336
+                                 C 122 360, 108 396, 108 434
+                                 C 108 486, 128 540, 170 566
+                                 C 190 578, 205 582, 220 582
+                                 C 235 582, 250 578, 270 566
+                                 C 312 540, 332 486, 332 434
+                                 C 332 396, 318 360, 294 336
+                                 C 272 314, 244 302, 238 300
+                                 C 232 298, 208 298, 202 300 Z"
+                              fill="url(#thickGrad)" />
+
+                        <!-- ===== 水晶切面(钻石切割, 打破平滑表面) ===== -->
+                        <g clip-path="url(#bodyClip)">
+                          <!-- 相邻刻面微差明度(冠部: 肩→腰) -->
+                          <g fill="#ffffff">
+                            <polygon points="146,336 170,318 146,438 108,434" opacity="0.09" />
+                            <polygon points="196,308 220,305 220,441 183,440" opacity="0.06" />
+                            <polygon points="220,305 244,308 257,440 220,441" opacity="0.10" />
+                            <polygon points="244,308 270,318 294,438 257,440" opacity="0.05" />
+                            <polygon points="270,318 294,336 332,434 294,438" opacity="0.08" />
+                            <!-- 亭部(腰→底尖) -->
+                            <polygon points="108,434 146,438 220,578" opacity="0.05" />
+                            <polygon points="146,438 183,440 220,578" opacity="0.09" />
+                            <polygon points="183,440 220,441 220,578" opacity="0.05" />
+                            <polygon points="220,441 257,440 220,578" opacity="0.09" />
+                            <polygon points="257,440 294,438 220,578" opacity="0.05" />
+                            <polygon points="294,438 332,434 220,578" opacity="0.08" />
+                          </g>
+                          <!-- 棱镜火彩(主受光刻面) -->
+                          <polygon points="170,318 196,308 183,440 146,438" fill="url(#prismGrad)" opacity="0.55" />
+                          <polygon points="146,438 183,440 220,578" fill="url(#prismGrad)" opacity="0.3" />
+                          <!-- 刻面棱线(锐利, 无模糊) -->
+                          <g stroke="#ffffff" stroke-opacity="0.42" stroke-width="1" fill="none">
+                            <polyline points="146,336 170,318 196,308 220,305 244,308 270,318 294,336" />
+                            <line x1="146" y1="336" x2="108" y2="434" />
+                            <line x1="170" y1="318" x2="146" y2="438" />
+                            <line x1="196" y1="308" x2="183" y2="440" />
+                            <line x1="220" y1="305" x2="220" y2="441" />
+                            <line x1="244" y1="308" x2="257" y2="440" />
+                            <line x1="270" y1="318" x2="294" y2="438" />
+                            <line x1="294" y1="336" x2="332" y2="434" />
+                            <polyline points="108,434 146,438 183,440 220,441 257,440 294,438 332,434" />
+                            <line x1="108" y1="434" x2="220" y2="578" />
+                            <line x1="146" y1="438" x2="220" y2="578" />
+                            <line x1="183" y1="440" x2="220" y2="578" />
+                            <line x1="220" y1="441" x2="220" y2="578" />
+                            <line x1="257" y1="440" x2="220" y2="578" />
+                            <line x1="294" y1="438" x2="220" y2="578" />
+                            <line x1="332" y1="434" x2="220" y2="578" />
+                          </g>
+                          <!-- 刻面交点星芒(钻石闪光) -->
+                          <g fill="#ffffff">
+                            <g transform="translate(183 440) scale(0.55)">
+                              <path d="M0 -10 C1.2 -3.5,3.5 -1.2,10 0 C3.5 1.2,1.2 3.5,0 10 C-1.2 3.5,-3.5 1.2,-10 0 C-3.5 -1.2,-1.2 -3.5,0 -10 Z" opacity="0.85" />
+                            </g>
+                            <g transform="translate(257 440) scale(0.42)">
+                              <path d="M0 -10 C1.2 -3.5,3.5 -1.2,10 0 C3.5 1.2,1.2 3.5,0 10 C-1.2 3.5,-3.5 1.2,-10 0 C-3.5 -1.2,-1.2 -3.5,0 -10 Z" opacity="0.7" />
+                            </g>
+                            <g transform="translate(220 441) scale(0.48)">
+                              <path d="M0 -10 C1.2 -3.5,3.5 -1.2,10 0 C3.5 1.2,1.2 3.5,0 10 C-1.2 3.5,-3.5 1.2,-10 0 C-3.5 -1.2,-1.2 -3.5,0 -10 Z" opacity="0.78" />
+                            </g>
+                          </g>
+                        </g>
+
+                        <!-- ===== 玻璃高光(立体感) ===== -->
+                        <path class="hl hl-main" d="M 132 362 C 119 420, 121 500, 139 552"
+                              stroke="#ffffff" stroke-opacity="0.72" stroke-width="7.5"
+                              fill="none" stroke-linecap="round" filter="url(#hlBlur)" />
+                        <path class="hl hl-side" d="M 311 384 C 320 440, 318 508, 305 548"
+                              stroke="#ffffff" stroke-opacity="0.45" stroke-width="3.5"
+                              fill="none" stroke-linecap="round" filter="url(#hlBlur)" />
+                        <path class="hl hl-shoulder" d="M 158 332 Q 220 305 282 332"
+                              stroke="#ffffff" stroke-opacity="0.4" stroke-width="5"
+                              fill="none" stroke-linecap="round" filter="url(#hlBlur)" />
+                        <path class="hl hl-bottom" d="M 156 566 Q 220 582 284 566"
+                              stroke="#ffffff" stroke-opacity="0.5" stroke-width="5"
+                              fill="none" stroke-linecap="round" filter="url(#hlBlur)" />
+
+                        <!-- ===== 玻璃边缘聚光(替代描边,勾勒轮廓) ===== -->
+                        <path class="hl hl-edgeL" d="M 148 334 C 124 358, 110 394, 110 434 C 110 486, 130 540, 172 566"
+                              stroke="#ffffff" stroke-opacity="0.92" stroke-width="3"
+                              fill="none" stroke-linecap="round" filter="url(#hlBlur)" />
+                        <path class="hl hl-edgeR" d="M 292 334 C 316 358, 330 394, 330 434 C 330 486, 310 540, 268 566"
+                              stroke="#ffffff" stroke-opacity="0.6" stroke-width="2.4"
+                              fill="none" stroke-linecap="round" filter="url(#hlBlur)" />
+                        <!-- 镜面高光: 湿润玻璃的锐利反光 -->
+                        <path class="hl hl-spec" d="M 150 374 C 144 432, 145 500, 156 545"
+                              stroke="#ffffff" stroke-opacity="0.95" stroke-width="3.4"
+                              fill="none" stroke-linecap="round" filter="url(#specBlur)" />
+                        <path class="hl hl-spec2" d="M 168 392 C 164 440, 165 496, 172 532"
+                              stroke="#ffffff" stroke-opacity="0.5" stroke-width="1.8"
+                              fill="none" stroke-linecap="round" filter="url(#specBlur)" />
+                        <circle class="hl-spec" cx="151" cy="392" r="3.2" fill="#ffffff" opacity="0.95" filter="url(#specBlur)" />
+                        <!-- 右侧冷光描边(与环境分离,突出立体) -->
+                        <path class="hl hl-rimR" d="M 318 360 C 330 400, 330 470, 312 528"
+                              stroke="#BFD8F5" stroke-opacity="0.5" stroke-width="2.2"
+                              fill="none" stroke-linecap="round" filter="url(#hlBlur)" />
+
+                        <!-- ===== 五线谱丝带 · 前段(水晶质感,缠绕瓶身) ===== -->
+                        <g class="ribbon-reveal">
+                        <g class="ribbon-front" filter="url(#noteGlow)">
+                          <!-- 斜绕一圈 · 瓶前(左低右高, 像丝带斜系在瓶上) -->
+                          <path d="M 46 567 C 118 535, 158 499, 220 484 C 282 469, 322 477, 394 453"
+                                stroke="url(#ribbonG)" stroke-width="1.7" fill="none" opacity="0.78" />
+                          <path d="M 46 573.5 C 118 541.5, 158 505.5, 220 490.5 C 282 475.5, 322 483.5, 394 459.5"
+                                stroke="url(#ribbonG)" stroke-width="1.7" fill="none" opacity="0.78" />
+                          <path d="M 46 580 C 118 548, 158 512, 220 497 C 282 482, 322 490, 394 466"
+                                stroke="url(#ribbonG)" stroke-width="1.7" fill="none" opacity="0.78" />
+                          <path d="M 46 586.5 C 118 554.5, 158 518.5, 220 503.5 C 282 488.5, 322 496.5, 394 472.5"
+                                stroke="url(#ribbonG)" stroke-width="1.7" fill="none" opacity="0.78" />
+                          <path d="M 46 593 C 118 561, 158 525, 220 510 C 282 495, 322 503, 394 479"
+                                stroke="url(#ribbonG)" stroke-width="1.7" fill="none" opacity="0.78" />
+                          <!-- 流动光点(音乐在线谱上流动) -->
+                          <path class="ribbon-run" d="M 46 580 C 118 548, 158 512, 220 497 C 282 482, 322 490, 394 466"
+                                stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"
+                                stroke-dasharray="34 330" fill="none" opacity="0.9" />
+                          <path class="ribbon-run ribbon-run2" d="M 46 567 C 118 535, 158 499, 220 484 C 282 469, 322 477, 394 453"
+                                stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"
+                                stroke-dasharray="34 330" fill="none" opacity="0.9" />
+                        </g>
+
+                        <!-- 丝带上的水晶音符 -->
+                        <g transform="translate(160 506) rotate(-10) scale(0.9)">
+                          <g class="note-r" filter="url(#noteGlow)">
+                            <ellipse cx="0" cy="0" rx="6" ry="4.4" transform="rotate(-20 0 0)" fill="url(#crystalGrad)" />
+                            <ellipse cx="-1.8" cy="-1.4" rx="2" ry="1.4" fill="#ffffff" opacity="0.95" />
+                            <line x1="5" y1="0" x2="5" y2="-20" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" />
+                            <path d="M 5 -20 C 12.5 -17, 14.5 -8, 7.5 -2 C 11.5 -7, 9.5 -13, 5 -13 Z" fill="#FFFFFF" />
+                          </g>
+                        </g>
+                        <g transform="translate(268 478) rotate(-8) scale(0.95)">
+                          <g class="note-r nr2" filter="url(#noteGlow)">
+                            <ellipse cx="-5" cy="0" rx="5.4" ry="4" transform="rotate(-20 -5 0)" fill="url(#crystalGrad)" />
+                            <ellipse cx="-6.6" cy="-1.3" rx="1.8" ry="1.3" fill="#ffffff" opacity="0.95" />
+                            <line x1="-0.6" y1="0" x2="-0.6" y2="-18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+                            <ellipse cx="6" cy="2.5" rx="5.4" ry="4" transform="rotate(-20 6 2.5)" fill="url(#crystalGrad)" />
+                            <line x1="10.4" y1="2.5" x2="10.4" y2="-15.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+                            <path d="M -0.6 -18 Q 5 -22.5 10.4 -15.5 L 10.4 -10 Q 5 -14.5 -0.6 -11 Z" fill="#FFFFFF" />
+                        </g>
+                      </g>
+
+                        <!-- 五线谱上方: 淡蓝色水晶音符(沿丝带浮在线谱上方, 错峰闪烁) -->
+                        <g transform="translate(100 542) rotate(-14) scale(1.0)">
+                          <g class="note-r" filter="url(#noteGlow)" style="animation-delay:0.6s">
+                            <ellipse cx="0" cy="0" rx="6" ry="4.4" transform="rotate(-20 0 0)" fill="url(#crystalBlueGrad)" stroke="#FFFFFF" stroke-width="0.8" />
+                            <ellipse cx="-1.8" cy="-1.4" rx="2" ry="1.4" fill="#ffffff" opacity="0.95" />
+                            <line x1="5" y1="0" x2="5" y2="-20" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" />
+                            <path d="M 5 -20 C 12.5 -17, 14.5 -8, 7.5 -2 C 11.5 -7, 9.5 -13, 5 -13 Z" fill="#FFFFFF" />
+                          </g>
+                        </g>
+                        <g transform="translate(192 490) rotate(-4) scale(1.05)">
+                          <g class="note-r" filter="url(#noteGlow)" style="animation-delay:1.8s">
+                            <ellipse cx="0" cy="0" rx="6" ry="4.4" transform="rotate(-20 0 0)" fill="url(#crystalBlueGrad)" stroke="#FFFFFF" stroke-width="0.8" />
+                            <ellipse cx="-1.8" cy="-1.4" rx="2" ry="1.4" fill="#ffffff" opacity="0.95" />
+                            <line x1="5" y1="0" x2="5" y2="-20" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" />
+                            <path d="M 5 -20 C 12.5 -17, 14.5 -8, 7.5 -2 C 11.5 -7, 9.5 -13, 5 -13 Z" fill="#FFFFFF" />
+                          </g>
+                        </g>
+                        <g transform="translate(316 464) rotate(10) scale(1.0)">
+                          <g class="note-r" filter="url(#noteGlow)" style="animation-delay:3s">
+                            <ellipse cx="-5" cy="0" rx="5.4" ry="4" transform="rotate(-20 -5 0)" fill="url(#crystalBlueGrad)" stroke="#FFFFFF" stroke-width="0.8" />
+                            <ellipse cx="-6.6" cy="-1.3" rx="1.8" ry="1.3" fill="#ffffff" opacity="0.95" />
+                            <line x1="-0.6" y1="0" x2="-0.6" y2="-18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+                            <ellipse cx="6" cy="2.5" rx="5.4" ry="4" transform="rotate(-20 6 2.5)" fill="url(#crystalBlueGrad)" stroke="#FFFFFF" stroke-width="0.8" />
+                            <line x1="10.4" y1="2.5" x2="10.4" y2="-15.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+                            <path d="M -0.6 -18 Q 5 -22.5 10.4 -15.5 L 10.4 -10 Q 5 -14.5 -0.6 -11 Z" fill="#FFFFFF" />
+                          </g>
+                        </g>
+                        <g transform="translate(374 452) rotate(16) scale(0.92)">
+                          <g class="note-r" filter="url(#noteGlow)" style="animation-delay:4.2s">
+                            <ellipse cx="0" cy="0" rx="6" ry="4.4" transform="rotate(-20 0 0)" fill="url(#crystalBlueGrad)" stroke="#FFFFFF" stroke-width="0.8" />
+                            <ellipse cx="-1.8" cy="-1.4" rx="2" ry="1.4" fill="#ffffff" opacity="0.95" />
+                            <line x1="5" y1="0" x2="5" y2="-20" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" />
+                            <path d="M 5 -20 C 12.5 -17, 14.5 -8, 7.5 -2 C 11.5 -7, 9.5 -13, 5 -13 Z" fill="#FFFFFF" />
+                          </g>
+                        </g>
+                      </g>
+                      </g>
+
+                      <!-- ===== 瓶颈 ===== -->
+                        <path d="M 206 258 L 234 258 L 237 300 C 231 302, 209 302, 203 300 Z"
+                              fill="url(#glassGrad)" fill-opacity="0.65" />
+                        <path class="hl hl-neck" d="M 211 262 L 213 296"
+                              stroke="#ffffff" stroke-opacity="0.6" stroke-width="3"
+                              stroke-linecap="round" filter="url(#hlBlur)" />
+                        <path class="hl hl-neckR" d="M 228 262 L 227 294"
+                              stroke="#ffffff" stroke-opacity="0.4" stroke-width="2"
+                              stroke-linecap="round" filter="url(#hlBlur)" />
+                        <!-- 瓶口 -->
+                        <ellipse cx="220" cy="257" rx="19" ry="5.5" fill="#F2ECFD" opacity="0.9" />
+                        <ellipse cx="220" cy="257" rx="12" ry="3.2" fill="#C8B4E8" opacity="0.8" />
+
+                        <!-- ===== 水晶宝珠瓶塞 ===== -->
+                        <path d="M 209 247 L 231 247 L 229 256 L 211 256 Z"
+                              fill="url(#glassGrad)" fill-opacity="0.7" />
+                        <circle cx="220" cy="226" r="18" fill="url(#orbGrad)" />
+                        <ellipse cx="213" cy="219" rx="6" ry="4" fill="#ffffff" opacity="0.9" transform="rotate(-24 213 219)" />
+                        <circle cx="227" cy="233" r="1.8" fill="#F0E4FF" opacity="0.8" />
+                        <!-- 宝珠: 底部冷反光 + 切面高光 -->
+                        <circle cx="220" cy="226" r="18" fill="url(#orbRim)" />
+                        <path d="M 208 219 Q 220 212 232 221" stroke="#ffffff" stroke-opacity="0.8" stroke-width="1.4" fill="none" stroke-linecap="round" filter="url(#specBlur)" />
+                        <circle cx="215" cy="221" r="1.6" fill="#ffffff" opacity="1" />
+                        <g transform="translate(228 222)">
+                          <path class="sparkle sp8" d="M0 -5 C0.6 -1.8,1.8 -0.6,5 0 C1.8 0.6,0.6 1.8,0 5 C-0.6 1.8,-1.8 0.6,-5 0 C-1.8 -0.6,-0.6 -1.8,0 -5 Z" fill="#ffffff" opacity="0.95" />
+                        </g>
+
+                        <!-- ===== 五线谱向上延伸: 螺旋升腾, 飘入烟雾(飘逸美感) ===== -->
+                        <g class="ribbon-reveal">
+                          <path d="M 214 388 C 248 366, 250 330, 222 308 C 198 290, 206 274, 224 262"
+                                stroke="url(#tailGrad)" stroke-width="1.7" stroke-linecap="round" fill="none" />
+                          <path d="M 222 388 C 254 366, 254 332, 228 310 C 204 292, 212 276, 230 264"
+                                stroke="url(#tailGrad)" stroke-width="1.3" stroke-linecap="round" fill="none" />
+                          <path d="M 206 388 C 240 366, 242 328, 216 306 C 194 288, 202 272, 220 260"
+                                stroke="url(#tailGrad)" stroke-width="1.0" stroke-linecap="round" fill="none" />
+                          <!-- 向上延伸段的水晶音符 -->
+                          <g transform="translate(232 322) rotate(8) scale(0.6)">
+                            <g filter="url(#noteGlow)">
+                              <ellipse cx="0" cy="0" rx="6" ry="4.4" transform="rotate(-20 0 0)" fill="url(#crystalGrad)" />
+                              <ellipse cx="-1.8" cy="-1.4" rx="2" ry="1.4" fill="#ffffff" opacity="0.95" />
+                              <line x1="5" y1="0" x2="5" y2="-20" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" />
+                              <path d="M 5 -20 C 12.5 -17, 14.5 -8, 7.5 -2 C 11.5 -7, 9.5 -13, 5 -13 Z" fill="#FFFFFF" />
+                            </g>
+                          </g>
+                          <g transform="translate(214 286) rotate(-6) scale(0.5)">
+                            <g filter="url(#noteGlow)">
+                              <ellipse cx="0" cy="0" rx="6" ry="4.4" transform="rotate(-20 0 0)" fill="url(#crystalGrad)" />
+                              <ellipse cx="-1.8" cy="-1.4" rx="2" ry="1.4" fill="#ffffff" opacity="0.95" />
+                              <line x1="5" y1="0" x2="5" y2="-20" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" />
+                              <path d="M 5 -20 C 12.5 -17, 14.5 -8, 7.5 -2 C 11.5 -7, 9.5 -13, 5 -13 Z" fill="#FFFFFF" />
+                            </g>
+                          </g>
+                          <g transform="translate(244 298) rotate(14) scale(0.5)">
+                            <g filter="url(#noteGlow)">
+                              <ellipse cx="0" cy="0" rx="6" ry="4.4" transform="rotate(-20 0 0)" fill="url(#crystalGrad)" />
+                              <ellipse cx="-1.8" cy="-1.4" rx="2" ry="1.4" fill="#ffffff" opacity="0.95" />
+                              <line x1="5" y1="0" x2="5" y2="-20" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" />
+                              <path d="M 5 -20 C 12.5 -17, 14.5 -8, 7.5 -2 C 11.5 -7, 9.5 -13, 5 -13 Z" fill="#FFFFFF" />
+                            </g>
+                          </g>
+                          <g transform="translate(206 270) rotate(-12) scale(0.44)">
+                            <g filter="url(#noteGlow)">
+                              <ellipse cx="0" cy="0" rx="6" ry="4.4" transform="rotate(-20 0 0)" fill="url(#crystalGrad)" />
+                              <ellipse cx="-1.8" cy="-1.4" rx="2" ry="1.4" fill="#ffffff" opacity="0.95" />
+                              <line x1="5" y1="0" x2="5" y2="-20" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" />
+                              <path d="M 5 -20 C 12.5 -17, 14.5 -8, 7.5 -2 C 11.5 -7, 9.5 -13, 5 -13 Z" fill="#FFFFFF" />
+                            </g>
+                          </g>
+                          <g transform="translate(230 252) rotate(8) scale(0.38)">
+                            <g filter="url(#noteGlow)">
+                              <ellipse cx="0" cy="0" rx="6" ry="4.4" transform="rotate(-20 0 0)" fill="url(#crystalGrad)" />
+                              <ellipse cx="-1.8" cy="-1.4" rx="2" ry="1.4" fill="#ffffff" opacity="0.95" />
+                              <line x1="5" y1="0" x2="5" y2="-20" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" />
+                              <path d="M 5 -20 C 12.5 -17, 14.5 -8, 7.5 -2 C 11.5 -7, 9.5 -13, 5 -13 Z" fill="#FFFFFF" />
+                            </g>
+                          </g>
+                        </g>
+                      </g>
+                      </g>
+
+                      <!-- ========= 注入特效: 滴管 + 精油滴 + 光环(仅变身为播放一次) ========= -->
+                      <g class="dropper">
+                        <ellipse cx="220" cy="120" rx="30" ry="92" fill="url(#orbHalo)" opacity="0.45" filter="url(#shBlur)" />
+                        <ellipse cx="220" cy="64" rx="16" ry="22" fill="url(#glassGrad)" fill-opacity="0.72" />
+                        <ellipse cx="214" cy="56" rx="5" ry="9" fill="#ffffff" opacity="0.75" />
+                        <rect x="216.5" y="84" width="7" height="112" rx="3.5" fill="url(#glassGrad)" fill-opacity="0.55" />
+                        <rect x="219" y="90" width="2" height="100" rx="1" fill="#ffffff" opacity="0.6" />
+                        <path d="M216 196 Q220 212 224 196 Z" fill="url(#glassGrad)" fill-opacity="0.72" />
+                      </g>
+                      <circle class="injector-drop" cx="220" cy="206" r="5.5" fill="url(#dropGrad)" />
+                      <circle class="injector-ring" cx="220" cy="262" r="7" fill="none" stroke="url(#dropGrad)" stroke-width="3" />
+
+                      <!-- ========= 漂浮发光音符 ========= -->
+                      <g transform="translate(148 205) scale(1.25)">
+                        <g class="note note-a" filter="url(#noteGlow)">
+                          <ellipse cx="-8" cy="12" rx="5" ry="3.8" transform="rotate(-20 -8 12)" fill="#ffffff" />
+                          <line x1="-4.5" y1="12" x2="-4.5" y2="-14" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
+                          <ellipse cx="8" cy="9" rx="5" ry="3.8" transform="rotate(-20 8 9)" fill="#ffffff" />
+                          <line x1="12.5" y1="9" x2="12.5" y2="-17" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
+                          <path d="M -4.5 -14 Q 4 -19 12.5 -17 L 12.5 -10 Q 4 -12 -4.5 -7 Z" fill="#ffffff" />
+                        </g>
+                      </g>
+                      <g transform="translate(296 128) scale(1.15)">
+                        <g class="note note-b" filter="url(#noteGlow)">
+                          <ellipse cx="0" cy="12" rx="5.5" ry="4" transform="rotate(-20 0 12)" fill="#ffffff" />
+                          <line x1="4.5" y1="12" x2="4.5" y2="-16" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+                          <path d="M 4.5 -16 C 12 -13, 14 -4, 7 2 C 11 -3, 9 -9, 4.5 -9 Z" fill="#ffffff" />
+                        </g>
+                      </g>
+
+                      <!-- ========= 四周闪光星(魔法元素) ========= -->
+                      <g class="sparkles">
+                        <g transform="translate(304 186) scale(1.7)">
+                          <path class="sparkle sp1" d="M0 -10 C1.2 -3.5,3.5 -1.2,10 0 C3.5 1.2,1.2 3.5,0 10 C-1.2 3.5,-3.5 1.2,-10 0 C-3.5 -1.2,-1.2 -3.5,0 -10 Z" fill="#F5D992" />
+                        </g>
+                        <g transform="translate(130 148) scale(1.25)">
+                          <path class="sparkle sp2" d="M0 -10 C1.2 -3.5,3.5 -1.2,10 0 C3.5 1.2,1.2 3.5,0 10 C-1.2 3.5,-3.5 1.2,-10 0 C-3.5 -1.2,-1.2 -3.5,0 -10 Z" fill="#ffffff" />
+                        </g>
+                        <g transform="translate(338 318) scale(1.3)">
+                          <path class="sparkle sp3" d="M0 -10 C1.2 -3.5,3.5 -1.2,10 0 C3.5 1.2,1.2 3.5,0 10 C-1.2 3.5,-3.5 1.2,-10 0 C-3.5 -1.2,-1.2 -3.5,0 -10 Z" fill="#ffffff" />
+                        </g>
+                        <g transform="translate(96 306) scale(1.1)">
+                          <path class="sparkle sp4" d="M0 -10 C1.2 -3.5,3.5 -1.2,10 0 C3.5 1.2,1.2 3.5,0 10 C-1.2 3.5,-3.5 1.2,-10 0 C-3.5 -1.2,-1.2 -3.5,0 -10 Z" fill="#E4C8F0" />
+                        </g>
+                        <g transform="translate(352 236) scale(0.95)">
+                          <path class="sparkle sp9" d="M0 -10 C1.2 -3.5,3.5 -1.2,10 0 C3.5 1.2,1.2 3.5,0 10 C-1.2 3.5,-3.5 1.2,-10 0 C-3.5 -1.2,-1.2 -3.5,0 -10 Z" fill="#ffffff" />
+                        </g>
+                        <g transform="translate(178 92) scale(0.9)">
+                          <path class="sparkle sp10" d="M0 -10 C1.2 -3.5,3.5 -1.2,10 0 C3.5 1.2,1.2 3.5,0 10 C-1.2 3.5,-3.5 1.2,-10 0 C-3.5 -1.2,-1.2 -3.5,0 -10 Z" fill="#F5D992" />
+                        </g>
+                        <g transform="translate(88 210) scale(0.85)">
+                          <path class="sparkle sp11" d="M0 -10 C1.2 -3.5,3.5 -1.2,10 0 C3.5 1.2,1.2 3.5,0 10 C-1.2 3.5,-3.5 1.2,-10 0 C-3.5 -1.2,-1.2 -3.5,0 -10 Z" fill="#BFEFEA" />
+                        </g>
+                      </g>
+                    </svg>
+        </div>
+
+        <!-- 文字: 点击品牌触发魔法变身, 再次点击跳转购买 -->
+        <div class="logo-text-link" id="logoText">
+          <a class="logo-trigger" href="#shop" aria-label="点击注入灵感,唤醒魔法药水瓶">
+            <h1 class="brand-title">Music Aroma</h1>
+            <p class="brand-sub">点&nbsp;击&nbsp;注&nbsp;入&nbsp;灵&nbsp;感</p>
+          </a>
+          <a class="hint-arrow" href="#shop">↓&nbsp;&nbsp;购买疗愈方案</a>
+        </div>
+
+        <!-- v45: 注入灵感动画播完后弹出的魔法刷子卡片 -->
+        <div class="magic-card-overlay" id="magicCardOverlay" aria-hidden="true">
+          <div class="magic-card" role="dialog" aria-label="开启心灵疗愈所">
+            <div class="mc-brush-stage">
+              <svg class="mc-swipe" viewBox="0 0 340 90" aria-hidden="true">
+                <!-- 刷过的闪光轨迹(随刷子一起扫过) -->
+                <g class="mc-trail">
+                  <ellipse cx="0" cy="62" rx="60" ry="7" fill="url(#mcTrailG)" opacity="0.9"/>
+                </g>
+                <defs>
+                  <linearGradient id="mcTrailG" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#F5D992" stop-opacity="0"/>
+                    <stop offset="1" stop-color="#F5D992" stop-opacity="0.55"/>
+                  </linearGradient>
+                  <linearGradient id="mcWood" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#C9A06C"/>
+                    <stop offset="0.5" stop-color="#A87E52"/>
+                    <stop offset="1" stop-color="#8E6E4F"/>
+                  </linearGradient>
+                  <linearGradient id="mcGold" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#F5DF9E"/>
+                    <stop offset="1" stop-color="#C9A24F"/>
+                  </linearGradient>
+                  <linearGradient id="mcBristle" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#E8C9B0"/>
+                    <stop offset="0.55" stop-color="#F3DCC8"/>
+                    <stop offset="1" stop-color="#E4B9A0"/>
+                  </linearGradient>
+                </defs>
+                <!-- 魔法软毛刷: 木柄 + 金箍 + 蓬松软毛 -->
+                <g class="mc-brush">
+                  <!-- 柄 -->
+                  <rect x="128" y="4" width="14" height="34" rx="7" fill="url(#mcWood)"/>
+                  <ellipse cx="135" cy="6" rx="7" ry="3" fill="#D9B184"/>
+                  <!-- 金箍 -->
+                  <path d="M124 38 L144 38 L141 50 L127 50 Z" fill="url(#mcGold)"/>
+                  <path d="M124 38 L144 38 L143 41 L125 41 Z" fill="#F9EBC4" opacity="0.7"/>
+                  <!-- 蓬松软毛(多层椭圆叠加, 发丝渐变) -->
+                  <g>
+                    <path d="M127 50 C118 58 108 66 96 70 C104 74 118 76 128 74 Z" fill="#D9A98F" opacity="0.85"/>
+                    <path d="M128 51 C120 59 111 66 100 70 C107 74 120 75 129 74 Z" fill="url(#mcBristle)"/>
+                    <path d="M129 52 C122 60 114 66 104 70 C111 73 122 74 130 74 Z" fill="#F6E4D4" opacity="0.85"/>
+                    <!-- 发丝 -->
+                    <g stroke="#C99878" stroke-width="0.8" opacity="0.55" fill="none" stroke-linecap="round">
+                      <path d="M128 52 C121 59 113 64 103 68"/>
+                      <path d="M129 54 C123 60 116 65 107 69"/>
+                      <path d="M130 56 C125 61 120 65 112 69"/>
+                      <path d="M131 58 C127 62 123 65 117 69"/>
+                    </g>
+                    <g stroke="#FFF6EC" stroke-width="0.9" opacity="0.8" fill="none" stroke-linecap="round">
+                      <path d="M129 53 C124 60 118 65 110 69"/>
+                      <path d="M130 55 C126 61 122 65 115 69"/>
+                    </g>
+                    <!-- 毛尖微光 -->
+                    <ellipse cx="99" cy="70" rx="7" ry="3.4" fill="#FFF3E2" opacity="0.85" transform="rotate(-14 99 70)"/>
+                  </g>
+                  <!-- 刷毛星光 -->
+                  <g class="mc-brush-dust">
+                    <path d="M92 64 C93 67 94 68 97 69 C94 70 93 71 92 74 C91 71 90 70 87 69 C90 68 91 67 92 64 Z" fill="#F5D992"/>
+                    <path d="M86 58 C86.7 60 87.4 60.7 89 61 C87.4 61.3 86.7 62 86 64 C85.3 62 84.6 61.3 83 61 C84.6 60.7 85.3 60 86 58 Z" fill="#FFF6DF"/>
+                    <path d="M104 78 C104.7 80 105.4 80.7 107 81 C105.4 81.3 104.7 82 104 84 C103.3 82 102.6 81.3 101 81 C102.6 80.7 103.3 80 104 78 Z" fill="#F5D992"/>
+                  </g>
+                </g>
+                <!-- 漂浮星芒 -->
+                <g class="mc-star mc-s1"><path d="M0 -6 C0.8 -2 2 -0.8 6 0 C2 0.8 0.8 2 0 6 C-0.8 2 -2 0.8 -6 0 C-2 -0.8 -0.8 -2 0 -6 Z" fill="#F5D992"/></g>
+                <g class="mc-star mc-s2"><path d="M0 -6 C0.8 -2 2 -0.8 6 0 C2 0.8 0.8 2 0 6 C-0.8 2 -2 0.8 -6 0 C-2 -0.8 -0.8 -2 0 -6 Z" fill="#F5D992"/></g>
+                <g class="mc-star mc-s3"><path d="M0 -6 C0.8 -2 2 -0.8 6 0 C2 0.8 0.8 2 0 6 C-0.8 2 -2 0.8 -6 0 C-2 -0.8 -0.8 -2 0 -6 Z" fill="#FFF6DF"/></g>
+              </svg>
+            </div>
+            <p class="mc-text">亲爱的小疗友，这里是专属于你的心灵疗愈所，<br>一起开启这场神秘旅行吧～</p>
+            <button class="mc-btn" type="button">✦&nbsp;点 击 开 启&nbsp;✦</button>
+          </div>
+        </div>
+
+        <!-- 三段简短介绍 -->
+        <div class="hero-meta">
+          <div class="meta-item">
+            <span class="meta-icon">✦</span>
+            <span>一瓶精油</span>
+          </div>
+          <div class="meta-divider"></div>
+          <div class="meta-item">
+            <span class="meta-icon">♪</span>
+            <span>一首音乐</span>
+          </div>
+          <div class="meta-divider"></div>
+          <div class="meta-item">
+            <span class="meta-icon meta-icon-moon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M12.34 2.02C6.59 1.82 2 6.42 2 12c0 5.52 4.48 10 10 10 3.71 0 6.93-2.02 8.66-5.02C14.05 17.62 9 13.6 9 8.53c0-2.58.99-4.93 2.6-6.67.24-.26.48-.5.74-.72z"/>
+              </svg>
+            </span>
+            <span>一段护肤操</span>
+          </div>
+        </div>
+
+        <!-- v51: 手机铃声温馨提示 -->
+        <p class="hero-ring-note">🔔 小提醒: 把手机铃声打开, 疗愈的声音才听得见哦～</p>
+
+        <div class="page-nav-wrap" data-page-nav></div>
+      </div>
+    </section>
+
+    <!-- ============== 购买方案 ============== -->
+    <section id="shop" class="view" aria-label="购买方案">
+      <div class="section-inner">
+        <header class="section-head">
+          <p class="eyebrow">— AROMA&nbsp;·&nbsp;COLLECTION —</p>
+          <h2 class="section-title">为每一刻的自己,选一首配方的香气</h2>
+          <p class="section-desc">每一份方案都包含：一瓶精油、一首专属疗愈音乐、一套 3 分钟护肤操<br>小提示：轻轻点一下卡片，就能看到配方详情和 30 秒音乐试听哦～</p>
+        </header>
+
+        <div class="plan-grid">
+          <!-- 方案 1 -->
+          <article class="plan-card" data-plan="sleep">
+            <div class="plan-cover c1">
+              <svg class="plan-art" viewBox="0 0 300 140" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <filter id="wc1" x="-20%" y="-20%" width="140%" height="140%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="3" result="n"/>
+                    <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                  </filter>
+                </defs>
+                <rect width="300" height="140" fill="url(#wnight)"/>
+                <g filter="url(#wc1)">
+                  <!-- 满月 -->
+                  <circle cx="200" cy="46" r="24" fill="#FBF3D8" opacity="0.92"/>
+                  <circle cx="192" cy="40" r="5" fill="#E9DCBF" opacity="0.6"/>
+                  <circle cx="208" cy="54" r="3.5" fill="#E9DCBF" opacity="0.5"/>
+                  <!-- 星 -->
+                  <path d="M 66 40 l 3 8 l 8 3 l -8 3 l -3 8 l -3 -8 l -8 -3 l 8 -3 Z" fill="#FFF7DD"/>
+                  <path d="M 124 30 l 2.4 6 l 6 2.4 l -6 2.4 l -2.4 6 l -2.4 -6 l -6 -2.4 l 6 -2.4 Z" fill="#FFF7DD"/>
+                  <path d="M 150 76 l 2 5 l 5 2 l -5 2 l -2 5 l -2 -5 l -5 -2 l 5 -2 Z" fill="#FFF7DD"/>
+                  <!-- 薰衣草 -->
+                  <path d="M 92 134 C 88 104, 98 82, 94 56" stroke="#9B7BC4" stroke-width="3" fill="none" stroke-linecap="round"/>
+                  <g fill="#C9AEEA">
+                    <ellipse cx="90" cy="64" rx="5" ry="8" transform="rotate(-18 90 64)"/>
+                    <ellipse cx="98" cy="78" rx="5" ry="8" transform="rotate(-10 98 78)"/>
+                    <ellipse cx="93" cy="92" rx="5" ry="8" transform="rotate(-14 93 92)"/>
+                    <ellipse cx="99" cy="106" rx="5" ry="8" transform="rotate(-8 99 106)"/>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="plan-body">
+              <h3 class="plan-name">安眠夜曲</h3>
+              <p class="plan-tag">·  助眠 · 深度放松 ·</p>
+              <ul class="plan-list">
+                <li><b>精油</b>:薰衣草 + 雪松 + 岩兰草</li>
+                <li><b>音乐</b>:432Hz 月光钢琴(8分钟)</li>
+                <li><b>护肤操</b>:颈肩放松 + 面部抚触</li>
+              </ul>
+              <div class="plan-foot">
+                <span class="plan-price"><small>¥</small>48</span>
+                <button class="btn btn-ghost add-cart">加入购物车</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 方案 2 -->
+          <article class="plan-card featured" data-plan="release">
+            <div class="plan-badge">人气之选</div>
+            <div class="plan-cover c2">
+              <svg class="plan-art" viewBox="0 0 300 140" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <filter id="wc2" x="-20%" y="-20%" width="140%" height="140%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="7" result="n"/>
+                    <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                  </filter>
+                </defs>
+                <rect width="300" height="140" fill="url(#wbreeze)"/>
+                <g filter="url(#wc2)">
+                  <!-- 微风曲线 -->
+                  <path d="M 28 58 C 80 38, 120 80, 172 56 C 212 38, 252 70, 286 50" stroke="#7FB89C" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.8"/>
+                  <path d="M 40 92 C 92 74, 132 110, 184 88 C 224 72, 258 100, 288 84" stroke="#A9D8BE" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+                  <!-- 柑橘切片 -->
+                  <g transform="translate(228 84)">
+                    <circle r="26" fill="#FBE6A8" opacity="0.92"/>
+                    <circle r="26" fill="none" stroke="#E7B85B" stroke-width="2.5"/>
+                    <g stroke="#E7B85B" stroke-width="1.6" opacity="0.8">
+                      <line x1="0" y1="0" x2="0" y2="-24"/>
+                      <line x1="0" y1="0" x2="21" y2="12"/>
+                      <line x1="0" y1="0" x2="-21" y2="12"/>
+                      <line x1="0" y1="0" x2="21" y2="-12"/>
+                      <line x1="0" y1="0" x2="-21" y2="-12"/>
+                    </g>
+                  </g>
+                  <!-- 叶子 -->
+                  <path d="M 66 112 C 54 92, 68 74, 92 76 C 82 98, 86 112, 66 112 Z" fill="#86C29A"/>
+                  <line x1="66" y1="112" x2="86" y2="78" stroke="#5E9C76" stroke-width="1.5"/>
+                </g>
+              </svg>
+            </div>
+            <div class="plan-body">
+              <h3 class="plan-name">释怀微风</h3>
+              <p class="plan-tag">·  减压 · 焦虑舒缓 ·</p>
+              <ul class="plan-list">
+                <li><b>精油</b>:佛手柑 + 依兰 + 甜橙</li>
+                <li><b>音乐</b>:环境白噪音 + 钢琴(10分钟)</li>
+                <li><b>护肤操</b>:眼周穴位 + 呼吸抚触</li>
+              </ul>
+              <div class="plan-foot">
+                <span class="plan-price"><small>¥</small>58</span>
+                <button class="btn btn-solid add-cart">加入购物车</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 方案 3 -->
+          <article class="plan-card" data-plan="revive">
+            <div class="plan-cover c3">
+              <svg class="plan-art" viewBox="0 0 300 140" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <filter id="wc3" x="-20%" y="-20%" width="140%" height="140%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="11" result="n"/>
+                    <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                  </filter>
+                </defs>
+                <rect width="300" height="140" fill="url(#wsun)"/>
+                <g filter="url(#wc3)">
+                  <!-- 太阳 -->
+                  <circle cx="150" cy="66" r="30" fill="#F8C66B" opacity="0.92"/>
+                  <g stroke="#F6B24E" stroke-width="3" stroke-linecap="round" opacity="0.85">
+                    <line x1="150" y1="14" x2="150" y2="30"/>
+                    <line x1="150" y1="102" x2="150" y2="118"/>
+                    <line x1="98" y1="66" x2="114" y2="66"/>
+                    <line x1="186" y1="66" x2="202" y2="66"/>
+                    <line x1="113" y1="29" x2="124" y2="40"/>
+                    <line x1="176" y1="92" x2="187" y2="103"/>
+                    <line x1="187" y1="29" x2="176" y2="40"/>
+                    <line x1="124" y1="92" x2="113" y2="103"/>
+                  </g>
+                  <!-- 露珠 -->
+                  <circle cx="76" cy="108" r="7" fill="#BFE3EC" opacity="0.85"/>
+                  <circle cx="226" cy="110" r="5" fill="#BFE3EC" opacity="0.8"/>
+                  <circle cx="210" cy="38" r="4" fill="#BFE3EC" opacity="0.8"/>
+                  <!-- 柑橘半切 -->
+                  <g transform="translate(234 96)">
+                    <path d="M -24 0 A 24 24 0 0 1 24 0 Z" fill="#F6B24E" opacity="0.92"/>
+                    <path d="M -24 0 A 24 24 0 0 1 24 0" fill="none" stroke="#E2913A" stroke-width="2.5"/>
+                    <g stroke="#E2913A" stroke-width="1.4" opacity="0.8">
+                      <line x1="0" y1="0" x2="0" y2="-22"/>
+                      <line x1="0" y1="0" x2="19" y2="-11"/>
+                      <line x1="0" y1="0" x2="-19" y2="-11"/>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="plan-body">
+              <h3 class="plan-name">晨光苏醒</h3>
+              <p class="plan-tag">·  焕活 · 提亮 · 元气 ·</p>
+              <ul class="plan-list">
+                <li><b>精油</b>:葡萄柚 + 迷迭香 + 柠檬</li>
+                <li><b>音乐</b>:轻快民谣(5分钟)</li>
+                <li><b>护肤操</b>:提拉按摩 + 冷热敷交替</li>
+              </ul>
+              <div class="plan-foot">
+                <span class="plan-price"><small>¥</small>38</span>
+                <button class="btn btn-ghost add-cart">加入购物车</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 方案 4 -->
+          <article class="plan-card" data-plan="calm">
+            <div class="plan-cover c4">
+              <svg class="plan-art" viewBox="0 0 300 140" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <filter id="wc4" x="-20%" y="-20%" width="140%" height="140%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="15" result="n"/>
+                    <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                  </filter>
+                </defs>
+                <rect width="300" height="140" fill="url(#wtea)"/>
+                <g filter="url(#wc4)">
+                  <!-- 蒸汽 -->
+                  <path d="M 140 44 C 130 34, 150 28, 140 16" stroke="#D9C3A8" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.8"/>
+                  <path d="M 158 44 C 168 34, 148 28, 158 16" stroke="#D9C3A8" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.8"/>
+                  <!-- 茶杯 -->
+                  <path d="M 116 54 L 182 54 L 174 92 C 172 104, 128 104, 126 92 Z" fill="#F3E7D6" opacity="0.95"/>
+                  <ellipse cx="149" cy="54" rx="33" ry="8" fill="#C9A878"/>
+                  <path d="M 182 60 C 200 60, 202 86, 184 88" stroke="#C9A878" stroke-width="4" fill="none" stroke-linecap="round"/>
+                  <ellipse cx="149" cy="54" rx="24" ry="5" fill="#A9743F" opacity="0.85"/>
+                  <!-- 茶叶 -->
+                  <path d="M 78 102 C 68 88, 80 72, 100 74 C 92 92, 94 102, 78 102 Z" fill="#8A6A45"/>
+                  <line x1="78" y1="102" x2="94" y2="76" stroke="#6E5236" stroke-width="1.4"/>
+                </g>
+              </svg>
+            </div>
+            <div class="plan-body">
+              <h3 class="plan-name">午后禅茶</h3>
+              <p class="plan-tag">· 专注 · 心流 · 平复 ·</p>
+              <ul class="plan-list">
+                <li><b>精油</b>:沉香 + 檀香 + 茶树</li>
+                <li><b>音乐</b>:禅意尺八 + 水滴声(15分钟)</li>
+                <li><b>护肤操</b>:手腕脉搏按摩</li>
+              </ul>
+              <div class="plan-foot">
+                <span class="plan-price"><small>¥</small>68</span>
+                <button class="btn btn-ghost add-cart">加入购物车</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="cart-panel">
+          <div class="cart-head">
+            <span class="cart-title">🛒 购物车</span>
+            <button class="btn btn-link" id="resetCart">全部清空</button>
+          </div>
+          <div class="cart-items" id="cartItems"></div>
+          <div class="cart-foot">
+            <span class="cart-count">共 <span id="cartCount">0</span> 件</span>
+            <span class="cart-total">合计 <span id="cartSum">¥0</span></span>
+          </div>
+          <div class="cart-checkout">
+            <span class="cc-tip" id="cartDiscount" hidden>🎁 满 2 件立减 ¥10</span>
+            <button class="btn btn-solid cc-btn" id="checkoutBtn" disabled>去结算</button>
+          </div>
+        </div>
+
+        <a class="enter-healing" id="enterHealingCta" href="#healing">
+          <span class="eh-text">选好了？一起进入疗愈之旅吧～</span>
+          <span class="eh-arrow">→</span>
+        </a>
+        <p class="scan-hint">疗愈之旅部分为免费体验，可以跟随音频放松身心，完整疗愈内容在精油包装的二维码中，请收到之后扫码查看</p>
+
+        <div class="page-nav-wrap" data-page-nav></div>
+      </div>
+    </section>
+
+    <!-- ============== 疗愈之旅 ============== -->
+    <section id="healing" class="view" aria-label="疗愈之旅">
+      <div class="section-inner">
+        <header class="section-head">
+          <p class="eyebrow">— HEALING&nbsp;·&nbsp;SESSION —</p>
+          <h2 class="section-title">给身体和心一段被照顾的时间</h2>
+        </header>
+
+        <div class="healing-grid">
+          <!-- 左:步骤说明 -->
+          <div class="instructions">
+            <h3 class="block-title">使用前,请为自己准备 4 步</h3>
+            <ol class="step-list">
+              <li>
+                <span class="step-num">01</span>
+                <div>
+                  <h4>选一处安静的角落</h4>
+                  <p>关掉刺眼的灯,只留一盏暖光。可以是卧室、书房、阳台。</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">02</span>
+                <div>
+                  <h4>取 2-3 滴精油于掌心</h4>
+                  <p>双手合拢,轻轻揉暖,让香气自然在指间散开。</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">03</span>
+                <div>
+                  <h4>佩戴耳机,开始播放音乐</h4>
+                  <p>音量以"听清但不刺耳"为佳。</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">04</span>
+                <div>
+                  <h4>跟随人声,完成护肤操</h4>
+                  <p>每个动作请慢于平时一倍,把注意力留在指尖和呼吸上。</p>
+                </div>
+              </li>
+            </ol>
+
+            <div class="healing-actions">
+              <button class="btn btn-ghost" id="watchGuide">
+                <span>▷</span> 观看说明视频
+              </button>
+              <button class="btn btn-solid" id="startHealing">
+                进入疗愈 ✦
+              </button>
+            </div>
+          </div>
+
+          <!-- 右:疗愈进行中画布 -->
+          <div class="healing-stage">
+            <div class="stage-bg" aria-hidden="true">
+              <span class="ripple rp-1"></span>
+              <span class="ripple rp-2"></span>
+              <span class="ripple rp-3"></span>
+              <span class="ripple rp-4"></span>
+            </div>
+
+            <!-- 未开始态 -->
+            <div class="stage-idle" id="stageIdle">
+              <div class="heal-bottle logo-wrap is-empty" id="healBottle">
+                <!-- JS 克隆主页魔法瓶 SVG 到这里 -->
+                <svg class="heal-weather-svg" viewBox="0 0 440 700" aria-hidden="true">
+                  <g transform="matrix(1.06,0,0,0.85,-13.2,45)">
+                    <g clip-path="url(#bodyClip)">
+                      <!-- 雨: 液面下的雨丝 -->
+                      <g class="hw hw-rain" id="hwRain"></g>
+                      <!-- 森林: 液面长出小树 -->
+                      <g class="hw hw-forest" id="hwForest"></g>
+                      <!-- 海滩: 液面海浪 -->
+                      <g class="hw hw-beach" id="hwBeach"></g>
+                    </g>
+                  </g>
+                </svg>
+                <div class="heal-inject-ui">
+                  <button class="heal-inject-btn" id="healInjectBtn" type="button">注入</button>
+                  <button class="heal-inject-btn heal-stop-btn" id="healStopBtn" type="button" hidden>停止</button>
+                  <div class="heal-inject-menu" id="healInjectMenu" hidden>
+                    <button type="button" data-weather="rain">雨声</button>
+                    <button type="button" data-weather="forest">森林</button>
+                    <button type="button" data-weather="beach">海滩</button>
+                  </div>
+                </div>
+              </div>
+              <p class="stage-tip">当你准备好了，点击下方按钮</p>
+              <button class="btn btn-solid" id="stageStartBtn" type="button">进入疗愈 ✦</button>
+            </div>
+
+            <!-- 进行中态 -->
+            <div class="stage-active" id="stageActive" hidden>
+              <div class="breathing-circle" aria-hidden="true">
+                <span class="bc-inner"></span>
+                <span class="bc-outer"></span>
+              </div>
+              <p class="bc-label" id="bcLabel">准备好...</p>
+              <div class="bc-controls">
+                <button class="btn btn-ghost small" id="pauseBtn">暂停</button>
+                <button class="btn btn-ghost small" id="stopBtn">结束</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="enter-healing" id="enterGamesCta" href="#games">
+          <span class="eh-text">感到无聊？来试试解压游戏吧～</span>
+          <span class="eh-arrow">→</span>
+        </a>
+
+        <div class="page-nav-wrap" data-page-nav></div>
+      </div>
+    </section>
+
+    <!-- ============== 解压游戏 ============== -->
+    <section id="games" class="view" aria-label="解压游戏">
+      <div class="section-inner">
+        <header class="section-head">
+          <p class="eyebrow">— ANTI-STRESS&nbsp;·&nbsp;PLAYGROUND —</p>
+          <h2 class="section-title">把烦恼交给指尖,玩一会儿就好</h2>
+          <p class="section-desc">小游戏随时点开, 玩完随手关掉, 不用记规则, 也不用赢, 纯粹地放松一下。</p>
+        </header>
+
+        <div class="game-grid">
+          <!-- 游戏 0: 抽象球(1.0 纪念版) -->
+          <button class="game-card gc-abstract" data-game="abstract" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb3" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#A8E06F" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#A8E06F" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf3" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="3" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="gwgaBody" cx="38%" cy="30%" r="80%">
+                  <stop offset="0" stop-color="#F4FBE6"/>
+                  <stop offset="55%" stop-color="#C6EC9F"/>
+                  <stop offset="100%" stop-color="#8CC468"/>
+                </radialGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb3)"/>
+              <g filter="url(#gwcf3)" opacity=".92">
+                <ellipse cx="100" cy="100" rx="44" ry="7" fill="#7E9C6A" opacity=".14"/>
+                <path d="M 64 60 Q 58 26 96 22 Q 138 18 144 50 Q 150 82 116 90 Q 76 98 66 80 Q 60 70 64 60 Z" fill="url(#gwgaBody)"/>
+                <ellipse cx="84" cy="46" rx="12" ry="8" fill="#FFFFFF" opacity=".55" transform="rotate(-24 84 46)"/>
+                <circle cx="88" cy="52" r="4.6" fill="#4E5A44"/>
+                <circle cx="112" cy="50" r="4" fill="#4E5A44"/>
+                <circle cx="89.4" cy="50.4" r="1.5" fill="#fff"/>
+                <circle cx="113.2" cy="48.4" r="1.3" fill="#fff"/>
+                <path d="M 90 64 Q 100 70 110 62" fill="none" stroke="#4E5A44" stroke-width="2.6" stroke-linecap="round" opacity=".8"/>
+                <ellipse cx="74" cy="58" rx="6.5" ry="4" fill="#F0A8B8" opacity=".45"/>
+                <ellipse cx="126" cy="56" rx="6.5" ry="4" fill="#F0A8B8" opacity=".45"/>
+                <path d="M 146 24 l 2.2 4.6 4.6 2.2 -4.6 2.2 -2.2 4.6 -2.2 -4.6 -4.6 -2.2 4.6 -2.2 Z" fill="#F5D992" opacity=".9"/>
+                <path d="M 42 36 l 1.6 3.4 3.4 1.6 -3.4 1.6 -1.6 3.4 -1.6 -3.4 -3.4 -1.6 3.4 -1.6 Z" fill="#F5D992" opacity=".7"/>
+                <circle cx="156" cy="86" r="11" fill="#FFF6DC" opacity=".9"/>
+                <text x="156" y="90" text-anchor="middle" font-size="8.5" font-weight="700" fill="#B08A3E" font-family="'Noto Sans SC', sans-serif">1.0</text>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">抽象球</span>
+              <span class="gc-desc">纪念模型生成的 1.0 版本搞笑小游戏</span>
+            </span>
+          </button>
+
+          <!-- 游戏 1: 拽拽弹力球(v48 果冻球 v51 独立成游戏) -->
+          <button class="game-card" data-game="tugball" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb5" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#B9A8F0" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#B9A8F0" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf5" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="5" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="gwgbBody" cx="38%" cy="30%" r="80%">
+                  <stop offset="0" stop-color="#FFFFFF"/>
+                  <stop offset="45%" stop-color="#DCCEF8"/>
+                  <stop offset="100%" stop-color="#A18BE8"/>
+                </radialGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb5)"/>
+              <g filter="url(#gwcf5)" opacity=".92">
+                <ellipse cx="100" cy="97" rx="40" ry="7" fill="#7C6FA8" opacity=".14"/>
+                <path d="M 56 58 Q 54 40 88 38 Q 128 34 144 52 Q 160 70 140 80 Q 108 94 76 84 Q 54 76 56 58 Z" fill="url(#gwgbBody)"/>
+                <ellipse cx="82" cy="50" rx="11" ry="6" fill="#FFFFFF" opacity=".6" transform="rotate(-20 82 50)"/>
+                <circle cx="116" cy="68" r="2" fill="#fff" opacity=".7"/>
+                <circle cx="126" cy="60" r="1.4" fill="#fff" opacity=".6"/>
+                <path d="M 44 46 Q 40 62 48 74" fill="none" stroke="#B9A8E0" stroke-width="2.6" stroke-linecap="round" opacity=".55"/>
+                <path d="M 156 44 Q 160 60 152 72" fill="none" stroke="#B9A8E0" stroke-width="2.6" stroke-linecap="round" opacity=".55"/>
+                <circle cx="166" cy="30" r="6" fill="#D9C6F8" opacity=".55"/>
+                <circle cx="36" cy="30" r="4" fill="#C9E0F8" opacity=".55"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">拽拽弹力球</span>
+              <span class="gc-desc">果冻质感小球, 捏我拽我甩飞我, 我不生气</span>
+            </span>
+          </button>
+
+          <!-- 游戏 1: 水感果冻捏捏 -->
+          <button class="game-card" data-game="jelly" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb7" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#8FD4E8" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#8FD4E8" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf7" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="7" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="gwgcBody" cx="38%" cy="30%" r="80%">
+                  <stop offset="0" stop-color="#F4FBFE"/>
+                  <stop offset="55%" stop-color="#CFE9F4"/>
+                  <stop offset="100%" stop-color="#9CC6DC"/>
+                </radialGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb7)"/>
+              <g filter="url(#gwcf7)" opacity=".92">
+                <ellipse cx="100" cy="102" rx="46" ry="7" fill="#7D9BB4" opacity=".14"/>
+                <path d="M 56 96 Q 56 46 100 42 Q 144 46 144 96 Q 122 102 100 102 Q 78 102 56 96 Z" fill="url(#gwgcBody)" opacity=".95"/>
+                <ellipse cx="84" cy="60" rx="12" ry="7" fill="#FFFFFF" opacity=".6" transform="rotate(-18 84 60)"/>
+                <ellipse cx="110" cy="76" rx="8" ry="4.5" fill="#EAF6FB" opacity=".55" transform="rotate(22 110 76)"/>
+                <circle cx="92" cy="72" r="1.6" fill="#fff" opacity=".85"/>
+                <circle cx="110" cy="56" r="1.2" fill="#fff" opacity=".7"/>
+                <circle cx="120" cy="68" r="1.5" fill="#fff" opacity=".65"/>
+                <circle cx="80" cy="84" r="1.3" fill="#fff" opacity=".6"/>
+                <path d="M 56 96 Q 56 46 100 42 Q 144 46 144 96" fill="none" stroke="#FFFFFF" stroke-width="2" opacity=".65"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">水感果冻捏捏</span>
+              <span class="gc-desc">水感果冻,按住揉一揉,松手后回弹</span>
+            </span>
+          </button>
+
+          <!-- 游戏 3: 泡泡纸 -->
+          <button class="game-card" data-game="bubble" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb9" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#A9C8DD" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#A9C8DD" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf9" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="9" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="gwgdBub" cx="38%" cy="30%" r="80%">
+                  <stop offset="0" stop-color="#FFFFFF"/>
+                  <stop offset="62%" stop-color="#E1EDF6"/>
+                  <stop offset="100%" stop-color="#ACCADC"/>
+                </radialGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb9)"/>
+              <g filter="url(#gwcf9)" opacity=".92">
+                <circle cx="56" cy="42" r="19" fill="url(#gwgdBub)" opacity=".92"/>
+                <circle cx="98" cy="42" r="19" fill="url(#gwgdBub)" opacity=".92"/>
+                <circle cx="140" cy="42" r="19" fill="url(#gwgdBub)" opacity=".92"/>
+                <circle cx="77" cy="78" r="19" fill="url(#gwgdBub)" opacity=".92"/>
+                <circle cx="119" cy="78" r="19" fill="url(#gwgdBub)" opacity=".92"/>
+                <ellipse cx="98" cy="78" rx="19" ry="12" fill="#E4EAF0" opacity=".9"/>
+                <ellipse cx="98" cy="78" rx="15" ry="8" fill="none" stroke="#B9C6D2" stroke-width="1.5" stroke-dasharray="4 5" opacity=".8"/>
+                <ellipse cx="50" cy="36" rx="5" ry="3.4" fill="#fff" opacity=".8" transform="rotate(-28 50 36)"/>
+                <ellipse cx="92" cy="36" rx="5" ry="3.4" fill="#fff" opacity=".8" transform="rotate(-28 92 36)"/>
+                <ellipse cx="134" cy="36" rx="5" ry="3.4" fill="#fff" opacity=".8" transform="rotate(-28 134 36)"/>
+                <ellipse cx="71" cy="72" rx="5" ry="3.4" fill="#fff" opacity=".8" transform="rotate(-28 71 72)"/>
+                <ellipse cx="113" cy="72" rx="5" ry="3.4" fill="#fff" opacity=".8" transform="rotate(-28 113 72)"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">泡泡纸</span>
+              <span class="gc-desc">按住滑过去,一口气捏爆一整排</span>
+            </span>
+          </button>
+
+          <!-- 游戏 4: 切肥皂 -->
+          <button class="game-card" data-game="soap" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb11" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#F2AEC7" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#F2AEC7" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf11" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="11" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="gwgeSoap" cx="38%" cy="30%" r="80%">
+                  <stop offset="0" stop-color="#FDECF3"/>
+                  <stop offset="100%" stop-color="#F0A8C4"/>
+                </radialGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb11)"/>
+              <g filter="url(#gwcf11)" opacity=".92">
+                <ellipse cx="76" cy="96" rx="44" ry="6" fill="#B07A8E" opacity=".14"/>
+                <rect x="34" y="34" width="82" height="58" rx="11" fill="url(#gwgeSoap)"/>
+                <path d="M 44 44 Q 75 38 106 44" stroke="#FFFFFF" stroke-opacity=".75" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <text x="75" y="72" text-anchor="middle" font-size="12" letter-spacing="2" fill="#C4789A" opacity=".85" font-family="Georgia, serif">SOAP</text>
+                <rect x="126" y="44" width="27" height="17" rx="5" fill="url(#gwgeSoap)" transform="rotate(18 140 52)" opacity=".9"/>
+                <rect x="134" y="76" width="22" height="14" rx="5" fill="url(#gwgeSoap)" transform="rotate(-12 145 83)" opacity=".75"/>
+                <line x1="152" y1="20" x2="124" y2="48" stroke="#BFD3E0" stroke-width="3.4" stroke-linecap="round" opacity=".9"/>
+                <line x1="152" y1="20" x2="124" y2="48" stroke="#FFFFFF" stroke-width="1.1" stroke-linecap="round" opacity=".7"/>
+                <circle cx="48" cy="24" r="4" fill="#FBDCE7" opacity=".8"/>
+                <circle cx="160" cy="100" r="3" fill="#FBDCE7" opacity=".7"/>
+                <circle cx="36" cy="104" r="2.6" fill="#FBDCE7" opacity=".6"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">切肥皂</span>
+              <span class="gc-desc">任意方向随便切,还能切出自己的形状</span>
+            </span>
+          </button>
+
+          <!-- 游戏 5: DIY 史莱姆(制作+开罐玩) -->
+          <button class="game-card" data-game="maker" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb13" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#8CC49A" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#8CC49A" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf13" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="13" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="gwgfSlime" cx="38%" cy="30%" r="80%">
+                  <stop offset="0" stop-color="#DDF5E2"/>
+                  <stop offset="100%" stop-color="#7FBE92"/>
+                </radialGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb13)"/>
+              <g filter="url(#gwcf13)" opacity=".92">
+                <ellipse cx="100" cy="102" rx="40" ry="6" fill="#6E8A76" opacity=".14"/>
+                <rect x="72" y="34" width="56" height="66" rx="10" fill="#EDF4F8" opacity=".65"/>
+                <path d="M 76 74 Q 84 62 100 64 Q 116 62 124 74 L 124 94 Q 100 100 76 94 Z" fill="url(#gwgfSlime)"/>
+                <circle cx="90" cy="80" r="3.4" fill="#EAF9EE" opacity=".8"/>
+                <circle cx="106" cy="86" r="2.6" fill="#EAF9EE" opacity=".7"/>
+                <circle cx="112" cy="74" r="2" fill="#EAF9EE" opacity=".6"/>
+                <rect x="68" y="28" width="64" height="10" rx="5" fill="#C8A878" opacity=".9"/>
+                <path d="M 138 52 Q 152 46 158 56" fill="none" stroke="#B8D8C4" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+                <circle cx="164" cy="44" r="4" fill="#D8F0DE" opacity=".8"/>
+                <circle cx="42" cy="56" r="5" fill="#D8F0DE" opacity=".6"/>
+                <circle cx="46" cy="76" r="3.4" fill="#D8F0DE" opacity=".5"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">DIY 史莱姆</span>
+              <span class="gc-desc">第一视角开罐玩,六种泥各有手感</span>
+            </span>
+          </button>
+
+          <!-- 游戏 6: 炭火烤串 -->
+          <button class="game-card" data-game="roast" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb15" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#F0906B" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#F0906B" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf15" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="15" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb15)"/>
+              <g filter="url(#gwcf15)" opacity=".92">
+                <ellipse cx="100" cy="98" rx="52" ry="8" fill="#D08A4A" opacity=".2"/>
+                <circle cx="76" cy="92" r="13" fill="#E2703C" opacity=".85"/>
+                <circle cx="100" cy="94" r="15" fill="#E88A4C" opacity=".85"/>
+                <circle cx="124" cy="92" r="13" fill="#D96A38" opacity=".85"/>
+                <circle cx="88" cy="90" r="3.4" fill="#F8C66B" opacity=".9"/>
+                <circle cx="112" cy="92" r="4" fill="#F8C66B" opacity=".9"/>
+                <line x1="40" y1="40" x2="160" y2="88" stroke="#C8A078" stroke-width="3.4" stroke-linecap="round" opacity=".9"/>
+                <rect x="62" y="46" width="24" height="15" rx="7" fill="#C97A4E" transform="rotate(20 74 54)" opacity=".92"/>
+                <rect x="94" y="58" width="24" height="15" rx="7" fill="#9CC488" transform="rotate(20 106 66)" opacity=".9"/>
+                <rect x="124" y="70" width="22" height="14" rx="7" fill="#C97A4E" transform="rotate(20 135 77)" opacity=".92"/>
+                <path d="M 66 30 Q 60 22 66 16" fill="none" stroke="#F0B070" stroke-width="2.6" stroke-linecap="round" opacity=".6"/>
+                <path d="M 96 28 Q 92 20 98 14" fill="none" stroke="#F0B070" stroke-width="2.6" stroke-linecap="round" opacity=".5"/>
+                <path d="M 126 30 Q 122 22 128 16" fill="none" stroke="#F0B070" stroke-width="2.6" stroke-linecap="round" opacity=".45"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">炭火烤串</span>
+              <span class="gc-desc">烤到金黄就拿开,一直放着会烤焦</span>
+            </span>
+          </button>
+
+          <!-- 游戏 7: 冰激凌机 -->
+          <button class="game-card" data-game="blend" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb17" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#F5B8C9" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#F5B8C9" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf17" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="17" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="gwghSwirl" cx="38%" cy="30%" r="80%">
+                  <stop offset="0" stop-color="#FDEFF4"/>
+                  <stop offset="55%" stop-color="#F8CADC"/>
+                  <stop offset="100%" stop-color="#EEA6BE"/>
+                </radialGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb17)"/>
+              <g filter="url(#gwcf17)" opacity=".92">
+                <ellipse cx="100" cy="100" rx="38" ry="6" fill="#C8919E" opacity=".14"/>
+                <path d="M 76 58 Q 76 44 90 44 Q 86 32 100 32 Q 114 32 110 44 Q 124 44 124 58 Q 124 70 100 72 Q 76 70 76 58 Z" fill="url(#gwghSwirl)"/>
+                <path d="M 78 70 L 122 70 L 114 98 Q 100 104 86 98 Z" fill="#F3E2CC" opacity=".92"/>
+                <circle cx="100" cy="28" r="5" fill="#E06A7E" opacity=".9"/>
+                <path d="M 84 72 Q 86 80 84 88" fill="none" stroke="#F5D0DC" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+                <circle cx="128" cy="46" r="3" fill="#D8F0DE" opacity=".8"/>
+                <circle cx="70" cy="52" r="2.6" fill="#F5D992" opacity=".8"/>
+                <circle cx="132" cy="72" r="2.2" fill="#D8F0DE" opacity=".6"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">冰激凌机</span>
+              <span class="gc-desc">选配料倒进去,按住打出渐变色的丝滑软雪糕</span>
+            </span>
+          </button>
+
+          <!-- 游戏 8: 敲木鱼 -->
+          <button class="game-card" data-game="woodfish" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb19" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#C89B6E" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#C89B6E" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf19" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="19" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="gwgiFish" cx="38%" cy="30%" r="80%">
+                  <stop offset="0" stop-color="#F3E4CE"/>
+                  <stop offset="55%" stop-color="#DDBA8E"/>
+                  <stop offset="100%" stop-color="#B98E5E"/>
+                </radialGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb19)"/>
+              <g filter="url(#gwcf19)" opacity=".92">
+                <ellipse cx="96" cy="94" rx="46" ry="7" fill="#8A6A48" opacity=".16"/>
+                <path d="M 50 62 Q 50 34 96 34 Q 142 34 142 62 Q 142 84 96 86 Q 50 84 50 62 Z" fill="url(#gwgiFish)"/>
+                <path d="M 72 36 Q 96 28 120 36" fill="none" stroke="#9A7248" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+                <path d="M 84 44 Q 96 40 108 44" fill="none" stroke="#8A6238" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+                <circle cx="84" cy="60" r="3.6" fill="#5A4028" opacity=".85"/>
+                <circle cx="108" cy="60" r="3.6" fill="#5A4028" opacity=".85"/>
+                <line x1="140" y1="30" x2="168" y2="58" stroke="#B8905C" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+                <circle cx="172" cy="62" r="8" fill="#D8B478" opacity=".9"/>
+                <path d="M 156 44 Q 168 40 178 48" fill="none" stroke="#D8B478" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>
+                <circle cx="46" cy="40" r="3" fill="#F5D992" opacity=".7"/>
+                <circle cx="40" cy="62" r="2.2" fill="#F5D992" opacity=".5"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">敲木鱼</span>
+              <span class="gc-desc">一下一个功德,连着敲有暴击</span>
+            </span>
+          </button>
+
+          <!-- 游戏 9: 精油蒸馏 -->
+          <button class="game-card" data-game="still" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb21" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#B49AF0" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#B49AF0" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf21" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="21" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="gwgjLiq" cx="38%" cy="30%" r="80%">
+                  <stop offset="0" stop-color="#E6DBF8"/>
+                  <stop offset="100%" stop-color="#A884D8"/>
+                </radialGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb21)"/>
+              <g filter="url(#gwcf21)" opacity=".92">
+                <ellipse cx="70" cy="98" rx="30" ry="5" fill="#8A7AA8" opacity=".16"/>
+                <path d="M 62 52 L 78 52 Q 78 74 96 84 Q 100 88 96 94 Q 70 102 44 94 Q 40 88 44 84 Q 62 74 62 52 Z" fill="#EDF4F8" opacity=".7"/>
+                <path d="M 62 64 Q 70 76 96 84 Q 100 88 96 94 Q 70 102 44 94 Q 40 88 44 84 Q 60 78 62 64 Z" fill="url(#gwgjLiq)"/>
+                <line x1="70" y1="52" x2="70" y2="34" stroke="#C8D4E0" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+                <path d="M 70 34 Q 100 22 132 30" fill="none" stroke="#C8D4E0" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+                <path d="M 132 30 L 132 44" stroke="#C8D4E0" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+                <path d="M 128 56 Q 132 62 128 68" fill="none" stroke="#B49AF0" stroke-width="2.2" stroke-linecap="round" opacity=".6"/>
+                <circle cx="128" cy="76" r="3.2" fill="#B49AF0" opacity=".85"/>
+                <ellipse cx="128" cy="88" rx="7" ry="2.4" fill="none" stroke="#B49AF0" stroke-width="1.6" opacity=".5"/>
+                <path d="M 108 54 Q 102 48 108 42" fill="none" stroke="#CDBCF2" stroke-width="2.2" stroke-linecap="round" opacity=".6"/>
+                <path d="M 116 60 Q 110 54 116 48" fill="none" stroke="#CDBCF2" stroke-width="2.2" stroke-linecap="round" opacity=".45"/>
+                <circle cx="158" cy="44" r="3" fill="#D8CCF4" opacity=".7"/>
+                <circle cx="164" cy="66" r="2.2" fill="#D8CCF4" opacity=".5"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">精油蒸馏</span>
+              <span class="gc-desc">放花瓣点火,一滴一滴接出精油</span>
+            </span>
+          </button>
+
+          <!-- 游戏 10: 开汽水 -->
+          <button class="game-card" data-game="soda" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb23" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#8FD8E8" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#8FD8E8" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf23" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="23" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="gwgkSoda" cx="38%" cy="30%" r="80%">
+                  <stop offset="0" stop-color="#D8F0F6"/>
+                  <stop offset="100%" stop-color="#8FC8D8"/>
+                </radialGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb23)"/>
+              <g filter="url(#gwcf23)" opacity=".92">
+                <ellipse cx="92" cy="100" rx="34" ry="5" fill="#6E9AA8" opacity=".15"/>
+                <path d="M 74 44 L 110 44 L 108 52 Q 118 58 118 74 L 118 92 Q 118 98 112 98 L 72 98 Q 66 98 66 92 L 66 74 Q 66 58 76 52 Z" fill="#E8F4F8" opacity=".72"/>
+                <path d="M 76 66 Q 78 78 76 92 L 108 92 Q 108 74 110 62 Q 92 58 76 66 Z" fill="url(#gwgkSoda)"/>
+                <circle cx="86" cy="72" r="2.4" fill="#FFFFFF" opacity=".8"/>
+                <circle cx="98" cy="80" r="1.8" fill="#FFFFFF" opacity=".7"/>
+                <circle cx="92" cy="60" r="1.6" fill="#FFFFFF" opacity=".6"/>
+                <rect x="76" y="34" width="32" height="10" rx="4" fill="#8FBCC8" opacity=".85"/>
+                <path d="M 118 30 Q 126 24 132 30" fill="none" stroke="#8FD8E8" stroke-width="2.6" stroke-linecap="round" opacity=".7"/>
+                <circle cx="138" cy="26" r="3.4" fill="#C8E8F0" opacity=".85"/>
+                <circle cx="146" cy="38" r="2.6" fill="#C8E8F0" opacity=".65"/>
+                <circle cx="140" cy="50" r="2" fill="#C8E8F0" opacity=".5"/>
+                <circle cx="130" cy="62" r="2.6" fill="#C8E8F0" opacity=".55"/>
+                <circle cx="52" cy="58" r="3" fill="#D8F0F4" opacity=".6"/>
+                <circle cx="56" cy="40" r="2.2" fill="#D8F0F4" opacity=".5"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">开汽水</span>
+              <span class="gc-desc">画圈拧开瓶盖,听那声"啵"</span>
+            </span>
+          </button>
+
+          <!-- 游戏 11: 做披萨 -->
+          <button class="game-card" data-game="pizza" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb25" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#F0C060" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#F0C060" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf25" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="25" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="gwglCrust" cx="38%" cy="30%" r="80%">
+                  <stop offset="0" stop-color="#F8E6B8"/>
+                  <stop offset="100%" stop-color="#E0AE5E"/>
+                </radialGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb25)"/>
+              <g filter="url(#gwcf25)" opacity=".92">
+                <ellipse cx="100" cy="94" rx="44" ry="6" fill="#B08A4E" opacity=".16"/>
+                <circle cx="100" cy="60" r="40" fill="url(#gwglCrust)"/>
+                <circle cx="100" cy="60" r="32" fill="#F6DE9E" opacity=".95"/>
+                <circle cx="88" cy="50" r="6.5" fill="#E06A5E" opacity=".9"/>
+                <circle cx="112" cy="68" r="6" fill="#E06A5E" opacity=".9"/>
+                <circle cx="108" cy="46" r="5" fill="#E06A5E" opacity=".85"/>
+                <circle cx="84" cy="70" r="5" fill="#E06A5E" opacity=".85"/>
+                <path d="M 78 58 Q 84 62 82 68" fill="none" stroke="#8CA86A" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+                <path d="M 112 54 Q 118 58 116 64" fill="none" stroke="#8CA86A" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+                <path d="M 96 66 Q 100 72 96 76" fill="none" stroke="#8CA86A" stroke-width="2.6" stroke-linecap="round" opacity=".6"/>
+                <circle cx="60" cy="28" r="3" fill="#F5D992" opacity=".7"/>
+                <circle cx="142" cy="30" r="2.6" fill="#F5D992" opacity=".6"/>
+                <circle cx="148" cy="80" r="2.2" fill="#F5D992" opacity=".5"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">做披萨</span>
+              <span class="gc-desc">揉面抹酱撒芝士,DIY 配菜烤切八份</span>
+            </span>
+          </button>
+
+          <!-- 游戏 12: 指尖小圆 -->
+          <button class="game-card" data-game="taichi" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb27" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#8FA8E8" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#8FA8E8" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf27" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="27" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="gwgmInk" cx="38%" cy="30%" r="80%">
+                  <stop offset="0" stop-color="#A8BCE8"/>
+                  <stop offset="100%" stop-color="#7E96D9"/>
+                </radialGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb27)"/>
+              <g filter="url(#gwcf27)" opacity=".92">
+                <path d="M 100 24 Q 148 28 152 62 Q 154 94 118 100 Q 116 92 118 88 Q 144 82 144 62 Q 140 36 100 32 Q 60 36 56 62 Q 56 82 82 88 Q 84 92 82 100 Q 46 94 48 62 Q 52 28 100 24 Z" fill="none" stroke="url(#gwgmInk)" stroke-width="7" stroke-linecap="round"/>
+                <circle cx="100" cy="62" r="7" fill="#7E96D9" opacity=".9"/>
+                <circle cx="97.6" cy="59.6" r="2.2" fill="#fff" opacity=".9"/>
+                <circle cx="100" cy="62" r="16" fill="none" stroke="#A8BCE8" stroke-width="1.6" opacity=".5"/>
+                <circle cx="100" cy="62" r="26" fill="none" stroke="#A8BCE8" stroke-width="1.2" opacity=".3"/>
+                <circle cx="40" cy="34" r="2.4" fill="#C8D4F0" opacity=".7"/>
+                <circle cx="160" cy="90" r="2.6" fill="#C8D4F0" opacity=".6"/>
+                <circle cx="46" cy="88" r="2" fill="#C8D4F0" opacity=".5"/>
+                <circle cx="156" cy="34" r="2" fill="#C8D4F0" opacity=".55"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">指尖小圆</span>
+              <span class="gc-desc">跟着小圆慢慢长大, 松手它会慢慢散去</span>
+            </span>
+          </button>
+
+          <button class="game-card" data-game="blow" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcb29" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#F0BBD8" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#F0BBD8" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcf29" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="29" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <radialGradient id="gwgnBub" cx="38%" cy="30%" r="80%">
+                  <stop offset="0" stop-color="#FFFFFF"/>
+                  <stop offset="60%" stop-color="#FDEFF6"/>
+                  <stop offset="100%" stop-color="#E4C6E8"/>
+                </radialGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcb29)"/>
+              <g filter="url(#gwcf29)" opacity=".92">
+                <circle cx="128" cy="52" r="24" fill="none" stroke="#F0BBD8" stroke-width="3.2" opacity=".85"/>
+                <circle cx="128" cy="52" r="24" fill="#FDEFF6" opacity=".28"/>
+                <line x1="128" y1="76" x2="118" y2="96" stroke="#C8A8D8" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+                <circle cx="66" cy="34" r="14" fill="url(#gwgnBub)"/>
+                <circle cx="52" cy="66" r="9" fill="url(#gwgnBub)" opacity=".9"/>
+                <circle cx="82" cy="80" r="11" fill="url(#gwgnBub)" opacity=".85"/>
+                <circle cx="168" cy="86" r="7" fill="url(#gwgnBub)" opacity=".8"/>
+                <circle cx="170" cy="30" r="5" fill="url(#gwgnBub)" opacity=".7"/>
+                <ellipse cx="60" cy="29" rx="4" ry="2.6" fill="#fff" opacity=".85" transform="rotate(-30 60 29)"/>
+                <ellipse cx="78" cy="76" rx="3" ry="2" fill="#fff" opacity=".8" transform="rotate(-30 78 76)"/>
+                <circle cx="176" cy="84" r="1.6" fill="#fff" opacity=".8"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">吹泡泡</span>
+              <span class="gc-desc">按住吹出一串晶莹的泡泡, 一戳就 啵~</span>
+            </span>
+          </button>
+        </div>
+
+        <a class="enter-healing" id="enterAsmrCta" href="#asmr">
+          <span class="eh-text">玩累了？来听听 ASMR 助眠音吧～</span>
+          <span class="eh-arrow">→</span>
+        </a>
+
+        <div class="page-nav-wrap" data-page-nav></div>
+      </div>
+    </section>
+
+    <!-- ============== ASMR 助眠音 ============== -->
+    <section id="asmr" class="view" aria-label="ASMR 助眠音">
+      <div class="section-inner">
+        <header class="section-head">
+          <p class="eyebrow">— ASMR&nbsp;·&nbsp;LULLABY —</p>
+          <h2 class="section-title">闭上眼,让耳朵先睡一会儿</h2>
+          <p class="section-desc">雨声、森林、海浪是免版权的高品质实录音, 其它由页面实时合成。想换成自己的录音, 去设置区「音频替换」上传就行。</p>
+          <div class="asmr-toolbar">
+            <button class="asmr-stop-all" id="asmrStopAllBtn" type="button" aria-label="停止所有声音">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></svg>
+              <span>全部停止</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="asmr-grid">
+          <button class="asmr-card" data-sound="rain" type="button">
+            <span class="ac-icon ac-rain" aria-hidden="true">
+              <svg viewBox="0 0 56 56">
+                <defs>
+                  <linearGradient id="acrg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f4f8fb"/><stop offset="100%" stop-color="#c3d9e6"/></linearGradient>
+                  <linearGradient id="acrg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7FB0C8"/><stop offset="100%" stop-color="#3A7290"/></linearGradient>
+                  <filter id="acf-rain" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.04" numOctaves="3" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+                </defs>
+                <g filter="url(#acf-rain)">
+                  <ellipse cx="24" cy="23" rx="12" ry="9" fill="url(#acrg1)"/>
+                  <ellipse cx="37" cy="21" rx="10" ry="8" fill="url(#acrg1)"/>
+                  <rect x="18" y="22" width="25" height="10" rx="5" fill="url(#acrg1)"/>
+                  <path d="M20 39.5l-2.6 5.6M28 41.5l-2.6 5.6M37 39.5l-2.6 5.6" stroke="url(#acrg2)" stroke-width="3.4" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </span>
+            <span class="ac-name">窗外落雨</span>
+            <span class="ac-desc">细密的雨点,轻轻打在窗台上</span>
+            <span class="ac-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="asmr-card" data-sound="wave" type="button">
+            <span class="ac-icon ac-wave" aria-hidden="true">
+              <svg viewBox="0 0 56 56">
+                <defs>
+                  <linearGradient id="acwg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8FB6D8"/><stop offset="100%" stop-color="#3E6E9C"/></linearGradient>
+                  <filter id="acf-wave" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.04" numOctaves="3" seed="13" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+                </defs>
+                <g filter="url(#acf-wave)">
+                  <path d="M6 23c5-5.4 10-5.4 15 0s10 5.4 15 0 10-5.4 15 0" stroke="url(#acwg1)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.95"/>
+                  <path d="M6 32c5-5.4 10-5.4 15 0s10 5.4 15 0 10-5.4 15 0" stroke="url(#acwg1)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.68"/>
+                  <path d="M6 41c5-5.4 10-5.4 15 0s10 5.4 15 0 10-5.4 15 0" stroke="url(#acwg1)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.42"/>
+                  <path d="M31 16.5q3-3 6 0M32.5 17.5q2.4-2.4 4.8 0" stroke="#EAF4FB" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.85"/>
+                </g>
+              </svg>
+            </span>
+            <span class="ac-name">海边的浪</span>
+            <span class="ac-desc">潮水一遍一遍,漫上又退下</span>
+            <span class="ac-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="asmr-card" data-sound="fire" type="button">
+            <span class="ac-icon ac-fire" aria-hidden="true">
+              <svg viewBox="0 0 56 56">
+                <defs>
+                  <linearGradient id="acfg1" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#C05A2E"/><stop offset="55%" stop-color="#E8853F"/><stop offset="100%" stop-color="#F2B45C"/></linearGradient>
+                  <filter id="acf-fire" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.04" numOctaves="3" seed="17" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+                </defs>
+                <g filter="url(#acf-fire)">
+                  <path d="M28 8c1.8 7-3.8 10.5-6.6 15-2.4 3.8-3.4 7.2-3.4 10.2 0 6 4.4 10 10 10s10-4 10-10c0-2.8-.8-5.4-2.2-7.8-1 2.4-2.6 4-5 4.4 1.4-6.2-1-12.6-2.8-21.8z" fill="url(#acfg1)"/>
+                  <path d="M28 20c1.4 4-2.8 6-4.6 9-1.6 2.6-2.2 4.8-2.2 6.8 0 4 3 6.6 6.8 6.6s6.8-2.6 6.8-6.6c0-1.8-.5-3.5-1.5-5-1 1.6-2.6 2.6-4.2 2.8 1.2-3.6-.6-8.6-1.1-13.6z" fill="#FBE3A2" opacity="0.85"/>
+                  <circle cx="14" cy="30" r="1.6" fill="#F2B45C" opacity="0.8"/>
+                  <circle cx="44" cy="24" r="1.3" fill="#E8853F" opacity="0.7"/>
+                  <circle cx="41" cy="38" r="1" fill="#F2B45C" opacity="0.6"/>
+                </g>
+              </svg>
+            </span>
+            <span class="ac-name">炉中篝火</span>
+            <span class="ac-desc">木柴偶尔爆出的小火星</span>
+            <span class="ac-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="asmr-card" data-sound="wind" type="button">
+            <span class="ac-icon ac-wind" aria-hidden="true">
+              <svg viewBox="0 0 56 56">
+                <defs>
+                  <linearGradient id="acng1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#A3C89A"/><stop offset="100%" stop-color="#5E8C5B"/></linearGradient>
+                  <filter id="acf-wind" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.04" numOctaves="3" seed="19" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+                </defs>
+                <g filter="url(#acf-wind)">
+                  <path d="M7 20h20a4.5 4.5 0 1 0-4.3-5.8M7 28h28a4.5 4.5 0 1 1-4.3 5.8M7 36h17" stroke="url(#acng1)" stroke-width="4.6" fill="none" stroke-linecap="round"/>
+                  <path d="M42 26c-2.5-7 3.5-11 9-10-1 7.5-4 10.5-9 10z" fill="#79B851" opacity="0.9"/>
+                  <path d="M43 26c1-4 3.4-6.2 6.6-7.6" stroke="#4E7A3E" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.6"/>
+                </g>
+              </svg>
+            </span>
+            <span class="ac-name">穿过林间的风</span>
+            <span class="ac-desc">树叶沙沙,若有若无</span>
+            <span class="ac-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="asmr-card" data-sound="chew" type="button">
+            <span class="ac-icon ac-chew" aria-hidden="true">
+              <svg viewBox="0 0 56 56">
+                <defs>
+                  <linearGradient id="accg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F6DFAE"/><stop offset="100%" stop-color="#D9A860"/></linearGradient>
+                  <filter id="acf-chew" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.04" numOctaves="3" seed="23" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+                </defs>
+                <g filter="url(#acf-chew)">
+                  <path d="M9 36c0 9 8.5 14.5 19 14.5S47 45 47 36z" fill="url(#accg1)" stroke="#B57E3E" stroke-width="1.6"/>
+                  <ellipse cx="28" cy="36" rx="19" ry="7" fill="#F6DFAE" stroke="#B57E3E" stroke-width="1.6"/>
+                  <circle cx="20" cy="30" r="4.2" fill="#C98A4B"/>
+                  <circle cx="28" cy="27" r="4.2" fill="#D9A05C"/>
+                  <circle cx="36" cy="30" r="4.2" fill="#C98A4B"/>
+                  <circle cx="28" cy="33" r="3" fill="#E8B868"/>
+                  <path d="M15 47q2.4 2.4 4.8 0M24 48q2.4 2.4 4.8 0" stroke="#F2E3C0" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+                </g>
+              </svg>
+            </span>
+            <span class="ac-name">轻咀嚼</span>
+            <span class="ac-desc">咔嚓,咔嚓,有人安静地吃着零食</span>
+            <span class="ac-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="asmr-card" data-sound="tap" type="button">
+            <span class="ac-icon ac-tap" aria-hidden="true">
+              <svg viewBox="0 0 56 56">
+                <defs>
+                  <linearGradient id="actg1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#F9DCC8"/><stop offset="100%" stop-color="#E8B89A"/></linearGradient>
+                  <filter id="acf-tap" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.04" numOctaves="3" seed="29" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+                </defs>
+                <g filter="url(#acf-tap)">
+                  <rect x="9" y="40" width="38" height="7" rx="3.5" fill="#6FB5A8" opacity="0.85"/>
+                  <path d="M25 42c-1.6-2.6-1.4-5.6 1-7.4 2.4 1.4 3.6 3.6 3.6 6.4v1.8h-4.6z" fill="url(#actg1)" stroke="#C98F6E" stroke-width="1.2"/>
+                  <path d="M32 42c-1.6-2.8-1.4-5.8 1-7.8 2.6 1.4 3.8 3.8 3.8 6.8v1.6h-4.8z" fill="url(#actg1)" stroke="#C98F6E" stroke-width="1.2" opacity="0.92"/>
+                  <path d="M13 30q3.5-3.5 7 0M39 26q3.5-3.5 7 0" stroke="#9FE0D4" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+                  <circle cx="11" cy="27" r="1.4" fill="#9FE0D4"/>
+                </g>
+              </svg>
+            </span>
+            <span class="ac-name">指尖敲击</span>
+            <span class="ac-desc">指甲轻轻叩击,细碎的剐蹭声</span>
+            <span class="ac-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="asmr-card" data-sound="keys" type="button">
+            <span class="ac-icon ac-keys" aria-hidden="true">
+              <svg viewBox="0 0 56 56">
+                <defs>
+                  <linearGradient id="ackg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C2CCE8"/><stop offset="100%" stop-color="#8A98C4"/></linearGradient>
+                  <filter id="acf-keys" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.04" numOctaves="3" seed="31" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+                </defs>
+                <g filter="url(#acf-keys)">
+                  <rect x="9" y="18" width="38" height="25" rx="5" fill="url(#ackg1)" stroke="#5E6C9C" stroke-width="1.6"/>
+                  <g fill="#F0F3FA" opacity="0.95">
+                    <rect x="13" y="22" width="7.4" height="6.6" rx="1.8"/>
+                    <rect x="24.3" y="22" width="7.4" height="6.6" rx="1.8"/>
+                    <rect x="35.6" y="22" width="7.4" height="6.6" rx="1.8"/>
+                    <rect x="13" y="32" width="7.4" height="6.6" rx="1.8"/>
+                    <rect x="24.3" y="32" width="7.4" height="6.6" rx="1.8"/>
+                    <rect x="35.6" y="32" width="7.4" height="6.6" rx="1.8"/>
+                  </g>
+                  <circle cx="43" cy="38.5" r="1.7" fill="#8FD8CE"/>
+                </g>
+              </svg>
+            </span>
+            <span class="ac-name">机械键盘</span>
+            <span class="ac-desc">一阵一阵的打字声,打完就歇</span>
+            <span class="ac-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="asmr-card" data-sound="page" type="button">
+            <span class="ac-icon ac-page" aria-hidden="true">
+              <svg viewBox="0 0 56 56">
+                <defs>
+                  <linearGradient id="acpg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FBF6EA"/><stop offset="100%" stop-color="#EFDFC0"/></linearGradient>
+                  <linearGradient id="acpg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E7CEA4"/><stop offset="100%" stop-color="#C9A86A"/></linearGradient>
+                  <filter id="acf-page" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.04" numOctaves="3" seed="37" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+                </defs>
+                <g filter="url(#acf-page)">
+                  <path d="M14 16v27c6-2.4 11-2.4 16 0V16c-5-2.4-11-2.4-16 0z" fill="url(#acpg1)" stroke="#B08D58" stroke-width="1.5"/>
+                  <path d="M30 16v27c6 2.4 11 2.4 16 0V16c-5-2.4-11-2.4-16 0z" fill="url(#acpg2)" stroke="#B08D58" stroke-width="1.5"/>
+                  <path d="M30 16v27" stroke="#B08D58" stroke-width="1.6"/>
+                  <path d="M42 21c4.6 1.6 6.6 5.2 6 9.6" stroke="#FBF6EA" stroke-width="2.6" fill="none" stroke-linecap="round" opacity="0.9"/>
+                </g>
+              </svg>
+            </span>
+            <span class="ac-name">翻书页</span>
+            <span class="ac-desc">隔一会儿,轻轻翻过一页</span>
+            <span class="ac-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="asmr-card" data-sound="drip" type="button">
+            <span class="ac-icon ac-drip" aria-hidden="true">
+              <svg viewBox="0 0 56 56">
+                <defs>
+                  <linearGradient id="acdg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#B5DCF6"/><stop offset="100%" stop-color="#4E82B8"/></linearGradient>
+                  <filter id="acf-drip" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.04" numOctaves="3" seed="41" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+                </defs>
+                <g filter="url(#acf-drip)">
+                  <path d="M28 8c6 7.4 10 12.6 10 17.6a10 10 0 0 1-20 0c0-5 4-10.2 10-17.6z" fill="url(#acdg1)"/>
+                  <path d="M23.5 21.5a4.6 4.6 0 0 0 3.6 4.1" stroke="#DCEFFC" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8"/>
+                  <ellipse cx="28" cy="44" rx="9" ry="3.2" fill="none" stroke="#7FB0D8" stroke-width="2" opacity="0.7"/>
+                  <ellipse cx="28" cy="44" rx="15" ry="5" fill="none" stroke="#7FB0D8" stroke-width="1.6" opacity="0.4"/>
+                </g>
+              </svg>
+            </span>
+            <span class="ac-name">水滴声</span>
+            <span class="ac-desc">空房间里,偶尔一声「叮咚」</span>
+            <span class="ac-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          </button>
+
+          <!-- v48: 用户自选助眠音空位(上传存本机, 时长不限) -->
+          <button class="asmr-card asmr-user" data-slot="0" type="button">
+            <span class="ac-icon ac-upload" aria-hidden="true">
+              <svg viewBox="0 0 56 56">
+                <defs>
+                  <filter id="acf-upload" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.04" numOctaves="3" seed="43" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+                </defs>
+                <g filter="url(#acf-upload)" fill="currentColor">
+                  <ellipse cx="23" cy="26" rx="11" ry="8" opacity="0.5"/>
+                  <ellipse cx="34" cy="24" rx="9" ry="7" opacity="0.68"/>
+                  <rect x="17" y="25" width="23" height="9" rx="4.5" opacity="0.5"/>
+                  <path d="M28 39.5v-8.5M24.3 35.2 28 31.2l3.7 4" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+              </svg>
+            </span>
+            <span class="ac-name">上传你喜欢的助眠音</span>
+            <span class="ac-desc">白噪音/音乐/录音都可以 · 时长不限</span>
+            <span class="ac-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span class="ac-del" title="删除这个音频" role="button" aria-label="删除这个音频">✕</span>
+          </button>
+
+          <button class="asmr-card asmr-user" data-slot="1" type="button">
+            <span class="ac-icon ac-upload" aria-hidden="true">
+              <svg viewBox="0 0 56 56">
+                <defs>
+                  <filter id="acf-upload" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.04" numOctaves="3" seed="43" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+                </defs>
+                <g filter="url(#acf-upload)" fill="currentColor">
+                  <ellipse cx="23" cy="26" rx="11" ry="8" opacity="0.5"/>
+                  <ellipse cx="34" cy="24" rx="9" ry="7" opacity="0.68"/>
+                  <rect x="17" y="25" width="23" height="9" rx="4.5" opacity="0.5"/>
+                  <path d="M28 39.5v-8.5M24.3 35.2 28 31.2l3.7 4" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+              </svg>
+            </span>
+            <span class="ac-name">上传你喜欢的助眠音</span>
+            <span class="ac-desc">白噪音/音乐/录音都可以 · 时长不限</span>
+            <span class="ac-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span class="ac-del" title="删除这个音频" role="button" aria-label="删除这个音频">✕</span>
+          </button>
+
+          <button class="asmr-card asmr-user" data-slot="2" type="button">
+            <span class="ac-icon ac-upload" aria-hidden="true">
+              <svg viewBox="0 0 56 56">
+                <defs>
+                  <filter id="acf-upload" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.04" numOctaves="3" seed="43" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+                </defs>
+                <g filter="url(#acf-upload)" fill="currentColor">
+                  <ellipse cx="23" cy="26" rx="11" ry="8" opacity="0.5"/>
+                  <ellipse cx="34" cy="24" rx="9" ry="7" opacity="0.68"/>
+                  <rect x="17" y="25" width="23" height="9" rx="4.5" opacity="0.5"/>
+                  <path d="M28 39.5v-8.5M24.3 35.2 28 31.2l3.7 4" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+              </svg>
+            </span>
+            <span class="ac-name">上传你喜欢的助眠音</span>
+            <span class="ac-desc">白噪音/音乐/录音都可以 · 时长不限</span>
+            <span class="ac-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span class="ac-del" title="删除这个音频" role="button" aria-label="删除这个音频">✕</span>
+          </button>
+        </div>
+
+        <p class="asmr-tip">建议戴上耳机, 点卡片开始或停止, 也能同时开多张混在一起。<br>带 ✕ 的是你自己上传的助眠音, 只存在这台设备上。</p>
+
+        <div class="page-nav-wrap" data-page-nav></div>
+      </div>
+    </section>
+
+    <!-- ============== 设置 ============== -->
+    <section id="settings" class="view" aria-label="设置">
+      <div class="section-inner">
+        <header class="section-head">
+          <p class="eyebrow">— PERSONALIZE&nbsp;·&nbsp;COLOR —</p>
+          <h2 class="section-title">把网页调成,让你最放松的样子</h2>
+          <p class="section-desc">所有颜色均作用于背景与按钮,文字始终保持柔和以保护视力。设置自动保存在本设备。</p>
+        </header>
+
+        <div class="settings-card">
+          <h3 class="block-title">预设氛围主题</h3>
+          <div class="theme-grid" id="themeGrid">
+            <button class="theme-chip" data-theme="cream" style="--c1:#FAF6F0;--c2:#EDE4D3;--accent:#B89B7A">
+              <span class="chip-swatch"></span> 默认
+            </button>
+            <button class="theme-chip" data-theme="mist" style="--c1:#F1F4F4;--c2:#D7E0E0;--accent:#7FA8A8">
+              <span class="chip-swatch"></span> 雾蓝
+            </button>
+            <button class="theme-chip" data-theme="sage" style="--c1:#F3F4EC;--c2:#D9DEC9;--accent:#8A9A6B">
+              <span class="chip-swatch"></span> 抹茶
+            </button>
+            <button class="theme-chip" data-theme="blush" style="--c1:#FBF1F0;--c2:#EAD8D6;--accent:#C58E92">
+              <span class="chip-swatch"></span> 樱粉
+            </button>
+            <button class="theme-chip" data-theme="lavender" style="--c1:#F4F0F8;--c2:#DCD4E8;--accent:#9F84C0">
+              <span class="chip-swatch"></span> 薰衣草
+            </button>
+            <button class="theme-chip" data-theme="sand" style="--c1:#F6F1E7;--c2:#E2D4BE;--accent:#B89570">
+              <span class="chip-swatch"></span> 流沙
+            </button>
+          </div>
+
+          <h3 class="block-title">自定义颜色</h3>
+          <p class="block-sub">两个圆都可以点开选色:左边调主色(按钮与点缀),右边调底色(页面背景),选好立即生效。</p>
+          <div class="custom-color">
+            <label class="custom-picker">
+              <input type="color" id="customColor" value="#B89B7A" />
+              <span class="custom-label">主色</span>
+            </label>
+            <label class="custom-picker">
+              <input type="color" id="customBg" value="#FAF6F0" />
+              <span class="custom-label">底色</span>
+            </label>
+            <button class="btn btn-link" id="resetColor">恢复默认</button>
+          </div>
+
+          <h3 class="block-title">自定义字体</h3>
+          <p class="block-sub">左边换首页大标题的字体,右边换全站正文字体,选好立即生效,只在这台设备上生效。</p>
+          <div class="custom-font">
+            <label class="font-pick">
+              <span class="custom-label">标题字体</span>
+              <select id="fontBrand">
+                <option value="classic">经典衬线(默认)</option>
+                <option value="script">手写花体</option>
+                <option value="kai">楷体</option>
+                <option value="song">宋体</option>
+                <option value="hei">黑体</option>
+              </select>
+            </label>
+            <label class="font-pick">
+              <span class="custom-label">正文字体</span>
+              <select id="fontBody">
+                <option value="kai">楷体(默认)</option>
+                <option value="song">宋体</option>
+                <option value="hei">黑体</option>
+                <option value="fang">仿宋</option>
+              </select>
+            </label>
+            <button class="btn btn-link" id="resetFonts">恢复默认</button>
+          </div>
+
+          <h3 class="block-title">魔法瓶颜色</h3>
+          <p class="block-sub">首页的魔法瓶:左边换瓶里液体的颜色,右边换飘出来的烟雾颜色。</p>
+          <div class="custom-color">
+            <label class="custom-picker">
+              <input type="color" id="bottleLiquid" value="#9F86EC" />
+              <span class="custom-label">液体</span>
+            </label>
+            <label class="custom-picker">
+              <input type="color" id="bottleSmoke" value="#B89AF0" />
+              <span class="custom-label">烟雾</span>
+            </label>
+            <button class="btn btn-link" id="resetBottle">恢复默认</button>
+          </div>
+
+          <h3 class="block-title">全部恢复默认</h3>
+          <p class="block-sub">把颜色、字体、魔法瓶一次性恢复到最初的样子(不影响你的账号和替换过的音频)。</p>
+          <button class="btn btn-ghost ac-wide" id="resetAll">🎨 全部恢复默认</button>
+
+          <h3 class="block-title">音频替换</h3>
+          <p class="block-sub">网站里的每一个声音都可以换成你自己的音频文件(mp3 / wav / m4a 都行),只存在这台设备上,随时恢复默认。换好之后,全站播放都会用你的文件。</p>
+          <div class="audio-groups" id="audioGroups"></div>
+
+          <h3 class="block-title">疗法偏好</h3>
+          <div class="pref-row">
+            <label class="toggle-row">
+              <span>人声语音引导</span>
+              <input type="checkbox" id="prefVoice" checked />
+              <span class="toggle"></span>
+            </label>
+            <label class="toggle-row pref-vol-row" title="疗愈之旅中的人声大小，音乐不受影响">
+              <span>人声音量</span>
+              <input type="range" id="prefVoiceVol" min="0" max="100" value="100" />
+              <em class="pref-vol-val" id="prefVoiceVolVal">100%</em>
+            </label>
+            <!-- v597: 「自动循环」已按用户要求彻底删除 —— 疗愈音乐播完 3:30 就安静结束 -->
+          </div>
+        </div>
+
+        <!-- 群主专属: 疗愈社区一键清场 (仅 rosa 显示) -->
+        <div class="settings-card admin-card" id="adminCleanupCard" hidden>
+          <h3 class="block-title">🛡️ 群主工具 · 社区一键清场</h3>
+          <p class="block-sub">
+            把所有非真人账号 (测试账号、bot、防复发路人和幽灵账号) 一键标记为"已隐藏"，成员列表和聊天自动过滤掉他们。<b>rosa / Elio / wjw</b> 三个真人始终保留。
+            第一次使用需要先去 <b>Supabase 控制台 SQL Editor</b> 跑一次 <code>supabase-cleanup-v52.sql</code> 初始化，之后这里点按钮就生效。
+          </p>
+          <div class="admin-actions">
+            <button class="btn btn-ghost ac-wide" id="adminCleanupBtn">🚮 隐藏非真人账号</button>
+            <button class="btn btn-link" id="adminUnhideBtn">显示全部（撤回）</button>
+          </div>
+          <p class="admin-status" id="adminStatus"></p>
+        </div>
+
+        <!-- v572: 数据搬家(换网址/换设备时迁移账号数据) -->
+        <div class="settings-card migrate-card">
+          <h3 class="block-title">🧳 数据搬家</h3>
+          <p class="block-sub">换网址、换设备时, 把账号、小宠、订单、聊天记录全部带走: 在<b>旧网址</b>这里点「生成数据码」并复制, 再到<b>新网址</b>的同一位置粘贴导入。</p>
+          <div class="mig-row">
+            <button class="btn btn-solid small" id="migExportBtn" type="button">生成数据码</button>
+          </div>
+          <div class="mig-export" id="migExportBox" hidden>
+            <textarea id="migExportArea" readonly rows="4" aria-label="我的数据码"></textarea>
+            <button class="btn btn-ghost small" id="migCopyBtn" type="button">复制数据码</button>
+          </div>
+          <div class="mig-import">
+            <p class="block-sub">有数据码? 粘贴到这里导入(会覆盖本设备现有数据):</p>
+            <textarea id="migImportArea" rows="4" placeholder="把在旧网址生成的数据码粘贴到这里"></textarea>
+            <button class="btn btn-solid small" id="migImportBtn" type="button">导入数据</button>
+          </div>
+        </div>
+
+        <p class="settings-foot">
+          <button class="btn btn-ghost small" id="enterShop">← 去购买方案</button>
+          <span class="dot"></span>
+          <button class="btn btn-ghost small" id="enterHeal">去开始疗愈 →</button>
+        </p>
+
+        <div class="page-nav-wrap" data-page-nav></div>
+      </div>
+    </section>
+
+    <!-- ============== 用户中心 ============== -->
+    <section id="account" class="view" aria-label="用户中心">
+      <div class="section-inner">
+        <header class="section-head">
+          <p class="eyebrow">— ACCOUNT ·&nbsp;MY&nbsp;SPACE —</p>
+          <h2 class="section-title">我的小角落</h2>
+          <p class="section-desc">登录后可改名、换头像、看订单, 一台设备一个账号</p>
+        </header>
+
+        <!-- 未登录: 登录(默认显示) -->
+        <div class="acct-card" id="acctLogin">
+          <div class="ac-top">
+            <span class="ac-avatar-big">🎧</span>
+            <p class="ac-tip">欢迎回来, 输入昵称和密码就能进去。<br>不退出登录的话, 关掉网页下次打开, 还是登录状态。</p>
+          </div>
+          <label class="co-field">
+            <span class="co-field-name">昵称</span>
+            <input class="co-input" id="loginName" placeholder="注册时的昵称" maxlength="12" />
+          </label>
+          <label class="co-field">
+            <span class="co-field-name">密码</span>
+            <input class="co-input" id="loginPass" type="password" placeholder="密码" maxlength="16" autocomplete="current-password" />
+          </label>
+          <button class="btn btn-solid ac-wide" id="loginBtn">登录</button>
+          <p class="ac-switch ac-switch-r">忘记密码了? <button class="ac-link" id="toForgot">找回密码</button></p>
+          <p class="ac-switch ac-switch-r">还没有账号? <button class="ac-link" id="toReg">去注册</button></p>
+        </div>
+
+        <!-- 未登录: 注册 -->
+        <div class="acct-card" id="acctReg" hidden>
+          <div class="ac-top">
+            <span class="ac-avatar-big" id="regPreview">🌙</span>
+            <p class="ac-tip">第一次来? 起个名字注册一下,<br>一台设备一个账号, 系统会送你一个专属疗友号。</p>
+          </div>
+          <label class="co-field">
+            <span class="co-field-name">昵称</span>
+            <input class="co-input" id="regName" placeholder="给自己起个名字(2-12字)" maxlength="12" />
+          </label>
+          <label class="co-field">
+            <span class="co-field-name">密码</span>
+            <input class="co-input" id="regPass" type="password" placeholder="设个密码(至少6位)" maxlength="16" autocomplete="new-password" />
+          </label>
+          <label class="co-field">
+            <span class="co-field-name">确认密码</span>
+            <input class="co-input" id="regPass2" type="password" placeholder="再输一遍" maxlength="16" autocomplete="new-password" />
+          </label>
+          <button class="btn btn-solid ac-wide" id="regBtn">注册并登录</button>
+          <p class="ac-switch ac-switch-r">已经有账号了? <button class="ac-link" id="toLogin">去登录</button></p>
+        </div>
+
+        <!-- 未登录: 忘记密码(后台检测设备: 是 → 弹卡片显示用户名密码; 不是 → 提示设备不一样) -->
+        <div class="acct-card" id="acctForgot" hidden>
+          <div class="ac-top">
+            <span class="ac-avatar-big">🔑</span>
+            <p class="ac-tip">账号只绑定当初注册的那台设备。<br>点下面按钮, 后台检测是不是这台设备:<br>是 → 直接显示你的用户名和密码; 不是 → 无法找回。</p>
+          </div>
+          <button class="btn btn-solid ac-wide" id="fogBtn">找回我的账号信息</button>
+
+          <!-- 找回结果(JS 填充) -->
+          <div class="fog-result" id="fogResult" hidden></div>
+
+          <!-- 改密码和用户名(设备验证通过后才展开, 不需要旧密码) -->
+          <div class="fog-edit" id="fogEdit" hidden>
+            <p class="ac-label ac-label-lg">改密码和用户名</p>
+            <label class="co-field">
+              <span class="co-field-name">新昵称</span>
+              <input class="co-input" id="fogNewName" placeholder="留空 = 不改昵称" maxlength="12" />
+            </label>
+            <label class="co-field">
+              <span class="co-field-name">新密码</span>
+              <input class="co-input" id="fogNewPass" type="password" placeholder="至少 6 位" maxlength="16" autocomplete="new-password" />
+            </label>
+            <label class="co-field">
+              <span class="co-field-name">确认新密码</span>
+              <input class="co-input" id="fogNewPass2" type="password" placeholder="再输一遍" maxlength="16" autocomplete="new-password" />
+            </label>
+            <button class="btn btn-ghost ac-wide" id="fogEditBtn">保存修改</button>
+          </div>
+
+          <p class="ac-switch ac-switch-r">想起来了? <button class="ac-link" id="fogBackLogin">去登录</button></p>
+        </div>
+
+        <!-- 已登录 -->
+        <div id="acctHome" hidden>
+          <div class="acct-card">
+            <div class="ac-head">
+              <span class="ac-avatar-big" id="apAvatar">🌙</span>
+              <div class="ac-info">
+                <p class="ac-name" id="apName">—</p>
+                <p class="ac-sub" id="apSub">加入于 —</p>
+                <p class="ac-sub ac-sub-code" id="apFriendCode">疗友号 —</p>
+                <p class="ac-sub">疗友号是注册时系统分配的, 全站唯一, 永远绑定你这台设备 —— 改名、改密码它都不变。</p>
+              </div>
+              <button class="btn btn-ghost small" id="logoutBtn">退出登录</button>
+            </div>
+            <div class="ac-row">
+              <p class="ac-label">改名字</p>
+              <input class="co-input" id="renameInput" maxlength="12" />
+              <button class="btn btn-ghost small" id="renameBtn">保存</button>
+            </div>
+            <div class="ac-row ac-col">
+              <p class="ac-label">换头像</p>
+              <div class="ac-emoji-row" id="avatarRow"></div>
+            </div>
+            <div class="ac-row ac-col">
+              <p class="ac-label">修改密码</p>
+              <div class="ac-pass-grid">
+                <input class="co-input" id="pwOld" type="password" placeholder="当前密码" maxlength="16" autocomplete="current-password" />
+                <input class="co-input" id="pwNew" type="password" placeholder="新密码(至少6位)" maxlength="16" autocomplete="new-password" />
+                <input class="co-input" id="pwNew2" type="password" placeholder="再输一遍新密码" maxlength="16" autocomplete="new-password" />
+                <button class="btn btn-ghost small" id="pwBtn">保存新密码</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 隐私与数据: 注册信息查看权在用户本人, 后台不采集 -->
+          <div class="acct-card acct-privacy">
+            <p class="ac-label ac-label-lg">🔒 隐私与数据</p>
+            <p class="ac-privacy-line">注册信息只保存在<b>你这台设备</b>上, 后台不采集、不拿走, 查看权完全在你手里。</p>
+            <p class="ac-privacy-line">去云端聊天时, 只上传一个<b>匿名身份标识</b>用来识别"是不是你", 昵称以外的资料不上传。</p>
+            <p class="ac-privacy-line">私聊内容只有双方能看到; 和 AI 数字人的对话只有你自己能看到。</p>
+            <p class="ac-privacy-line">账号无法注销、一次登录终身有效; 密码随时能改, 忘了也能在这台设备直接找回。</p>
+          </div>
+
+          <p class="block-title acct-orders-title">我的订单</p>
+          <div id="orderList" class="order-list"></div>
+        </div>
+
+        <div class="page-nav-wrap" data-page-nav></div>
+      </div>
+    </section>
+
+    <!-- ============== 疗愈社区(云端聊天) ============== -->
+    <section id="community" class="view" aria-label="疗愈社区">
+      <div class="section-inner">
+        <div class="community-shell">
+          <!-- 顶栏 -->
+          <header class="cm-topbar">
+            <div class="cm-tb-left">
+              <span class="cm-tb-logo" aria-hidden="true">🌿</span>
+              <div class="cm-tb-meta">
+                <p class="cm-tb-name" id="cmTitleName">疗愈社区</p>
+                <p class="cm-tb-sub" id="cmTitleSub"><span id="cmMemberCount">…</span> 位小伙伴在这里</p>
+              </div>
+            </div>
+            <button class="cm-dm-back" id="cmDmBack" type="button" hidden>← 返回群聊</button>
+            <div class="cm-tabs" id="cmTabs">
+              <button class="cm-tab active" data-tab="chat" type="button">群聊</button>
+              <button class="cm-tab" data-tab="friends" type="button">好友<i class="cm-badge" id="cmFrBadge" hidden></i><i class="cm-badge cm-dm-badge" id="cmDmBadge" hidden></i></button>
+              <button class="cm-tab" data-tab="members" type="button">成员</button>
+            </div>
+            <button class="cm-gear" id="cmGear" type="button" aria-label="个性化设置" title="个性化设置">⚙️</button>
+            <button class="cm-leave" id="cmLeave" type="button" title="退出社区">退出</button>
+          </header>
+
+          <!-- 未注册门禁 -->
+          <div class="cm-gate" id="cmGate" hidden>
+            <button class="cm-gate-close" id="cmGateClose" type="button" aria-label="关闭提示">×</button>
+            <span class="cm-gate-icon" aria-hidden="true">🌿</span>
+            <p class="cm-gate-title">在这里遇到更多「疗友」吧</p>
+            <p class="cm-gate-desc">注册后即可解锁社区聊天——大家互不相识, 却都在学着好好生活。聊天记录会一直保留, 退出再进来也还在。</p>
+            <button class="btn btn-solid cm-gate-btn" id="cmGoReg" type="button">去注册</button>
+          </div>
+
+          <!-- 关闭提示后的轻量占位 -->
+          <div class="cm-locked" id="cmLocked" hidden>
+            <span>🔒 注册后即可解锁社区聊天</span>
+            <button class="cm-locked-btn" id="cmLockedReg" type="button">去注册</button>
+          </div>
+
+          <!-- v34 已退出社区(重新加入后之前的记录保留, 退出期间的消息不可见) -->
+          <div class="cm-left" id="cmLeft" hidden>
+            <span class="cm-left-icon" aria-hidden="true">👋</span>
+            <p class="cm-left-title">已退出疗愈社区</p>
+            <p class="cm-left-sub">退出期间的消息你不会看到；重新加入后，之前的聊天记录还会保留。</p>
+            <button class="btn btn-solid cm-left-btn" id="cmRejoin" type="button">重新加入</button>
+          </div>
+
+          <!-- 未配置 / 云端不可达 -->
+          <div class="cm-offline" id="cmOffline" hidden>
+            <p class="cm-offline-title" id="cmOfflineTitle">🌱 社区还在准备中</p>
+            <p class="cm-offline-sub" id="cmOfflineSub">功能马上就来, 敬请期待~</p>
+          </div>
+
+          <!-- 三面板 -->
+          <div class="cm-body" id="cmBody" hidden>
+            <div class="cm-panel cm-chat" id="cmPanelChat">
+              <button class="cm-load-older" id="cmLoadOlder" type="button" hidden>查看更早的消息</button>
+              <!-- v36.4 临时公告栏: 群主可编辑, 确认后自动 @所有人 -->
+              <div class="cm-announce" id="cmAnnounce" hidden>
+                <div class="cm-ann-head">
+                  <span class="cm-ann-title">📢 临时公告栏</span>
+                  <span class="cm-ann-owner" id="cmAnnOwner"></span>
+                  <span class="cm-ann-time" id="cmAnnTime"></span>
+                  <!-- v40: 新公告角标 + 折叠按钮(▾=可展开, ▴=可收起) -->
+                  <span class="cm-ann-new" id="cmAnnNew" hidden>新</span>
+                  <button class="cm-ann-fold" id="cmAnnFold" type="button" aria-expanded="true" title="收起公告">▾</button>
+                </div>
+                <p class="cm-ann-text" id="cmAnnText"></p>
+                <div class="cm-ann-edit" id="cmAnnEdit" hidden>
+                  <textarea class="cm-ann-input" id="cmAnnInput" maxlength="500" placeholder="写点要告诉大家的事…"></textarea>
+                  <div class="cm-ann-edit-row">
+                    <button class="btn btn-ghost small" id="cmAnnCancel" type="button">取消</button>
+                    <button class="btn btn-solid small" id="cmAnnConfirm" type="button">确认发布 · @所有人</button>
+                  </div>
+                </div>
+                <button class="cm-ann-editbtn" id="cmAnnEditBtn" type="button" hidden>✏️ 编辑公告</button>
+              </div>
+              <!-- v47 永久公告可折叠 -->
+              <div class="cm-notice" id="cmNotice">
+                <div class="cm-notice-head">
+                  <p class="cm-notice-title">📢 社区公告（永久）</p>
+                  <button class="cm-notice-fold" id="cmNoticeFold" type="button" aria-expanded="false" title="收起 / 展开公告">▾</button>
+                </div>
+                <div class="cm-notice-body" id="cmNoticeBody">
+                  <p class="cm-notice-text">欢迎大家来到疗愈社区，在这里，你们可以聊天，结交"疗友"，分享疗愈体验。请大家和平友好相处，不要互相攻击～如产生矛盾，请及时截图并联系客服，后台将处理。</p>
+                </div>
+              </div>
+              <div class="cm-msgs" id="cmMsgs"></div>
+              <p class="cm-sys-tip" id="cmConn" hidden>· 连接断开了, 正在重连… ·</p>
+            </div>
+            <div class="cm-panel cm-friends" id="cmPanelFriends" hidden>
+              <!-- v34: 按疗友号搜索加好友 -->
+              <div class="cm-search-row">
+                <input class="cm-input cm-search-input" id="cmFriendCode" type="text" placeholder="输入疗友号添加好友" maxlength="14" />
+                <button class="btn btn-solid cm-search-btn" id="cmSearchBtn" type="button">搜索</button>
+              </div>
+              <p class="cm-panel-label">好友申请</p>
+              <div class="cm-reqs" id="cmReqs"><p class="cm-empty">还没有收到申请~</p></div>
+              <p class="cm-panel-label">我的好友</p>
+              <div class="cm-friend-list" id="cmFriendList"></div>
+            </div>
+            <div class="cm-panel cm-members" id="cmPanelMembers" hidden>
+              <!-- v34: Rosa AI 数字人入口(虚拟分身, 对话仅本人可见) -->
+              <button class="cm-ai-entry" id="cmAiEntry" type="button">
+                <span class="cm-ai-entry-avatar" aria-hidden="true">🤖</span>
+                <span class="cm-ai-entry-info">
+                  <span class="cm-ai-entry-name">Rosa AI 数字人</span>
+                  <span class="cm-ai-entry-sub">我的虚拟分身 · ENFP 治愈系，不想打扰真人就来找我</span>
+                </span>
+                <span class="cm-ai-entry-go">去聊聊 →</span>
+              </button>
+              <div class="cm-member-grid" id="cmMemberGrid"></div>
+            </div>
+          </div>
+
+          <!-- 输入栏 -->
+          <footer class="cm-inputbar" id="cmInputBar" hidden>
+            <input class="cm-input" id="cmInput" type="text" placeholder="说点什么吧…" maxlength="200" />
+            <button class="btn btn-solid cm-send" id="cmSend" type="button">发送</button>
+          </footer>
+        </div>
+
+        <!-- v50 隐私温馨提示：移到聊天框下方、上一页/下一页按钮上方，不再占聊天空间 -->
+        <p class="cm-input-hint" id="cmNote">💬 温馨提示：私聊与 AI 对话仅双方可见, 后台不采集内容, 请文明上网～</p>
+
+        <div class="page-nav-wrap" data-page-nav></div>
+      </div>
+    </section>
+
+    <!-- ============== 疗愈小宠 ============== -->
+    <section id="pets" class="view" aria-label="疗愈小宠">
+      <div class="section-inner">
+        <header class="section-head">
+          <h2 class="section-title">疗愈小宠</h2>
+          <p class="section-desc">选一只陪伴你的小动物</p>
+        </header>
+
+        <!-- 未选：选择界面 -->
+        <div class="pet-pick" id="petPickWrap">
+          <p class="pet-pick-tip">选择你想要的宠物，之后随时可以回来重新挑选：</p>
+          <div class="pet-pick-grid">
+            <button class="pet-pick-card" data-pet="rabbit" type="button">
+              <span class="pet-pick-imgbox" id="petPickRabbitBox"></span>
+              <span class="pet-pick-name">小兔 ♡</span>
+            </button>
+            <button class="pet-pick-card" data-pet="bear" type="button">
+              <span class="pet-pick-imgbox" id="petPickBearBox"></span>
+              <span class="pet-pick-name">小熊 ♡</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 命名弹窗 -->
+        <div class="pet-name-overlay" id="petNameOverlay">
+          <div class="pet-name-modal">
+            <div class="pnm-art" id="pnmArt"></div>
+            <h3 class="pnm-title">给你的小宠起个名字</h3>
+            <p class="pnm-tip">名字一旦确定，与它终身相伴</p>
+            <input class="pnm-input" id="petNameInput" maxlength="10" placeholder="最多 10 个字" />
+            <div class="pnm-btns">
+              <button class="btn btn-ghost" id="petNameCancel" type="button">再想想</button>
+              <button class="btn btn-solid" id="petNameOk" type="button">确定</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 已选：宠物主页 -->
+        <div class="pet-home" id="petHome" hidden>
+          <div class="pet-main">
+            <div class="pet-stage">
+              <div class="pet-avatar-wrap" id="petAvatarWrap">
+                <div class="pet-avatar" id="petAvatar">
+                  <div class="pet-bg"></div>
+                  <div class="pet-creature-slot" id="petCreature"></div>
+                  <span class="pet-heart" id="petHeart">♡</span>
+                </div>
+                <div class="pet-bubble" id="petBubble" hidden></div>
+              </div>
+              <div class="pet-name-tag">「<span id="petNameShow"></span>」</div>
+            </div>
+            <div class="pet-info">
+              <div class="pet-magic-badge" title="魔力值 100 可减 ¥10">
+                <span class="pico">✦</span>
+                <span class="pml">魔力值</span>
+                <span class="pmc" id="petMagicShow">0</span>
+              </div>
+              <div class="pet-magic-rule" id="petMagicRule">
+                <span class="pmr-ico">📜</span>
+                <span class="pmr-txt">攒够 <b>100</b> 魔力值可抵 <b>¥10</b> 精油；<b>不可叠加</b>，每笔订单仅可使用一次（100 魔力值）</span>
+              </div>
+              <div class="pet-pot-wrap">
+                <div class="pet-pot pet-pot-svg" id="petPot">
+                  <div class="pot-plant" id="petPlant"></div>
+                </div>
+                <p class="pot-tip" id="potTip">每天浇一次水，+10 魔力值</p>
+              </div>
+              <div class="pet-actions">
+                <button class="pet-action-btn" id="petWaterBtn" type="button">
+                  <span class="pa-emoji">💧</span><span class="pa-text">浇水</span>
+                </button>
+                <button class="pet-action-btn" id="petFeedBtn" type="button">
+                  <span class="pa-emoji">🍳</span><span class="pa-text">喂食</span>
+                </button>
+                <button class="pet-action-btn" id="petRepickBtn" type="button">
+                  <span class="pa-emoji">🔄</span><span class="pa-text">重新挑选</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="pet-cookbook">
+            <h3 class="cb-title">食物柜 · <span class="cb-sub" id="cookbookCount">已解锁 0 / 7 道</span></h3>
+            <div class="cb-grid" id="cookbookGrid"></div>
+            <p class="cb-hint">做出食物喂食小宠，可解锁对应菜谱到食物柜。错误的组合是黑暗料理，宠物会拒吃哦～</p>
+          </div>
+        </div>
+
+        <!-- 喂食弹窗 -->
+        <div class="pet-feed-overlay" id="petFeedOverlay">
+          <div class="pet-feed-modal">
+            <button class="checkout-close" id="petFeedClose" type="button">✕</button>
+            <h3 class="checkout-title">喂食厨房</h3>
+            <p class="pf-tip">从下面 8 种食材里 <b>选 2 种</b>，组合出对宠物有益的食物。<br>组合错误会变成 <b>黑暗料理</b>，小宠会拒吃。</p>
+            <div class="pf-pan" id="pfPan">
+              <span class="pf-pan-empty" id="pfPanEmpty">点食材入锅（最多 2 种）</span>
+            </div>
+            <button class="btn btn-solid pf-cook" id="pfCookBtn" type="button" disabled>开始烹饪</button>
+            <p class="pfi-label">食材（点击入锅 / 长按移除）</p>
+            <div class="pfi-grid" id="pfIngs"></div>
+          </div>
+        </div>
+
+        <!-- 烹饪结果 -->
+        <div class="pet-cook-overlay" id="petCookOverlay">
+          <div class="pet-cook-modal">
+            <div class="pcm-art" id="pcmArt"></div>
+            <h3 class="pcm-title" id="pcmTitle"></h3>
+            <p class="pcm-desc" id="pcmDesc"></p>
+            <button class="btn btn-solid" id="pcmOk" type="button">好</button>
+          </div>
+        </div>
+      </div>
+      <div class="page-nav-wrap" data-page-nav></div>
+    </section>
+
+    <!-- ============== 关于网站 ============== -->
+    <section id="about" class="view" aria-label="关于网站">
+      <div class="section-inner">
+        <header class="section-head">
+          <p class="eyebrow">— ABOUT&nbsp;·&nbsp;STORY —</p>
+          <h2 class="section-title">关于这个网站</h2>
+        </header>
+
+        <div class="about-card">
+          <div class="about-letter">
+            <p>Hello 亲爱的小伙伴们，我是这个网站的建立者，你们可以叫我 Rosa。</p>
+            <p>网站名叫 Music Aroma（音乐与芳香），做它的初衷是想让更多像我一样处于焦虑状态的人可以适当缓解压力。多听听音乐，玩一下解压小游戏，偶尔给忙碌的自己放个假，在深夜里给自己一个庇护所。</p>
+            <p>我会持续更新内容，在这里上传更多原创疗愈音乐，大家也可以关注我的音乐人账号 <span class="about-hl">Honey Lolita</span>，解锁更多小众歌曲。</p>
+            <p>如果你没有时间去线下疗愈，那就请来这里吧！除了精油部分，其他功能都是免费的哦～祝你们玩得开心！</p>
+          </div>
+        </div>
+
+        <div class="page-nav-wrap" data-page-nav></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot-line">
+      <span>© 2026 MUSIC AROMA · 让香气与音乐, 慢慢治愈日常</span>
+      <span class="foot-links">
+        <a href="#community" id="footCommunity" class="foot-link">🌿 疗愈社区<i class="cm-navdot" id="footCmDot" hidden></i></a>
+        <a href="#about" id="footAbout" class="foot-link">💌 关于这个网站</a>
+      </span>
+    </div>
+  </footer>
+
+  <!-- 通用弹窗 -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-mask" data-close></div>
+    <div class="modal-panel">
+      <button class="modal-close" data-close aria-label="关闭">×</button>
+      <h3 id="modalTitle">说明视频</h3>
+      <div class="modal-body" id="modalBody">
+        <!-- 占位:正式项目可嵌入视频 -->
+        <div class="video-placeholder">
+          <div class="vp-play">▷</div>
+          <p>在这里展示 30 秒使用说明视频</p>
+          <small>占位元素,可替换为 &lt;video&gt; 或 bilibili / youtube 嵌入</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== 在线客服(智能应答) ============== -->
+  <button class="support-fab" id="supportFab" type="button" aria-label="打开在线客服">
+    <span class="sf-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M21 12a8 8 0 0 1-8 8H4l2.3-2.9A8 8 0 1 1 21 12z"/>
+        <path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01"/>
+      </svg>
+    </span>
+    <span class="sf-badge" id="sfBadge" hidden>1</span>
+  </button>
+
+  <!-- ============== 小目录 (v34: 悬浮左下角, 全站翻页入口) ============== -->
+  <button class="toc-fab" id="tocFab" type="button" aria-label="打开页面目录">
+    <svg viewBox="0 0 24 24" class="toc-fab-icon" fill="currentColor" aria-hidden="true">
+      <path d="M3 5h2v2H3V5zm4 0h14v2H7V5zm-4 4h2v2H3V9zm4 0h14v2H7V9zm-4 4h2v2H3v-2zm4 0h14v2H7v-2zm-4 4h2v2H3v-2zm4 0h14v2H7v-2z"/>
+    </svg>
+    <span class="toc-fab-label">目录</span>
+  </button>
+  <div class="toc-overlay" id="tocOverlay"></div>
+  <aside class="toc-panel" id="tocPanel" aria-label="页面目录">
+    <div class="toc-head">
+      <span class="toc-title">📖 小目录</span>
+      <button class="toc-close" id="tocClose" type="button" aria-label="关闭目录">×</button>
+    </div>
+    <nav class="toc-list" id="tocList"></nav>
+    <p class="toc-foot">点击条目快速跳转</p>
+  </aside>
+
+  <div class="support-chat" id="supportChat" aria-hidden="true">
+    <div class="sc-head">
+      <span class="sc-avatar" aria-hidden="true">🌿</span>
+      <div class="sc-meta">
+        <p class="sc-title">MUSIC AROMA 客服</p>
+        <p class="sc-status"><i class="sc-dot"></i>在线 · 通常秒回</p>
+      </div>
+      <button class="sc-close" id="supportClose" type="button" aria-label="关闭客服">×</button>
+    </div>
+    <div class="sc-msgs" id="scMsgs"></div>
+    <div class="sc-chips" id="scChips"></div>
+    <div class="sc-input-row">
+      <input class="sc-input" id="scInput" type="text" placeholder="说说你的问题…" maxlength="200" />
+      <button class="sc-send" id="scSend" type="button">发送</button>
+    </div>
+  </div>
+
+  <!-- ============== Rosa AI 数字人聊天窗 (v34, 对话仅本机可见) ============== -->
+  <div class="ai-chat-overlay" id="aiChatOverlay" aria-hidden="true">
+    <div class="ai-chat-panel" role="dialog" aria-label="Rosa AI 数字人">
+      <header class="ai-chat-head">
+        <span class="ai-chat-avatar" aria-hidden="true">🤖</span>
+        <div class="ai-chat-meta">
+          <p class="ai-chat-name">Rosa AI 数字人</p>
+          <p class="ai-chat-status">ENFP 治愈系 · 虚拟分身 · 对话仅你自己可见</p>
+        </div>
+        <button class="ai-chat-close" id="aiChatClose" type="button" aria-label="关闭">×</button>
+      </header>
+      <div class="ai-msgs" id="aiMsgs"></div>
+      <div class="ai-quick" id="aiQuick">
+        <button type="button" class="ai-chip" data-q="最近总是睡不好">😴 睡不好</button>
+        <button type="button" class="ai-chip" data-q="我有点焦虑">🌧️ 有点焦虑</button>
+        <button type="button" class="ai-chip" data-q="推荐一首歌给我">🎵 推荐首歌</button>
+      </div>
+      <div class="ai-input-row">
+        <input class="ai-input" id="aiInput" type="text" placeholder="和 Rosa 说点什么…" maxlength="200" />
+        <button class="ai-send" id="aiSend" type="button">发送</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== 社区个性化设置 (v34, 仅对自己生效) ============== -->
+  <div class="cm-pref-overlay" id="cmPrefOverlay" aria-hidden="true">
+    <div class="cm-pref-panel" role="dialog" aria-label="社区个性化设置">
+      <header class="cm-pref-head">
+        <span class="cm-pref-title">⚙️ 个性化设置</span>
+        <span class="cm-pref-sub">只改变你这边的样子, 不影响别人</span>
+        <button class="cm-pref-close" id="cmPrefClose" type="button" aria-label="关闭">×</button>
+      </header>
+      <div class="cm-pref-body">
+        <div class="cm-pref-row">
+          <div class="cm-pref-info">
+            <p class="cm-pref-name">消息免打扰</p>
+            <p class="cm-pref-sub2">开启后新消息只安静出现, 不弹提醒</p>
+          </div>
+          <label class="cm-switch">
+            <input type="checkbox" id="cmDnd" />
+            <i aria-hidden="true"></i>
+          </label>
+        </div>
+        <div class="cm-pref-row cm-pref-bgrow">
+          <div class="cm-pref-info">
+            <p class="cm-pref-name">聊天背景</p>
+            <p class="cm-pref-sub2">选一个喜欢的, 换换心情</p>
+          </div>
+          <div class="cm-bg-row" id="cmBgRow"></div>
+        </div>
+        <div class="cm-pref-row cm-pref-nickrow">
+          <div class="cm-pref-info">
+            <p class="cm-pref-name">社区群昵称</p>
+            <p class="cm-pref-sub2">在社区里大家看到你的名字</p>
+          </div>
+          <div class="cm-pref-nick">
+            <input class="cm-input" id="cmNick" maxlength="12" placeholder="输入群昵称" />
+            <button class="btn btn-solid small" id="cmNickSave" type="button">保存</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 提示气泡 -->
+  <!-- ============== 结算弹窗（演示支付） ============== -->
+  <div class="checkout-overlay" id="checkoutOverlay">
+    <div class="checkout-modal" role="dialog" aria-modal="true" aria-label="订单结算">
+      <button class="checkout-close" id="checkoutClose" aria-label="关闭结算">✕</button>
+      <h3 class="checkout-title">确认订单</h3>
+
+      <div class="co-block">
+        <p class="co-block-label">商品清单</p>
+        <div class="co-items" id="coItems"></div>
+      </div>
+
+      <div class="co-summary">
+        <div class="co-line">
+          <span>商品合计</span>
+          <span id="coSubtotal">¥0</span>
+        </div>
+        <div class="co-line co-discount" id="coDiscountRow" hidden>
+          <span>满 2 件立减</span>
+          <span id="coDiscount">-¥10</span>
+        </div>
+        <div class="co-line co-magic" id="coMagicRow" hidden>
+          <label class="co-magic-toggle">
+            <input type="checkbox" id="coMagicChk" />
+            <span class="co-magic-text">
+              <span class="co-magic-title">✦ 使用 100 魔力值减 ¥10</span>
+              <span class="co-magic-sub" id="coMagicSub">当前魔力 0</span>
+            </span>
+          </label>
+          <span class="co-magic-val">-¥10</span>
+        </div>
+        <div class="co-line co-total">
+          <span>应付金额</span>
+          <span id="coTotal">¥0</span>
+        </div>
+      </div>
+
+      <div class="co-block">
+        <p class="co-block-label">收货信息</p>
+        <label class="co-field">
+          <span class="co-field-name">收货人</span>
+          <input class="co-input" id="coName" placeholder="请输入姓名" maxlength="20" autocomplete="name" />
+        </label>
+        <label class="co-field">
+          <span class="co-field-name">手机号</span>
+          <input class="co-input" id="coPhone" placeholder="请输入 11 位手机号" maxlength="11" autocomplete="tel" />
+        </label>
+        <label class="co-field">
+          <span class="co-field-name">收货地址</span>
+          <textarea class="co-input co-addr" id="coAddr" rows="2" placeholder="请输入省市区及详细地址" maxlength="80" autocomplete="street-address"></textarea>
+        </label>
+      </div>
+
+      <button class="btn btn-solid co-pay" id="coPay">立即付款</button>
+      <p class="co-note">演示环境：点击付款即自动完成，不会产生真实扣款</p>
+    </div>
+  </div>
+
+  <!-- ============== 订单详情弹窗（虚拟物流演示） ============== -->
+  <div class="checkout-overlay" id="odOverlay">
+    <div class="checkout-modal" role="dialog" aria-modal="true" aria-label="订单详情">
+      <button class="checkout-close" id="odClose" aria-label="关闭订单详情">✕</button>
+      <h3 class="checkout-title">订单详情</h3>
+      <div id="odBody"></div>
+    </div>
+  </div>
+
+  <!-- ============== 方案详情弹窗 ============== -->
+  <div class="checkout-overlay" id="pdOverlay" aria-hidden="true">
+    <div class="checkout-modal pd-modal" role="dialog" aria-modal="true" aria-label="方案详情">
+      <button class="checkout-close" id="pdClose" aria-label="关闭详情">✕</button>
+      <div id="pdBody"></div>
+    </div>
+  </div>
+
+  <!-- ============== 解压游戏弹窗 ============== -->
+  <div class="game-overlay" id="gameOverlay">
+    <div class="game-modal" role="dialog" aria-modal="true" aria-label="解压小游戏">
+      <button class="game-close" id="gameClose" aria-label="关闭游戏">✕</button>
+      <h3 class="game-title" id="gameTitle"></h3>
+      <p class="game-tip" id="gameTip"></p>
+      <div class="game-stage" id="gameStage"></div>
+    </div>
+  </div>
+
+  <!-- ============== 疗愈社区 · 成员资料卡 ============== -->
+  <div class="cm-overlay" id="pcOverlay" aria-hidden="true">
+    <div class="cm-modal" role="dialog" aria-modal="true" aria-label="成员资料">
+      <button class="cm-modal-close" id="pcClose" type="button" aria-label="关闭">×</button>
+      <span class="cm-pc-avatar" id="pcAvatar">🌙</span>
+      <p class="cm-pc-name" id="pcName">—</p>
+      <p class="cm-pc-sub" id="pcSub">加入于 —</p>
+      <div class="cm-pc-actions">
+        <button class="btn btn-solid" id="pcAddFriend" type="button">添加好友</button>
+        <button class="btn btn-ghost" id="pcDm" type="button">发消息</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="script.js?v=601"></script>
+</body>
+</html>
