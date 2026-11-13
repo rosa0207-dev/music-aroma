@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MUSIC AROMA · 音乐香氛疗愈</title>
   <meta name="description" content="一瓶精油 · 一首音乐 · 一段护肤操 —— 在香气与旋律中,给身心一场温柔的疗愈。" />
-  <link rel="stylesheet" href="styles.css?v=601" />
+  <link rel="stylesheet" href="styles.css?v=752" />
   <!-- 全站手写体: 霞鹜文楷(随性放松,治愈感) —— 异步加载, CDN 不通时自动用系统字体兜底, 页面绝不白屏 -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" media="print" onload="this.media='all'" />
@@ -79,9 +79,10 @@
       <a href="#healing" class="nav-link">疗愈之旅</a>
       <a href="#games" class="nav-link">解压游戏</a>
       <a href="#asmr" class="nav-link">ASMR</a>
-      <a href="#account" class="nav-link">我的</a>
       <a href="#community" class="nav-link">疗愈社区<i class="cm-navdot" id="cmNavDot" hidden></i></a>
+      <a href="#wish" class="nav-link">星星瓶</a>
       <a href="#pets" class="nav-link">疗愈小宠</a>
+      <a href="#account" class="nav-link">用户中心</a>
       <a href="#settings" class="nav-link">设置</a>
       <a href="#about" class="nav-link">关于</a>
       <a href="#account" class="nav-avatar" id="navAvatar" aria-label="我的账号">🌙</a>
@@ -867,8 +868,13 @@
           </div>
         </div>
 
-        <!-- v51: 手机铃声温馨提示 -->
-        <p class="hero-ring-note">🔔 小提醒: 把手机铃声打开, 疗愈的声音才听得见哦～</p>
+        <!-- v732: 首页完整温馨提示(用户钦定文案, 分四行排版) -->
+        <div class="hero-ring-note" role="note">
+          <p>🔔 如果听不到声音，请打开手机铃声哦～</p>
+          <p>各设备型号不同，录音放音功能可能略有差别，是正常现象；</p>
+          <p>如遇卡顿、显示和播放异常等情况，请刷新页面或重进；</p>
+          <p>无法解决的问题请联系右下角小客服，祝大家收获一场奇妙的疗愈体验！</p>
+        </div>
 
         <div class="page-nav-wrap" data-page-nav></div>
       </div>
@@ -1066,7 +1072,7 @@
               <p class="plan-tag">· 专注 · 心流 · 平复 ·</p>
               <ul class="plan-list">
                 <li><b>精油</b>:沉香 + 檀香 + 茶树</li>
-                <li><b>音乐</b>:禅意尺八 + 水滴声(15分钟)</li>
+                <li><b>音乐</b>:禅意颂钵 + 水滴声(15分钟)</li>
                 <li><b>护肤操</b>:手腕脉搏按摩</li>
               </ul>
               <div class="plan-foot">
@@ -1094,7 +1100,7 @@
         </div>
 
         <a class="enter-healing" id="enterHealingCta" href="#healing">
-          <span class="eh-text">选好了？一起进入疗愈之旅吧～</span>
+          <span class="eh-text">还在犹豫？先试试免费体验吧～</span>
           <span class="eh-arrow">→</span>
         </a>
         <p class="scan-hint">疗愈之旅部分为免费体验，可以跟随音频放松身心，完整疗愈内容在精油包装的二维码中，请收到之后扫码查看</p>
@@ -1109,51 +1115,30 @@
         <header class="section-head">
           <p class="eyebrow">— HEALING&nbsp;·&nbsp;SESSION —</p>
           <h2 class="section-title">给身体和心一段被照顾的时间</h2>
+          <div class="heal-hint">
+            <span class="hh-emoji">💡</span>
+            <p>提示：疗愈之旅时长约 <b>3 分钟</b>，不包含护肤操，可以用来缓解疲劳，<br class="hh-br">午休、夜晚睡前都是不错的选择！</p>
+          </div>
         </header>
 
         <div class="healing-grid">
-          <!-- 左:步骤说明 -->
-          <div class="instructions">
-            <h3 class="block-title">使用前,请为自己准备 4 步</h3>
-            <ol class="step-list">
-              <li>
-                <span class="step-num">01</span>
-                <div>
-                  <h4>选一处安静的角落</h4>
-                  <p>关掉刺眼的灯,只留一盏暖光。可以是卧室、书房、阳台。</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-num">02</span>
-                <div>
-                  <h4>取 2-3 滴精油于掌心</h4>
-                  <p>双手合拢,轻轻揉暖,让香气自然在指间散开。</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-num">03</span>
-                <div>
-                  <h4>佩戴耳机,开始播放音乐</h4>
-                  <p>音量以"听清但不刺耳"为佳。</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-num">04</span>
-                <div>
-                  <h4>跟随人声,完成护肤操</h4>
-                  <p>每个动作请慢于平时一倍,把注意力留在指尖和呼吸上。</p>
-                </div>
-              </li>
-            </ol>
-
-            <div class="healing-actions">
-              <button class="btn btn-ghost" id="watchGuide">
-                <span>▷</span> 观看说明视频
-              </button>
-              <button class="btn btn-solid" id="startHealing">
-                进入疗愈 ✦
-              </button>
+          <!-- 左:自由作画(v657) -->
+          <div class="instructions" id="freeDrawCard">
+            <h3 class="block-title">自由作画 ✧</h3>
+            <p class="block-sub">跟着音乐随手画 —— 发光画笔很丝滑, 两种模式随便换</p>
+            <div class="fd-tools">
+              <button class="fd-chip active" id="fdModeTrace" type="button">✍️ 留痕</button>
+              <button class="fd-chip" id="fdModeLaser" type="button">💡 激光笔</button>
+              <span class="fd-sep"></span>
+              <button class="fd-chip fd-act" id="fdUndo" type="button">↩️ 撤回</button>
+              <button class="fd-chip fd-act" id="fdEraser" type="button">🩹 橡皮</button>
+              <button class="fd-chip fd-act fd-danger" id="fdClear" type="button">🧹 清空</button>
+              <span class="fd-sep"></span>
+              <button class="fd-chip fd-act" id="fdSave" type="button">💾 保存</button>
+              <button class="fd-chip fd-act" id="fdGallery" type="button">🏛 展览柜</button>
             </div>
+            <div class="fd-colors" id="fdColors"></div>
+            <div class="fd-wrap"><canvas id="freeDraw"></canvas></div>
           </div>
 
           <!-- 右:疗愈进行中画布 -->
@@ -1308,7 +1293,7 @@
             </span>
             <span class="gc-body">
               <span class="gc-name">拽拽弹力球</span>
-              <span class="gc-desc">果冻质感小球, 捏我拽我甩飞我, 我不生气</span>
+              <span class="gc-desc">晶莹剔透小圆球, 饱满又Q弹, 拽飞了会 duang~ 弹回来</span>
             </span>
           </button>
 
@@ -1433,43 +1418,42 @@
             </span>
           </button>
 
-          <!-- 游戏 5: DIY 史莱姆(制作+开罐玩) -->
-          <button class="game-card" data-game="maker" type="button">
+          <!-- 游戏 5: 做蛋糕(v652 替换史莱姆) -->
+          <button class="game-card" data-game="cake" type="button">
             <span class="gc-art">
               <svg viewBox="0 0 200 120" aria-hidden="true">
               <defs>
-                <radialGradient id="gwcb13" cx="50%" cy="42%" r="75%">
-                  <stop offset="0" stop-color="#8CC49A" stop-opacity=".42"/>
-                  <stop offset="1" stop-color="#8CC49A" stop-opacity="0"/>
+                <radialGradient id="gwcbCake" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#EFC9D8" stop-opacity=".40"/>
+                  <stop offset="1" stop-color="#EFC9D8" stop-opacity="0"/>
                 </radialGradient>
-                <filter id="gwcf13" x="-20%" y="-20%" width="140%" height="140%">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="13" result="n"/>
+                <filter id="gwcfCake" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="21" result="n"/>
                   <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
                 </filter>
-                <radialGradient id="gwgfSlime" cx="38%" cy="30%" r="80%">
-                  <stop offset="0" stop-color="#DDF5E2"/>
-                  <stop offset="100%" stop-color="#7FBE92"/>
-                </radialGradient>
+                <linearGradient id="gwgfCake" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#FBF3F6"/>
+                  <stop offset="1" stop-color="#EFA9C4"/>
+                </linearGradient>
               </defs>
-              <rect width="200" height="120" fill="url(#gwcb13)"/>
-              <g filter="url(#gwcf13)" opacity=".92">
-                <ellipse cx="100" cy="102" rx="40" ry="6" fill="#6E8A76" opacity=".14"/>
-                <rect x="72" y="34" width="56" height="66" rx="10" fill="#EDF4F8" opacity=".65"/>
-                <path d="M 76 74 Q 84 62 100 64 Q 116 62 124 74 L 124 94 Q 100 100 76 94 Z" fill="url(#gwgfSlime)"/>
-                <circle cx="90" cy="80" r="3.4" fill="#EAF9EE" opacity=".8"/>
-                <circle cx="106" cy="86" r="2.6" fill="#EAF9EE" opacity=".7"/>
-                <circle cx="112" cy="74" r="2" fill="#EAF9EE" opacity=".6"/>
-                <rect x="68" y="28" width="64" height="10" rx="5" fill="#C8A878" opacity=".9"/>
-                <path d="M 138 52 Q 152 46 158 56" fill="none" stroke="#B8D8C4" stroke-width="3" stroke-linecap="round" opacity=".7"/>
-                <circle cx="164" cy="44" r="4" fill="#D8F0DE" opacity=".8"/>
-                <circle cx="42" cy="56" r="5" fill="#D8F0DE" opacity=".6"/>
-                <circle cx="46" cy="76" r="3.4" fill="#D8F0DE" opacity=".5"/>
+              <rect width="200" height="120" fill="url(#gwcbCake)"/>
+              <g filter="url(#gwcfCake)" opacity=".92">
+                <ellipse cx="100" cy="103" rx="46" ry="6" fill="#8A6470" opacity=".16"/>
+                <path d="M 62 74 L 62 92 Q 100 100 138 92 L 138 74 Q 100 82 62 74 Z" fill="#E7B98C"/>
+                <path d="M 58 64 Q 58 56 66 56 L 134 56 Q 142 56 142 64 L 142 70 Q 100 80 58 70 Z" fill="url(#gwgfCake)"/>
+                <path d="M 58 66 Q 66 74 74 67 Q 82 74 90 67 Q 98 74 106 67 Q 114 74 122 67 Q 130 74 138 67" fill="none" stroke="#FBD9E4" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="86" cy="52" r="7" fill="#E4586B"/>
+                <path d="M 84 46 Q 86 42 89 45" fill="none" stroke="#5F8F63" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="112" cy="50" r="5.6" fill="#4C6BB2"/>
+                <circle cx="110" cy="48" r="1.6" fill="#DDE7FA" opacity=".8"/>
+                <rect x="123" y="36" width="3.6" height="14" rx="1.8" fill="#F3E3C0"/>
+                <ellipse cx="124.8" cy="33" rx="2.6" ry="4" fill="#F6B33C"/>
               </g>
             </svg>
             </span>
             <span class="gc-body">
-              <span class="gc-name">DIY 史莱姆</span>
-              <span class="gc-desc">第一视角开罐玩,六种泥各有手感</span>
+              <span class="gc-name">做蛋糕</span>
+              <span class="gc-desc">倒面糊·进烤箱·挤奶油·摆水果, 全程自己来</span>
             </span>
           </button>
 
@@ -1791,7 +1775,149 @@
             </span>
             <span class="gc-body">
               <span class="gc-name">吹泡泡</span>
-              <span class="gc-desc">按住吹出一串晶莹的泡泡, 一戳就 啵~</span>
+              <span class="gc-desc">按住吹出一串晶莹的泡泡, 一戳就破</span>
+            </span>
+          </button>
+
+          <!-- 游戏 16: 装饰圣诞树(v652) -->
+          <button class="game-card" data-game="xmas" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcbXm" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#B8D4C0" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#B8D4C0" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcfXm" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="31" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <linearGradient id="gwgfXm" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#6FA379"/>
+                  <stop offset="1" stop-color="#41704F"/>
+                </linearGradient>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcbXm)"/>
+              <g filter="url(#gwcfXm)" opacity=".92">
+                <ellipse cx="100" cy="104" rx="46" ry="6" fill="#5C7264" opacity=".18"/>
+                <rect x="94" y="84" width="12" height="16" rx="3" fill="#7A5638"/>
+                <path d="M 100 24 L 128 58 L 72 58 Z" fill="url(#gwgfXm)"/>
+                <path d="M 100 40 L 138 84 L 62 84 Z" fill="url(#gwgfXm)" opacity=".95"/>
+                <path d="M 100 56 L 146 104 L 54 104 Z" fill="url(#gwgfXm)" opacity=".9"/>
+                <path d="M 100 22 l 2.4 5 5.4.6-4 3.7 1.1 5.3-4.9-2.7-4.9 2.7 1.1-5.3-4-3.7 5.4-.6 Z" fill="#F6C94A"/>
+                <circle cx="88" cy="70" r="4.6" fill="#E07A7A"/>
+                <circle cx="112" cy="76" r="4.2" fill="#F0C060"/>
+                <circle cx="97" cy="92" r="4.4" fill="#7E9CD6"/>
+                <circle cx="120" cy="96" r="2.4" fill="#FFD97A"/>
+                <circle cx="76" cy="98" r="2.4" fill="#FF9AA2"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">装饰圣诞树</span>
+              <span class="gc-desc">挂满彩球星星糖, 点亮彩灯有惊喜</span>
+            </span>
+          </button>
+
+          <!-- 游戏 17: 卷寿司(v655) -->
+          <button class="game-card" data-game="sushi" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcbSu" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#CBD8B0" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#CBD8B0" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcfSu" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="41" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcbSu)"/>
+              <g filter="url(#gwcfSu)" opacity=".92">
+                <ellipse cx="100" cy="108" rx="52" ry="6" fill="#8A6440" opacity=".15"/>
+                <rect x="78" y="34" width="44" height="70" rx="10" fill="#31402F"/>
+                <rect x="83" y="40" width="7" height="58" rx="3.5" fill="#FFFFFF" opacity=".12"/>
+                <ellipse cx="100" cy="36" rx="22" ry="12" fill="#31402F"/>
+                <ellipse cx="100" cy="36" rx="16" ry="8" fill="#FBF6EA"/>
+                <circle cx="95" cy="34" r="3.4" fill="#F2937E"/>
+                <circle cx="104" cy="38" r="3" fill="#9CCB86"/>
+                <ellipse cx="128" cy="86" rx="30" ry="11" fill="#31402F"/>
+                <ellipse cx="128" cy="84" rx="24" ry="7.5" fill="#FBF6EA"/>
+                <ellipse cx="56" cy="90" rx="30" ry="11" fill="#31402F"/>
+                <ellipse cx="56" cy="88" rx="24" ry="7.5" fill="#FBF6EA"/>
+                <ellipse cx="166" cy="92" rx="20" ry="9" fill="#E7EEF2"/>
+                <ellipse cx="162" cy="92" rx="11" ry="4.5" fill="#6B3F22"/>
+                <ellipse cx="174" cy="90" rx="5" ry="3" fill="#8CB84E"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">卷寿司</span>
+              <span class="gc-desc">铺饭·放馅·卷起立好·切段·蘸酱油吃掉</span>
+            </span>
+          </button>
+
+          <!-- 游戏 18: 剪春联(v655) -->
+          <button class="game-card" data-game="couplet" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcbCp" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#E8B9B0" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#E8B9B0" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcfCp" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="42" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcbCp)"/>
+              <g filter="url(#gwcfCp)" opacity=".92">
+                <rect x="62" y="12" width="76" height="96" rx="6" fill="#D93A3A"/>
+                <path d="M 100 12 L 100 108" stroke="#F6D678" stroke-width="1.6" stroke-dasharray="4 4"/>
+                <path d="M 96 30 q 12 8 4 20 q -8 10 4 18 M 108 26 q -6 10 2 16" fill="none" stroke="#F6D678" stroke-width="2.4" stroke-linecap="round"/>
+                <circle cx="100" cy="84" r="7" fill="none" stroke="#F6D678" stroke-width="2.4"/>
+                <path d="M 132 86 L 146 100 M 146 86 L 132 100" stroke="#9FB4C4" stroke-width="3.4" stroke-linecap="round"/>
+                <path d="M 130 102 a 5 5 0 1 0 6 -6 M 142 102 a 5 5 0 1 1 -6 -6" fill="none" stroke="#D98A4A" stroke-width="2.6" stroke-linecap="round"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">剪纸窗花</span>
+              <span class="gc-desc">对折·下剪刀·展开, 剪出对称的镂空窗花</span>
+            </span>
+          </button>
+
+          <!-- 游戏 19: 陶艺拉坯(v661) -->
+          <button class="game-card" data-game="pottery" type="button">
+            <span class="gc-art">
+              <svg viewBox="0 0 200 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="gwcbPt" cx="50%" cy="42%" r="75%">
+                  <stop offset="0" stop-color="#E8C9A8" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#E8C9A8" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="gwcfPt" x="-20%" y="-20%" width="140%" height="140%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="3" seed="43" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+              </defs>
+              <rect width="200" height="120" fill="url(#gwcbPt)"/>
+              <g filter="url(#gwcfPt)" opacity=".92">
+                <ellipse cx="100" cy="104" rx="54" ry="8" fill="#3E3A36"/>
+                <ellipse cx="100" cy="96" rx="46" ry="10" fill="#5A5550"/>
+                <path d="M 82 92 C 76 70 78 54 88 44 C 94 38 106 38 112 44 C 122 54 124 70 118 92 Z" fill="#C4795A"/>
+                <ellipse cx="100" cy="44" rx="12" ry="4.5" fill="#B06A48"/>
+                <path d="M 88 48 q -4 18 2 40" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity=".25"/>
+                <ellipse cx="152" cy="70" rx="9" ry="7" fill="#9CC4B4"/>
+                <rect x="145" y="58" width="14" height="10" rx="3" fill="#9CC4B4"/>
+              </g>
+            </svg>
+            </span>
+            <span class="gc-body">
+              <span class="gc-name">陶艺拉坯</span>
+              <span class="gc-desc">转盘上捏泥塑形·加水修坯·上釉出窑</span>
             </span>
           </button>
         </div>
@@ -1811,7 +1937,7 @@
         <header class="section-head">
           <p class="eyebrow">— ASMR&nbsp;·&nbsp;LULLABY —</p>
           <h2 class="section-title">闭上眼,让耳朵先睡一会儿</h2>
-          <p class="section-desc">雨声、森林、海浪是免版权的高品质实录音, 其它由页面实时合成。想换成自己的录音, 去设置区「音频替换」上传就行。</p>
+          <p class="section-desc">雨声、森林、海浪是免版权的高品质实录音, 其它由页面实时合成。</p>
           <div class="asmr-toolbar">
             <button class="asmr-stop-all" id="asmrStopAllBtn" type="button" aria-label="停止所有声音">
               <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></svg>
@@ -2167,12 +2293,10 @@
           </div>
 
           <h3 class="block-title">全部恢复默认</h3>
-          <p class="block-sub">把颜色、字体、魔法瓶一次性恢复到最初的样子(不影响你的账号和替换过的音频)。</p>
+          <p class="block-sub">把颜色、字体、魔法瓶一次性恢复到最初的样子。</p>
           <button class="btn btn-ghost ac-wide" id="resetAll">🎨 全部恢复默认</button>
 
-          <h3 class="block-title">音频替换</h3>
-          <p class="block-sub">网站里的每一个声音都可以换成你自己的音频文件(mp3 / wav / m4a 都行),只存在这台设备上,随时恢复默认。换好之后,全站播放都会用你的文件。</p>
-          <div class="audio-groups" id="audioGroups"></div>
+          <!-- v740: 设置页「ASMR 音源替换」区整体下架(用户钦定"不许换"), ASMR 页上传空位保留 -->
 
           <h3 class="block-title">疗法偏好</h3>
           <div class="pref-row">
@@ -2190,36 +2314,26 @@
           </div>
         </div>
 
-        <!-- 群主专属: 疗愈社区一键清场 (仅 rosa 显示) -->
+        <!-- 群主专属: 禁言管理 + 客服信箱 (仅 rosa 显示) -->
         <div class="settings-card admin-card" id="adminCleanupCard" hidden>
-          <h3 class="block-title">🛡️ 群主工具 · 社区一键清场</h3>
+          <h3 class="block-title">🛡️ 群主工具 · 禁言管理</h3>
           <p class="block-sub">
-            把所有非真人账号 (测试账号、bot、防复发路人和幽灵账号) 一键标记为"已隐藏"，成员列表和聊天自动过滤掉他们。<b>rosa / Elio / wjw</b> 三个真人始终保留。
-            第一次使用需要先去 <b>Supabase 控制台 SQL Editor</b> 跑一次 <code>supabase-cleanup-v52.sql</code> 初始化，之后这里点按钮就生效。
+            有人言语攻击或捣乱？搜 TA 的昵称直接禁言（云端强制生效，被禁言的人发消息会被服务器拒绝），也随时可解除。下方还可查看<b>客服信箱</b>——大家发给客服的留言。
           </p>
+          <div class="admin-search-row">
+            <input type="text" id="muteSearchInput" class="admin-search-input" placeholder="输入成员昵称搜索" maxlength="30" />
+            <button class="btn btn-ghost" id="muteSearchBtn">🔍 搜索</button>
+          </div>
+          <div id="muteResults"></div>
           <div class="admin-actions">
-            <button class="btn btn-ghost ac-wide" id="adminCleanupBtn">🚮 隐藏非真人账号</button>
-            <button class="btn btn-link" id="adminUnhideBtn">显示全部（撤回）</button>
+            <button class="btn btn-ghost ac-wide" id="ghostCleanupBtn">🧹 幽灵号清场 · 一键清掉未设置昵称的残留账号</button>
+            <button class="btn btn-ghost ac-wide" id="unlockReviewBtn">💰 解锁审核 · 核对到账后开通(1元游戏)</button>
+            <button class="btn btn-ghost ac-wide" id="supportMailBtn">📨 客服信箱 · 查看大家发给客服的留言</button>
+            <button class="btn btn-ghost ac-wide" id="supportTrashBtn">🗑️ 垃圾站 · 已删留言可恢复/彻底清理</button>
           </div>
+          <div id="unlockReviewList"></div>
+          <div id="supportMailList"></div>
           <p class="admin-status" id="adminStatus"></p>
-        </div>
-
-        <!-- v572: 数据搬家(换网址/换设备时迁移账号数据) -->
-        <div class="settings-card migrate-card">
-          <h3 class="block-title">🧳 数据搬家</h3>
-          <p class="block-sub">换网址、换设备时, 把账号、小宠、订单、聊天记录全部带走: 在<b>旧网址</b>这里点「生成数据码」并复制, 再到<b>新网址</b>的同一位置粘贴导入。</p>
-          <div class="mig-row">
-            <button class="btn btn-solid small" id="migExportBtn" type="button">生成数据码</button>
-          </div>
-          <div class="mig-export" id="migExportBox" hidden>
-            <textarea id="migExportArea" readonly rows="4" aria-label="我的数据码"></textarea>
-            <button class="btn btn-ghost small" id="migCopyBtn" type="button">复制数据码</button>
-          </div>
-          <div class="mig-import">
-            <p class="block-sub">有数据码? 粘贴到这里导入(会覆盖本设备现有数据):</p>
-            <textarea id="migImportArea" rows="4" placeholder="把在旧网址生成的数据码粘贴到这里"></textarea>
-            <button class="btn btn-solid small" id="migImportBtn" type="button">导入数据</button>
-          </div>
         </div>
 
         <p class="settings-foot">
@@ -2237,26 +2351,26 @@
       <div class="section-inner">
         <header class="section-head">
           <p class="eyebrow">— ACCOUNT ·&nbsp;MY&nbsp;SPACE —</p>
-          <h2 class="section-title">我的小角落</h2>
-          <p class="section-desc">登录后可改名、换头像、看订单, 一台设备一个账号</p>
+          <h2 class="section-title">用户中心</h2>
+          <p class="section-desc">登录后可改名、换头像、看订单, 手机号一人一号</p>
         </header>
 
         <!-- 未登录: 登录(默认显示) -->
         <div class="acct-card" id="acctLogin">
           <div class="ac-top">
             <span class="ac-avatar-big">🎧</span>
-            <p class="ac-tip">欢迎回来, 输入昵称和密码就能进去。<br>不退出登录的话, 关掉网页下次打开, 还是登录状态。</p>
+            <p class="ac-tip">欢迎回来, 输入手机号和密码就能进去。<br>换了手机/电脑也能用手机号登录, 记录都还在。</p>
           </div>
           <label class="co-field">
-            <span class="co-field-name">昵称</span>
-            <input class="co-input" id="loginName" placeholder="注册时的昵称" maxlength="12" />
+            <span class="co-field-name">手机号</span>
+            <input class="co-input" id="loginName" type="tel" placeholder="注册时的手机号(11位)" maxlength="11" inputmode="numeric" />
           </label>
           <label class="co-field">
             <span class="co-field-name">密码</span>
             <input class="co-input" id="loginPass" type="password" placeholder="密码" maxlength="16" autocomplete="current-password" />
           </label>
           <button class="btn btn-solid ac-wide" id="loginBtn">登录</button>
-          <p class="ac-switch ac-switch-r">忘记密码了? <button class="ac-link" id="toForgot">找回密码</button></p>
+          <p class="ac-switch ac-switch-r">忘记密码了? <button class="ac-link" id="toForgot">用手机号找回</button></p>
           <p class="ac-switch ac-switch-r">还没有账号? <button class="ac-link" id="toReg">去注册</button></p>
         </div>
 
@@ -2264,8 +2378,18 @@
         <div class="acct-card" id="acctReg" hidden>
           <div class="ac-top">
             <span class="ac-avatar-big" id="regPreview">🌙</span>
-            <p class="ac-tip">第一次来? 起个名字注册一下,<br>一台设备一个账号, 系统会送你一个专属疗友号。</p>
+            <p class="ac-tip">第一次来? 用手机号注册一个,<br>手机号一人一号, 全站唯一, 系统会送你一个专属疗友号。</p>
           </div>
+          <label class="co-field">
+            <span class="co-field-name">手机号</span>
+            <input class="co-input" id="regPhone" type="tel" placeholder="你的手机号(11位, 就是你的账号)" maxlength="11" inputmode="numeric" />
+          </label>
+          <p class="co-note">🔒 手机号只用来识别"是不是同一个人", 后台严格保护隐私, 不会采集你的其他信息, 也不会用于推送或营销。</p>
+          <label class="co-field">
+            <span class="co-field-name">生日</span>
+            <input class="co-input" id="regBday" type="date" min="1900-01-01" />
+          </label>
+          <p class="co-note">🎂 生日只用来在忘记密码时确认"是你本人", 平时不会用到。</p>
           <label class="co-field">
             <span class="co-field-name">昵称</span>
             <input class="co-input" id="regName" placeholder="给自己起个名字(2-12字)" maxlength="12" />
@@ -2282,24 +2406,28 @@
           <p class="ac-switch ac-switch-r">已经有账号了? <button class="ac-link" id="toLogin">去登录</button></p>
         </div>
 
-        <!-- 未登录: 忘记密码(后台检测设备: 是 → 弹卡片显示用户名密码; 不是 → 提示设备不一样) -->
+        <!-- 未登录: 找回密码(输入注册手机号 → 本机就是注册设备则直接重设新密码) -->
         <div class="acct-card" id="acctForgot" hidden>
           <div class="ac-top">
             <span class="ac-avatar-big">🔑</span>
-            <p class="ac-tip">账号只绑定当初注册的那台设备。<br>点下面按钮, 后台检测是不是这台设备:<br>是 → 直接显示你的用户名和密码; 不是 → 无法找回。</p>
+            <p class="ac-tip">忘记密码不用怕, 输注册时的手机号和生日,<br>对上了就能直接设新密码 —— 不需要旧密码,<br>换手机换电脑也一样。</p>
           </div>
-          <button class="btn btn-solid ac-wide" id="fogBtn">找回我的账号信息</button>
+          <label class="co-field">
+            <span class="co-field-name">手机号</span>
+            <input class="co-input" id="fogPhone" type="tel" placeholder="注册时的手机号(11位)" maxlength="11" inputmode="numeric" />
+          </label>
+          <label class="co-field">
+            <span class="co-field-name">生日</span>
+            <input class="co-input" id="fogBday" type="date" min="1900-01-01" />
+          </label>
+          <button class="btn btn-solid ac-wide" id="fogBtn">找回密码</button>
 
           <!-- 找回结果(JS 填充) -->
           <div class="fog-result" id="fogResult" hidden></div>
 
-          <!-- 改密码和用户名(设备验证通过后才展开, 不需要旧密码) -->
+          <!-- 重设密码(手机号与本机注册记录一致后才展开) -->
           <div class="fog-edit" id="fogEdit" hidden>
-            <p class="ac-label ac-label-lg">改密码和用户名</p>
-            <label class="co-field">
-              <span class="co-field-name">新昵称</span>
-              <input class="co-input" id="fogNewName" placeholder="留空 = 不改昵称" maxlength="12" />
-            </label>
+            <p class="ac-label ac-label-lg">设置新密码</p>
             <label class="co-field">
               <span class="co-field-name">新密码</span>
               <input class="co-input" id="fogNewPass" type="password" placeholder="至少 6 位" maxlength="16" autocomplete="new-password" />
@@ -2308,7 +2436,7 @@
               <span class="co-field-name">确认新密码</span>
               <input class="co-input" id="fogNewPass2" type="password" placeholder="再输一遍" maxlength="16" autocomplete="new-password" />
             </label>
-            <button class="btn btn-ghost ac-wide" id="fogEditBtn">保存修改</button>
+            <button class="btn btn-ghost ac-wide" id="fogEditBtn">保存新密码并登录</button>
           </div>
 
           <p class="ac-switch ac-switch-r">想起来了? <button class="ac-link" id="fogBackLogin">去登录</button></p>
@@ -2345,6 +2473,14 @@
                 <button class="btn btn-ghost small" id="pwBtn">保存新密码</button>
               </div>
             </div>
+            <div class="ac-row ac-col">
+              <p class="ac-label">我的生日</p>
+              <div class="ac-pass-grid">
+                <input class="co-input" id="apBday" type="date" min="1900-01-01" />
+                <button class="btn btn-ghost small" id="apBdayBtn">保存生日</button>
+              </div>
+              <p class="co-note">🎂 忘记密码时用来确认是你本人。</p>
+            </div>
           </div>
 
           <!-- 隐私与数据: 注册信息查看权在用户本人, 后台不采集 -->
@@ -2352,8 +2488,7 @@
             <p class="ac-label ac-label-lg">🔒 隐私与数据</p>
             <p class="ac-privacy-line">注册信息只保存在<b>你这台设备</b>上, 后台不采集、不拿走, 查看权完全在你手里。</p>
             <p class="ac-privacy-line">去云端聊天时, 只上传一个<b>匿名身份标识</b>用来识别"是不是你", 昵称以外的资料不上传。</p>
-            <p class="ac-privacy-line">私聊内容只有双方能看到; 和 AI 数字人的对话只有你自己能看到。</p>
-            <p class="ac-privacy-line">账号无法注销、一次登录终身有效; 密码随时能改, 忘了也能在这台设备直接找回。</p>
+            <p class="ac-privacy-line">私聊内容只有双方能看到。</p>
           </div>
 
           <p class="block-title acct-orders-title">我的订单</p>
@@ -2414,6 +2549,7 @@
           <div class="cm-offline" id="cmOffline" hidden>
             <p class="cm-offline-title" id="cmOfflineTitle">🌱 社区还在准备中</p>
             <p class="cm-offline-sub" id="cmOfflineSub">功能马上就来, 敬请期待~</p>
+            <button class="cm-offline-retry" id="cmOfflineRetry" type="button" hidden>🔄 重新连接</button>
           </div>
 
           <!-- 三面板 -->
@@ -2439,6 +2575,7 @@
                   </div>
                 </div>
                 <button class="cm-ann-editbtn" id="cmAnnEditBtn" type="button" hidden>✏️ 编辑公告</button>
+                <button class="cm-ann-editbtn cm-ann-revokebtn" id="cmAnnRevokeBtn" type="button" hidden>🗑️ 撤销公告</button>
               </div>
               <!-- v47 永久公告可折叠 -->
               <div class="cm-notice" id="cmNotice">
@@ -2447,7 +2584,7 @@
                   <button class="cm-notice-fold" id="cmNoticeFold" type="button" aria-expanded="false" title="收起 / 展开公告">▾</button>
                 </div>
                 <div class="cm-notice-body" id="cmNoticeBody">
-                  <p class="cm-notice-text">欢迎大家来到疗愈社区，在这里，你们可以聊天，结交"疗友"，分享疗愈体验。请大家和平友好相处，不要互相攻击～如产生矛盾，请及时截图并联系客服，后台将处理。</p>
+                  <p class="cm-notice-text">欢迎大家来到疗愈社区，在这里，你们可以聊天，结交"疗友"，分享疗愈体验。请大家和平友好相处，不要互相攻击～如产生矛盾，请及时截图并联系右下角的客服，后台将处理。</p>
                 </div>
               </div>
               <div class="cm-msgs" id="cmMsgs"></div>
@@ -2465,22 +2602,15 @@
               <div class="cm-friend-list" id="cmFriendList"></div>
             </div>
             <div class="cm-panel cm-members" id="cmPanelMembers" hidden>
-              <!-- v34: Rosa AI 数字人入口(虚拟分身, 对话仅本人可见) -->
-              <button class="cm-ai-entry" id="cmAiEntry" type="button">
-                <span class="cm-ai-entry-avatar" aria-hidden="true">🤖</span>
-                <span class="cm-ai-entry-info">
-                  <span class="cm-ai-entry-name">Rosa AI 数字人</span>
-                  <span class="cm-ai-entry-sub">我的虚拟分身 · ENFP 治愈系，不想打扰真人就来找我</span>
-                </span>
-                <span class="cm-ai-entry-go">去聊聊 →</span>
-              </button>
+              <!-- v732: 星星瓶已独立成页面(顶部导航「星星瓶」), 社区里不再放入口 -->
               <div class="cm-member-grid" id="cmMemberGrid"></div>
             </div>
           </div>
 
           <!-- 输入栏 -->
           <footer class="cm-inputbar" id="cmInputBar" hidden>
-            <input class="cm-input" id="cmInput" type="text" placeholder="说点什么吧…" maxlength="200" />
+            <div class="cm-mention-pop" id="cmMentionPop" hidden></div>
+            <input class="cm-input" id="cmInput" type="text" placeholder="说点什么吧… 输入 @ 可提醒小伙伴" maxlength="200" />
             <button class="btn btn-solid cm-send" id="cmSend" type="button">发送</button>
           </footer>
         </div>
@@ -2492,6 +2622,110 @@
       </div>
     </section>
 
+    <!-- ============== 星星瓶 (v732: 从疗愈社区独立成一页, 更好找; 这一页没有社区背景音, 不会和语音打架) ============== -->
+    <section id="wish" class="view" aria-label="星星瓶">
+      <div class="section-inner wish-page">
+        <div class="wish-overlay" id="wishOverlay" aria-hidden="false">
+          <div class="wish-panel" role="dialog" aria-label="星星瓶">
+            <button class="wish-close" id="wishClose" type="button" aria-label="返回首页">×</button>
+            <header class="wish-head">
+              <p class="wish-title">✨ 星星瓶</p>
+              <p class="wish-sub">每一颗夜光纸星星里, 都住着一个愿望或一句祝福<br>向下滑动查看星星 ✨</p>
+            </header>
+            <div class="wish-stage"><canvas id="wishJar" class="wish-jar"></canvas></div>
+            <p class="wish-total" id="wishTotal">瓶子里还空着…</p>
+            <div class="wish-actions">
+              <button class="btn btn-solid wish-draw-btn" id="wishDrawBtn" type="button">🌙 抽一颗星星</button>
+              <button class="btn btn-ghost" id="wishWriteBtn" type="button">✨ 折一颗星星</button>
+              <button class="btn btn-ghost" id="wishMineBtn" type="button">我的纸条</button>
+              <button class="btn btn-ghost" id="wishLuckyBtn" type="button">🌟 幸运星榜</button>
+              <button class="btn btn-ghost" id="wishGhostBtn" type="button" hidden>🧹 星星 / 账号清理台</button>
+            </div>
+            <p class="wish-rules">投放过纸条才能抽 · 每天一颗 · 不会抽到重复或自己的<br>🌟 大彩虹幸运星每天只会被抽到一次 —— 抽中当天下单立减 ¥10, 并随单赠送一份神秘小礼物</p>
+
+            <!-- 写星星 -->
+            <div class="wish-modal" id="wishWriteModal" hidden>
+              <p class="wish-modal-title">折一颗纸星星</p>
+              <textarea class="wish-text" id="wishWriteText" maxlength="150" rows="4"
+                placeholder="写下一个愿望, 或想送给陌生人的祝福…"></textarea>
+              <p class="wish-count" id="wishWriteCount">0 / 150</p>
+              <div class="wish-voice" id="wishVoiceBox">
+                <button class="wish-voice-btn" id="wishVoiceBtn" type="button">🎙️ 说句话 (可选)</button>
+                <span class="wish-voice-status" id="wishVoiceStatus" hidden></span>
+                <span class="wish-voice-actions" id="wishVoiceActions" hidden>
+                  <button class="wish-voice-act play" id="wishVoicePlay" type="button">▶ 试听</button>
+                  <button class="wish-voice-act del" id="wishVoiceDel" type="button">✕ 删掉</button>
+                </span>
+              </div>
+              <div class="wish-lottery" id="wishLottery">
+                <button class="btn btn-ghost small" id="wishLotteryBtn" type="button">🎲 去抽一张星星纸</button>
+                <p class="wish-lottery-hint" id="wishLotteryHint">要先抽纸才能投哦 ✨ 星星的颜色是抽签决定的, 看看缘分给你哪张纸</p>
+              </div>
+              <div class="wish-chosen" id="wishChosen" hidden>
+                <span class="wish-chosen-star" id="wishChosenStar"></span>
+                <span class="wish-chosen-name" id="wishChosenName"></span>
+              </div>
+              <div class="wish-modal-btns">
+                <button class="btn btn-ghost small" id="wishWriteCancel" type="button">取消</button>
+                <button class="btn btn-solid small" id="wishSubmitBtn" type="button">把星星放进瓶子里</button>
+              </div>
+            </div>
+
+            <!-- 抽到的星星 -->
+            <div class="wish-modal" id="wishViewModal" hidden>
+              <p class="wish-modal-title">你抽到了一颗星星</p>
+              <div class="wish-view-star" id="wishViewStar"></div>
+              <p class="wish-view-content" id="wishViewContent"></p>
+              <button class="wish-voice-play" id="wishViewVoice" type="button" hidden>▶ 听 TA 的声音</button>
+              <p class="wish-view-from" id="wishViewFrom"></p>
+              <button class="wish-view-find" id="wishViewFind" type="button">💌 去认识 TA →</button>
+              <p class="wish-reply-label">给 TA 写一句回话吧 (鼓励 / 祝福都可以), 写完就放回瓶子里</p>
+              <textarea class="wish-text" id="wishReplyText" maxlength="150" rows="3"
+                placeholder="愿你的愿望早点实现…"></textarea>
+              <p class="wish-count" id="wishReplyCount">0 / 150</p>
+              <div class="wish-modal-btns">
+                <button class="btn btn-ghost small" id="wishReleaseBtn" type="button">🌊 放回去</button>
+                <button class="btn btn-solid small" id="wishReplySendBtn" type="button">写回话 · 送回瓶子</button>
+              </div>
+            </div>
+
+            <!-- 我的纸条(保密) -->
+            <div class="wish-modal" id="wishMineModal" hidden>
+              <p class="wish-modal-title">我的纸条</p>
+              <p class="wish-mine-note">这里只有你自己能看到 — 你写过的每一颗星星, 和有缘人留给它们的回话</p>
+              <div class="wish-mine-list" id="wishMineList"></div>
+              <div class="wish-modal-btns">
+                <button class="btn btn-ghost small" id="wishMineClose" type="button">返回瓶子</button>
+              </div>
+            </div>
+
+            <!-- v713 群主清理台: 先看清单再动手, 谁能清由群主判断 -->
+            <div class="wish-modal" id="wishCleanModal" hidden>
+              <p class="wish-modal-title">🧹 星星 / 账号清理台</p>
+              <p class="wish-mine-note">下列是「瓶子里有星星」的每一位作者。<b>🤍 白头像</b>是我放进去的测试机器人，<b>默认昵称的小号</b>是没走完注册的残留账号 —— 这两类已经自动勾好。<br>标着「有发言」的人可能是真人，勾之前请自己确认。</p>
+              <div class="wish-clean-list" id="wishCleanList"></div>
+              <div class="wish-modal-btns">
+                <button class="btn btn-ghost small" id="wishCleanCancel" type="button">取消</button>
+                <button class="btn btn-ghost small" id="wishCleanStars" type="button">只清星星</button>
+                <button class="btn btn-solid small" id="wishCleanAll" type="button">星星+账号一起清</button>
+              </div>
+            </div>
+
+            <!-- v699 幸运星名单(公开) -->
+            <div class="wish-modal" id="wishLuckyModal" hidden>
+              <p class="wish-modal-title">🌟 幸运星名单</p>
+              <p class="wish-mine-note">每一位抽中大彩虹幸运星的疗友都会留名在这里, 按抽中次数从高到低排 — 幸运星每天只会被抽到一次, 抽中当天生效</p>
+              <p class="wish-lucky-me" id="wishLuckyMe" hidden>🎉 你也是今天的幸运星, 今天下单立减 ¥10 并赠送神秘小礼物</p>
+              <div class="wish-lucky-list" id="wishLuckyList"></div>
+              <div class="wish-modal-btns">
+                <button class="btn btn-ghost small" id="wishLuckyClose" type="button">返回瓶子</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-nav-wrap" data-page-nav></div>
+      </div>
+    </section>
     <!-- ============== 疗愈小宠 ============== -->
     <section id="pets" class="view" aria-label="疗愈小宠">
       <div class="section-inner">
@@ -2500,27 +2734,56 @@
           <p class="section-desc">选一只陪伴你的小动物</p>
         </header>
 
-        <!-- 未选：选择界面 -->
+        <!-- v637: 未登录门禁 —— 领养需先登录 (v690: 文案兼顾未注册访客) -->
+        <div class="acct-card pet-gate" id="petGate" hidden>
+          <div class="ac-top">
+            <span class="ac-avatar-big">🐾</span>
+            <p class="ac-tip">小宠要跟着主人走的~<br>先登录或注册账号, 再来领养它吧。</p>
+          </div>
+          <button class="btn btn-solid ac-wide" id="petGateLogin">去登录 / 注册</button>
+        </div>
+
+        <!-- 未选：选择界面 (v690: 一次定终身, 只能改名字; v749: 7 只小伙伴) -->
         <div class="pet-pick" id="petPickWrap">
-          <p class="pet-pick-tip">选择你想要的宠物，之后随时可以回来重新挑选：</p>
+          <p class="pet-pick-tip">选一只一辈子的小伙伴吧～选好就不能换宠了，名字以后随时可以改：</p>
           <div class="pet-pick-grid">
             <button class="pet-pick-card" data-pet="rabbit" type="button">
-              <span class="pet-pick-imgbox" id="petPickRabbitBox"></span>
+              <span class="pet-pick-imgbox"></span>
               <span class="pet-pick-name">小兔 ♡</span>
             </button>
             <button class="pet-pick-card" data-pet="bear" type="button">
-              <span class="pet-pick-imgbox" id="petPickBearBox"></span>
+              <span class="pet-pick-imgbox"></span>
               <span class="pet-pick-name">小熊 ♡</span>
+            </button>
+            <button class="pet-pick-card" data-pet="hamster" type="button">
+              <span class="pet-pick-imgbox"></span>
+              <span class="pet-pick-name">仓鼠 ♡</span>
+            </button>
+            <button class="pet-pick-card" data-pet="squirrel" type="button">
+              <span class="pet-pick-imgbox"></span>
+              <span class="pet-pick-name">松鼠 ♡</span>
+            </button>
+            <button class="pet-pick-card" data-pet="cat" type="button">
+              <span class="pet-pick-imgbox"></span>
+              <span class="pet-pick-name">小猫 ♡</span>
+            </button>
+            <button class="pet-pick-card" data-pet="dog" type="button">
+              <span class="pet-pick-imgbox"></span>
+              <span class="pet-pick-name">小狗 ♡</span>
+            </button>
+            <button class="pet-pick-card" data-pet="pig" type="button">
+              <span class="pet-pick-imgbox"></span>
+              <span class="pet-pick-name">小猪 ♡</span>
             </button>
           </div>
         </div>
 
-        <!-- 命名弹窗 -->
+        <!-- 命名弹窗 (v690: 兼作改名弹窗) -->
         <div class="pet-name-overlay" id="petNameOverlay">
           <div class="pet-name-modal">
             <div class="pnm-art" id="pnmArt"></div>
-            <h3 class="pnm-title">给你的小宠起个名字</h3>
-            <p class="pnm-tip">名字一旦确定，与它终身相伴</p>
+            <h3 class="pnm-title" id="pnmTitle">给你的小宠起个名字</h3>
+            <p class="pnm-tip" id="pnmTip">名字一旦确定，与它终身相伴</p>
             <input class="pnm-input" id="petNameInput" maxlength="10" placeholder="最多 10 个字" />
             <div class="pnm-btns">
               <button class="btn btn-ghost" id="petNameCancel" type="button">再想想</button>
@@ -2541,7 +2804,8 @@
                 </div>
                 <div class="pet-bubble" id="petBubble" hidden></div>
               </div>
-              <div class="pet-name-tag">「<span id="petNameShow"></span>」</div>
+              <div class="pet-name-tag" id="petNameTag" title="点一下给小宠改名字">「<span id="petNameShow"></span>」✏️</div>
+              <div class="pet-grow-badge" id="petGrowBadge" hidden></div>
             </div>
             <div class="pet-info">
               <div class="pet-magic-badge" title="魔力值 100 可减 ¥10">
@@ -2551,7 +2815,7 @@
               </div>
               <div class="pet-magic-rule" id="petMagicRule">
                 <span class="pmr-ico">📜</span>
-                <span class="pmr-txt">攒够 <b>100</b> 魔力值可抵 <b>¥10</b> 精油；<b>不可叠加</b>，每笔订单仅可使用一次（100 魔力值）</span>
+                <span class="pmr-txt">攒够 <b>100</b> 魔力值可抵 <b>¥10</b> 精油；<b>与幸运星立减不可同享</b>，每笔订单仅可使用一次</span>
               </div>
               <div class="pet-pot-wrap">
                 <div class="pet-pot pet-pot-svg" id="petPot">
@@ -2565,9 +2829,6 @@
                 </button>
                 <button class="pet-action-btn" id="petFeedBtn" type="button">
                   <span class="pa-emoji">🍳</span><span class="pa-text">喂食</span>
-                </button>
-                <button class="pet-action-btn" id="petRepickBtn" type="button">
-                  <span class="pa-emoji">🔄</span><span class="pa-text">重新挑选</span>
                 </button>
               </div>
             </div>
@@ -2620,7 +2881,7 @@
             <p>Hello 亲爱的小伙伴们，我是这个网站的建立者，你们可以叫我 Rosa。</p>
             <p>网站名叫 Music Aroma（音乐与芳香），做它的初衷是想让更多像我一样处于焦虑状态的人可以适当缓解压力。多听听音乐，玩一下解压小游戏，偶尔给忙碌的自己放个假，在深夜里给自己一个庇护所。</p>
             <p>我会持续更新内容，在这里上传更多原创疗愈音乐，大家也可以关注我的音乐人账号 <span class="about-hl">Honey Lolita</span>，解锁更多小众歌曲。</p>
-            <p>如果你没有时间去线下疗愈，那就请来这里吧！除了精油部分，其他功能都是免费的哦～祝你们玩得开心！</p>
+            <p>如果你没有时间去线下疗愈，那就请来这里吧！你们听到的音乐都是我做的哦，人声也是我本人～如果你喜欢这些声音，可以向身边朋友推荐，非常感谢大家的支持！部分功能需要付费，但是全部超低价，物超所值！祝你们玩得开心！</p>
           </div>
         </div>
 
@@ -2693,37 +2954,21 @@
       </div>
       <button class="sc-close" id="supportClose" type="button" aria-label="关闭客服">×</button>
     </div>
+    <div class="sc-lock" id="scLock" hidden>
+      <span class="sc-lock-icon" aria-hidden="true">🔒</span>
+      <p class="sc-lock-txt">先要登录才能发消息哦</p>
+      <button class="sc-lock-btn" id="scLockLogin" type="button">去登录</button>
+    </div>
     <div class="sc-msgs" id="scMsgs"></div>
     <div class="sc-chips" id="scChips"></div>
     <div class="sc-input-row">
+      <input type="file" id="scImgFile" accept="image/*" hidden />
+      <button class="sc-img-btn" id="scImgBtn" type="button" aria-label="发送图片">🖼️</button>
       <input class="sc-input" id="scInput" type="text" placeholder="说说你的问题…" maxlength="200" />
       <button class="sc-send" id="scSend" type="button">发送</button>
     </div>
   </div>
 
-  <!-- ============== Rosa AI 数字人聊天窗 (v34, 对话仅本机可见) ============== -->
-  <div class="ai-chat-overlay" id="aiChatOverlay" aria-hidden="true">
-    <div class="ai-chat-panel" role="dialog" aria-label="Rosa AI 数字人">
-      <header class="ai-chat-head">
-        <span class="ai-chat-avatar" aria-hidden="true">🤖</span>
-        <div class="ai-chat-meta">
-          <p class="ai-chat-name">Rosa AI 数字人</p>
-          <p class="ai-chat-status">ENFP 治愈系 · 虚拟分身 · 对话仅你自己可见</p>
-        </div>
-        <button class="ai-chat-close" id="aiChatClose" type="button" aria-label="关闭">×</button>
-      </header>
-      <div class="ai-msgs" id="aiMsgs"></div>
-      <div class="ai-quick" id="aiQuick">
-        <button type="button" class="ai-chip" data-q="最近总是睡不好">😴 睡不好</button>
-        <button type="button" class="ai-chip" data-q="我有点焦虑">🌧️ 有点焦虑</button>
-        <button type="button" class="ai-chip" data-q="推荐一首歌给我">🎵 推荐首歌</button>
-      </div>
-      <div class="ai-input-row">
-        <input class="ai-input" id="aiInput" type="text" placeholder="和 Rosa 说点什么…" maxlength="200" />
-        <button class="ai-send" id="aiSend" type="button">发送</button>
-      </div>
-    </div>
-  </div>
 
   <!-- ============== 社区个性化设置 (v34, 仅对自己生效) ============== -->
   <div class="cm-pref-overlay" id="cmPrefOverlay" aria-hidden="true">
@@ -2765,12 +3010,35 @@
     </div>
   </div>
 
+
+  <!-- v699 幸运星庆祝弹窗(全屏) -->
+  <div class="lucky-pop" id="luckyPop" hidden>
+    <div class="lucky-pop-box">
+      <div class="lucky-pop-star" id="luckyPopStar"></div>
+      <p class="lucky-pop-title">你就是今天的幸运星！</p>
+      <p class="lucky-pop-sub">大彩虹幸运星选中了你 🌈</p>
+      <p class="lucky-pop-perk">🎉 今天下单立减 ¥10 · 再送你一份神秘小礼物</p>
+      <p class="lucky-pop-note">优惠仅限今天有效 · 每天只能中一次 · 你的名字已经写进幸运星名单, 大家都看得到哦</p>
+      <p class="lucky-pop-test" id="luckyPopTest" hidden>🌟 已记在你名下 · 今天下单立减 ¥10 · 名单里这行只有你自己能看到</p>
+      <button class="btn btn-solid" id="luckyPopClose" type="button">接住这份幸运 ✨</button>
+    </div>
+  </div>
+
   <!-- 提示气泡 -->
   <!-- ============== 结算弹窗（演示支付） ============== -->
   <div class="checkout-overlay" id="checkoutOverlay">
     <div class="checkout-modal" role="dialog" aria-modal="true" aria-label="订单结算">
       <button class="checkout-close" id="checkoutClose" aria-label="关闭结算">✕</button>
       <h3 class="checkout-title">确认订单</h3>
+
+      <!-- v732: 幸运星徽章 —— 下单前就让用户看见自己是今天的幸运星 -->
+      <div class="co-lucky-badge" id="coLuckyBadge" hidden>
+        <span class="co-lucky-badge-star" aria-hidden="true">🌟</span>
+        <span class="co-lucky-badge-text">
+          <b>你是今天的幸运星</b>
+          <em id="coLuckyBadgeSub">本单立减 ¥10 · 随单赠送神秘小礼物</em>
+        </span>
+      </div>
 
       <div class="co-block">
         <p class="co-block-label">商品清单</p>
@@ -2786,6 +3054,15 @@
           <span>满 2 件立减</span>
           <span id="coDiscount">-¥10</span>
         </div>
+        <div class="co-line co-lucky" id="coLuckyRow" hidden>
+          <span>🌟 幸运星立减（当天有效）</span>
+          <span id="coLucky">-¥10</span>
+        </div>
+        <div class="co-line co-gift" id="coGiftRow" hidden>
+          <span>🎁 神秘小礼物</span>
+          <span>随单赠送</span>
+        </div>
+        <p class="co-stack-note" id="coStackNote" hidden></p>
         <div class="co-line co-magic" id="coMagicRow" hidden>
           <label class="co-magic-toggle">
             <input type="checkbox" id="coMagicChk" />
@@ -2818,8 +3095,19 @@
         </label>
       </div>
 
+      <!-- v732: 优惠条款 —— 下单前就写清楚, 避免事后争议 -->
+      <div class="co-terms">
+        <p class="co-terms-title">📜 优惠使用条款（下单前请先看一遍）</p>
+        <ol class="co-terms-list">
+          <li>🌟 <b>幸运星立减 ¥10 仅限抽中当天使用</b>，隔天自动失效。</li>
+          <li>幸运星<b>每天只有一个抽中名额</b>，抽中会进入幸运星名单。</li>
+          <li>幸运星立减与魔力值抵扣 <b>不可叠加，每单只能二选一</b>；两个都有时<b>优先使用幸运星</b>（星星只有当天有效）。</li>
+          <li>满 2 件立减 ¥10 <b>一直有效</b>，不与其他减法冲突。</li>
+          <li>抽中幸运星的订单 <b>随单赠送神秘小礼物一份</b>。</li>
+        </ol>
+      </div>
+
       <button class="btn btn-solid co-pay" id="coPay">立即付款</button>
-      <p class="co-note">演示环境：点击付款即自动完成，不会产生真实扣款</p>
     </div>
   </div>
 
@@ -2866,6 +3154,9 @@
 
   <div class="toast" id="toast" hidden></div>
 
-  <script src="script.js?v=601"></script>
+  <!-- v608: 疗愈社区专属环境音 —— 只在社区页面循环播放, 离开自动暂停保留进度 -->
+  <audio id="cmBgAudio" src="long.mp3?v=752" loop preload="auto" hidden></audio>
+
+  <script src="script.js?v=752"></script>
 </body>
 </html>
