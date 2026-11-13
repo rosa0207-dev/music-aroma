@@ -3,7 +3,7 @@
    ============================================ */
 
 /* ---------- 版本号（缓存击穿用，修改音频资源后必须递增）---------- */
-const AUDIO_VERSION = '752' /* v752: 七宠宝宝版+成长系统 —— 领养即宝宝(chibi 小小一只), 浇水/成功喂饭每天记 1 天喂养, 攒满 10 天长成成体; 老档宠物视为已成年 */
+const AUDIO_VERSION = '753' /* v753: 登录/注册提示文案修正(网络 vs 密码分开)+阻止云端注册失败时静默建本地假号 | v752: 七宠宝宝版+成长系统 —— 领养即宝宝(chibi 小小一只), 浇水/成功喂饭每天记 1 天喂养, 攒满 10 天长成成体; 老档宠物视为已成年 */
 
 /* v631: 全站清零重启 —— 每台设备第一次加载本版本时, 清掉本地旧账号与云端登录会话 */
 const MA_WIPE_FLAG = 'ma_wiped_v631';
@@ -14143,16 +14143,22 @@ function bindAccount() {
       return;
     }
     fogShowMsg('ok', '⏳', '正在查这个手机号…', '稍等一两秒。');
-    let exists = null, fnMissing = false;
+    /* v753: 查询失败(网络/超时)不再误报「没注册过」—— 之前任何 RPC 报错都被当成"账号不存在",
+       把用户误导去重新注册, 结果注册被拒或另开新号, 老账号数据就"用不了"了 */
+    let exists = null, fnMissing = false, netErr = false;
     try {
       const { data, error } = await sb.rpc('ma_phone_exists', { p_email: phoneEmail(phone) });
       if (error) {
         if (/PGRST202|does not exist|could not find/i.test(JSON.stringify(error))) fnMissing = true;
-        else exists = false;
+        else netErr = true;
       } else exists = !!data;
-    } catch (e) { exists = false; }
+    } catch (e) { netErr = true; }
     if (fnMissing) {
       fogShowMsg('bad', '🛠️', '找回功能正在升级', '后台的新开关还没装好, 装好后输入手机号就能直接设新密码啦。');
+      return;
+    }
+    if (netErr) {
+      fogShowMsg('bad', '📡', '云端没连上, 没法确认', '网络不太顺, 过一会儿再点一次; 别急着去重新注册, 你的账号还在。');
       return;
     }
     if (!exists) {
@@ -14283,6 +14289,13 @@ function bindAccount() {
             document.getElementById('loginName').value = phone;
             return;
           }
+          /* v753: 云端注册失败(限流/服务端异常等)不再静默退化成本地注册 ——
+             否则本地建了号、云端没建, 用户以为注册成功, 之后换设备或进社区全"用不了" */
+          const _net = /fetch|network|timeout|timed out|Failed to fetch|NetworkError|ERR_/i.test(m);
+          if (!_net) {
+            toast('注册没成功: ' + (m || '云端报错') + '。稍后再试, 别急着换个新号注册');
+            return;
+          }
         }
       } catch (e) { /* 网络异常 → 继续本地注册, 稍后自动同步 */ }
     }
@@ -14349,7 +14362,14 @@ function bindAccount() {
     try {
       const { error } = await sb.auth.signInWithPassword({ email: phoneEmail(phone), password: cloudPass(h) });
       if (error) {
-        toast('手机号还没注册过, 或密码不对');
+        /* v753: 区分「网络不通」和「密码不对」—— 以前一律说「手机号还没注册过, 或密码不对」,
+           用户以为号没了就去重新注册, 反而把本地档覆盖成新号, 老账号数据就"用不了"了 */
+        const _m = String(error.message || error.msg || '');
+        if (/fetch|network|timeout|timed out|Failed to fetch|NetworkError|ERR_/i.test(_m)) {
+          toast('网络没连上, 换个网络或过一会儿再试');
+        } else {
+          toast('密码不对。忘了密码就点「忘记密码」, 用手机号 + 生日重设');
+        }
         return;
       }
       const { data: { session } } = await sb.auth.getSession();
