@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MUSIC AROMA · 音乐香氛疗愈</title>
   <meta name="description" content="一瓶精油 · 一首音乐 · 一段护肤操 —— 在香气与旋律中,给身心一场温柔的疗愈。" />
-  <link rel="stylesheet" href="styles.css?v=756" />
+  <link rel="stylesheet" href="styles.css?v=757" />
   <!-- 全站手写体: 霞鹜文楷(随性放松,治愈感) —— 异步加载, CDN 不通时自动用系统字体兜底, 页面绝不白屏 -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" media="print" onload="this.media='all'" />
@@ -2638,6 +2638,7 @@
               <button class="btn btn-solid wish-draw-btn" id="wishDrawBtn" type="button">🌙 抽一颗星星</button>
               <button class="btn btn-ghost" id="wishWriteBtn" type="button">✨ 折一颗星星</button>
               <button class="btn btn-ghost" id="wishMineBtn" type="button">我的纸条</button>
+              <button class="btn btn-ghost" id="wishDestinyBtn" type="button">💫 有缘星星</button>
               <button class="btn btn-ghost" id="wishLuckyBtn" type="button">🌟 幸运星榜</button>
               <button class="btn btn-ghost" id="wishGhostBtn" type="button" hidden>🧹 星星 / 账号清理台</button>
             </div>
@@ -2692,10 +2693,20 @@
             <!-- 我的纸条(保密) -->
             <div class="wish-modal" id="wishMineModal" hidden>
               <p class="wish-modal-title">我的纸条</p>
-              <p class="wish-mine-note">这里只有你自己能看到 — 你写过的每一颗星星, 和有缘人留给它们的回话</p>
+              <p class="wish-mine-note">这里只有你自己能看到 — 你写过的每一颗星星, 和有缘人留给它们的回话。<br>被有缘人抽到过的星星就是「有缘的星星」啦, 不能再撤回, 会留作纪念。</p>
               <div class="wish-mine-list" id="wishMineList"></div>
               <div class="wish-modal-btns">
                 <button class="btn btn-ghost small" id="wishMineClose" type="button">返回瓶子</button>
+              </div>
+            </div>
+
+            <!-- v757 有缘星星(个人记录): 星星还在瓶子里, 自己这里复制一份 -->
+            <div class="wish-modal" id="wishDestinyModal" hidden>
+              <p class="wish-modal-title">💫 我的有缘星星</p>
+              <p class="wish-mine-note">你抽到过的每一颗星星都记在这里。它们会继续留在瓶子里, 但你永远可以回看 — 缘分不会丢 🌙</p>
+              <div class="wish-mine-list" id="wishDestinyList"></div>
+              <div class="wish-modal-btns">
+                <button class="btn btn-ghost small" id="wishDestinyClose" type="button">返回瓶子</button>
               </div>
             </div>
 
@@ -3168,8 +3179,8 @@
   <div class="toast" id="toast" hidden></div>
 
   <!-- v608: 疗愈社区专属环境音 —— 只在社区页面循环播放, 离开自动暂停保留进度 -->
-  <audio id="cmBgAudio" src="long.mp3?v=756" loop preload="auto" hidden></audio>
+  <audio id="cmBgAudio" src="long.mp3?v=757" loop preload="auto" hidden></audio>
 
-  <script src="script.js?v=756"></script>
+  <script src="script.js?v=757"></script>
 </body>
 </html>
