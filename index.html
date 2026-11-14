@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MUSIC AROMA · 音乐香氛疗愈</title>
   <meta name="description" content="一瓶精油 · 一首音乐 · 一段护肤操 —— 在香气与旋律中,给身心一场温柔的疗愈。" />
-  <link rel="stylesheet" href="styles.css?v=754" />
+  <link rel="stylesheet" href="styles.css?v=755" />
   <!-- 全站手写体: 霞鹜文楷(随性放松,治愈感) —— 异步加载, CDN 不通时自动用系统字体兜底, 页面绝不白屏 -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" media="print" onload="this.media='all'" />
@@ -2835,6 +2835,15 @@
                   <span class="pa-emoji">🍳</span><span class="pa-text">喂食</span>
                 </button>
               </div>
+              <!-- v755: 群主特权区 —— 仅机主可见(换宠物 / 变大变小形态切换) -->
+              <div class="pet-owner-box" id="petOwnerBox" hidden>
+                <button class="pet-action-btn pet-owner-btn" id="petOwnerSwitch" type="button">
+                  <span class="pa-emoji">🔁</span><span class="pa-text">换宠物</span>
+                </button>
+                <button class="pet-action-btn pet-owner-btn" id="petOwnerMorph" type="button">
+                  <span class="pa-emoji">🪄</span><span class="pa-text">变大变小</span>
+                </button>
+              </div>
             </div>
           </div>
           <div class="pet-cookbook">
@@ -3159,8 +3168,8 @@
   <div class="toast" id="toast" hidden></div>
 
   <!-- v608: 疗愈社区专属环境音 —— 只在社区页面循环播放, 离开自动暂停保留进度 -->
-  <audio id="cmBgAudio" src="long.mp3?v=754" loop preload="auto" hidden></audio>
+  <audio id="cmBgAudio" src="long.mp3?v=755" loop preload="auto" hidden></audio>
 
-  <script src="script.js?v=754"></script>
+  <script src="script.js?v=755"></script>
 </body>
 </html>
