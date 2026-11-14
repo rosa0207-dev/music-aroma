@@ -4653,7 +4653,9 @@ img.pet-creature { object-fit: contain; }
 .pt2-bear-ear-r { transform-origin: 158px 82px; animation: pt2-bear-ear-r 5.8s ease-in-out infinite; }
 @keyframes pt2-bear-ear-l { 0%,100% { transform: rotate(0deg); } 16% { transform: rotate(-5deg); } 30% { transform: rotate(0deg); } }
 @keyframes pt2-bear-ear-r { 0%,100% { transform: rotate(0deg); } 16% { transform: rotate(5deg); } 30% { transform: rotate(0deg); } }
-.pt2-eyes { transform-origin: 120px 116px; animation: pt2-blink 4.8s infinite; }
+/* v754: 眨眼以眼球组自身包围盒为中心缩放 —— 以前锚点写死 120px 116px, 宝宝版眼睛在 y=140,
+   scaleY(.1) 时眼睛会朝锚点滑过去, 看起来"一只眼睛上下乱跳"; fill-box 后每只都原地眨 */
+.pt2-eyes { transform-box: fill-box; transform-origin: center; animation: pt2-blink 4.8s infinite; }
 @keyframes pt2-blink { 0%, 90%, 100% { transform: scaleY(1); } 92%, 94% { transform: scaleY(.1); } }
 .pt2-mouth-open { opacity: 0; transform-origin: 120px 145px; }
 .pet-avatar.talking .pt2-mouth-open { opacity: 1; animation: pt2-talk .28s ease-in-out infinite alternate; }
