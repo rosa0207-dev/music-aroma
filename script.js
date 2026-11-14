@@ -3,7 +3,7 @@
    ============================================ */
 
 /* ---------- 版本号（缓存击穿用，修改音频资源后必须递增）---------- */
-const AUDIO_VERSION = '778' /* v764: 歌曲多源CDN(修幸运星歌/游戏歌没声) + 彩虹幸运星进有缘星星置顶可点播 + 冰激凌整根塌落 + 猪鼻/猪宝宝耳/狐眼上挑/松鼠脸/象鼻卷 */ /* v762: 幸运星抽中独占展示(小星星让位)+点星星重播幸运星之歌 / 象去嘴 / 仓鼠豆豆眼加大 / 熊眼鼻回滚 v760 / 狐耳接回头部+缩短 / 狗耳内移 */ /* v761: 狐狸眼🦊上挑+尖耳(成体宝宝)/猫须去层/狗狗眼/猪月牙眼/熊眼鼻缩小/仓鼠豆豆眼鼓脸/松鼠双滤镜拆层 + 新增猴猴象象 + 展览柜保存失败修复(insert补uid) + 彩虹星不进有缘星星 */ /* v760: 狗成体耳 38°→22° 收窄 + 宝宝说话嘴跳修复(pt2-mouth-open 锚点写死 145px 改 fill-box 自身中心) */ /* v759: Rosa 修正 —— 猪成体耳圆钝(上次误改宝宝) 狐眼去眼线 狐尾 anchor 左移防 viewBox 裁剪 仓鼠/松鼠成体嘴=宝宝同形(删松鼠鼻上游离门牙) */ /* v758: 宠物视觉修订 —— 狐眼重画(魅惑上挑杏眼+眼线)/狐尾加大1.28/1.24 兔睫毛去除 仓鼠腮红收进脸内+成体不张嘴 松鼠成体不张嘴 狗耳外扩38° 猪宝宝去嘴+耳朵圆钝 */ /* v757: 有缘星星 —— 被抽到过的星星不可撤回(原本就如此, 现在正名) + 「💫 有缘星星」个人记录: 抽到过的星星本地复制一份随时回看(星星仍在瓶子里, 云端永久去重不变) */ /* v755: 存量宠物一次性重置为宝宝 | 群主特权(换宠物/变大变小) | 成长只认正确料理(浇水/黑暗料理不算) | 音频多源CDN加速(jsDelivr, 治GitHub慢崩) | 吹泡泡每次按键都有吹气声 | 冰激凌限高12层塌落 '啊哦～冰激凌掉了' */
+const AUDIO_VERSION = '779' /* v764: 歌曲多源CDN(修幸运星歌/游戏歌没声) + 彩虹幸运星进有缘星星置顶可点播 + 冰激凌整根塌落 + 猪鼻/猪宝宝耳/狐眼上挑/松鼠脸/象鼻卷 */ /* v762: 幸运星抽中独占展示(小星星让位)+点星星重播幸运星之歌 / 象去嘴 / 仓鼠豆豆眼加大 / 熊眼鼻回滚 v760 / 狐耳接回头部+缩短 / 狗耳内移 */ /* v761: 狐狸眼🦊上挑+尖耳(成体宝宝)/猫须去层/狗狗眼/猪月牙眼/熊眼鼻缩小/仓鼠豆豆眼鼓脸/松鼠双滤镜拆层 + 新增猴猴象象 + 展览柜保存失败修复(insert补uid) + 彩虹星不进有缘星星 */ /* v760: 狗成体耳 38°→22° 收窄 + 宝宝说话嘴跳修复(pt2-mouth-open 锚点写死 145px 改 fill-box 自身中心) */ /* v759: Rosa 修正 —— 猪成体耳圆钝(上次误改宝宝) 狐眼去眼线 狐尾 anchor 左移防 viewBox 裁剪 仓鼠/松鼠成体嘴=宝宝同形(删松鼠鼻上游离门牙) */ /* v758: 宠物视觉修订 —— 狐眼重画(魅惑上挑杏眼+眼线)/狐尾加大1.28/1.24 兔睫毛去除 仓鼠腮红收进脸内+成体不张嘴 松鼠成体不张嘴 狗耳外扩38° 猪宝宝去嘴+耳朵圆钝 */ /* v757: 有缘星星 —— 被抽到过的星星不可撤回(原本就如此, 现在正名) + 「💫 有缘星星」个人记录: 抽到过的星星本地复制一份随时回看(星星仍在瓶子里, 云端永久去重不变) */ /* v755: 存量宠物一次性重置为宝宝 | 群主特权(换宠物/变大变小) | 成长只认正确料理(浇水/黑暗料理不算) | 音频多源CDN加速(jsDelivr, 治GitHub慢崩) | 吹泡泡每次按键都有吹气声 | 冰激凌限高12层塌落 '啊哦～冰激凌掉了' */
 
 /* v631: 全站清零重启 —— 每台设备第一次加载本版本时, 清掉本地旧账号与云端登录会话 */
 const MA_WIPE_FLAG = 'ma_wiped_v631';
@@ -132,6 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
   preloadHealAudio();     // v597: 预加载疗愈音乐/人声 → Blob URL 本地播放(根治服务器无 Range 的跳回/重播)
   preloadRealPreviews(); // v602/v605: 安眠夜曲/晨光苏醒试听用用户提供的真实文件(替换原 Web Audio 合成)
   preloadCmBgAudio();   // v616: 社区背景音整段拉成 Blob, 根治服务器无 Range 导致的流式断流截断
+  /* v779: 游戏歌曲开机预载+解码进内存 —— 圣诞歌/生日歌/幸运星歌点击瞬间秒响(不然 fetch+decode 慢半拍) */
+  setTimeout(() => { ['lucky-star.mp3', 'xmas-bounce.mp3', 'birthday-bounce.mp3'].forEach(f => { try { preloadSongBgm(f); } catch (e) {} }); }, 3000);
   loadBowlAudio();        // 预载水晶钵 wav, 开头「注入灵感」变身音效(v49 保持不变)
   loadHarpAudio();        // v49: 预载竖琴 wav, 魔法卡片「点击开启」按钮用
   applyTheme(state.prefs.theme, state.prefs.customAccent, state.prefs.customBg);
@@ -11580,8 +11582,8 @@ function buildBlender(stage) {
   const CONE = { x: 280, top: 262, tip: 372, w: 80 };
   const NOZZLE = { x: 280, y: 258 };   // 出料嘴尖端
   /* v755: 冰激凌限高 —— 到达极限高度整根塌落掉下去(不再无限叠通天塔); 塔越高越晃, 歪过头顶端会斜着塌下来 */
-  const ICE_MAX_LAYERS = 12; // v755: 极限层数(约到画面上沿), 再往上整根塌掉
-  let towerFall = null;      // v764: 整根塌落 —— 连蛋筒一起真的掉下去(不再碎成小段)
+  const ICE_MAX_LAYERS = 12; // v755: 极限层数(约到画面上沿), 再往上塌掉
+  let fallChunk = null;      // v779: 塌落 —— 只有雪糕整坨从蛋筒上掉下去, 蛋筒留在画面里(不再连蛋筒一起掉)
 
   function mixHex(a, b, t) {
     const h = c => {
@@ -11648,9 +11650,9 @@ function buildBlender(stage) {
   status.textContent = '选配料倒进机器, 按住挤出冰激凌, 点雪糕咬一口 · 堆太高会塌掉哦';
   stage.appendChild(status);
 
-  /* v755: 整根塌落 —— 全部雪糕层翻滚掉落, 松手后需重新按住再挤 */
+  /* v779: 塌落 —— 雪糕整坨翻着掉下去, 蛋筒不跟着掉; 松手后需重新按住再挤 */
   function collapseTower() {
-    towerFall = { vx: 0, vy: -60, dx: 0, dy: 0, rot: 0, vrot: (Math.random() < 0.5 ? -1 : 1) * (0.45 + Math.random() * 0.4) };
+    fallChunk = { vx: (Math.random() < 0.5 ? -1 : 1) * 45, vy: -70, dx: 0, dy: 0, rot: 0, vrot: (Math.random() < 0.5 ? -1 : 1) * (0.9 + Math.random() * 0.5) };
     cupLevel = 0;
     blending = false;
     blendBtn.classList.remove('on');
@@ -11659,9 +11661,9 @@ function buildBlender(stage) {
     floats.push({ x: CONE.x, y: 150, text: '啊哦～冰激凌掉了！', color: '#D9825F', life: 2 });
   }
   function openLayer() {
-    if (towerFall) return;   // v764: 上一根还在掉, 等它掉完
+    if (fallChunk) return;   // v779: 上一坨还在掉, 等它掉完
     if (!queue.length) return;
-    /* v755: 到达极限高度 → 整根塌落掉下去 */
+    /* v755: 到达极限高度 → 雪糕整坨掉下去 */
     if (layers.length >= ICE_MAX_LAYERS) { collapseTower(); return; }
     const t = queue.shift();
     const next = queue[0] || t;
@@ -11675,7 +11677,7 @@ function buildBlender(stage) {
 
   function takeBite(e) {
     if (e.target !== cv) return;
-    if (!layers.length || towerFall) return;
+    if (!layers.length || fallChunk) return;
     const p = canvasPos(cv, e, GAME_W, GAME_H);
     const topY = swirlTopY();
     // 雪糕堆叠区域(比蛋筒略宽, 从最顶到蛋筒卷边): 点哪咬哪
@@ -11840,24 +11842,24 @@ function buildBlender(stage) {
     }
     // 咬痕/碎屑
     if (bite) { bite.t += dt * 2.4; if (bite.t >= 1) bite = null; }
-    // v749: 塔歪过头 → 顶端几层斜着塌下来(趣味)
-    if (layers.length > 4 && !towerFall) {
+    // v749: 塔歪过头 → 顶端斜着塌下来(趣味)
+    if (layers.length > 4 && !fallChunk) {
       const t2 = layers[layers.length - 1];
       if (Math.abs(t2.dx || 0) > 42) {
         const dir = t2.dx > 0 ? 1 : -1;
-        towerFall = { vx: dir * 55, vy: -50, dx: 0, dy: 0, rot: 0, vrot: dir * (1.3 + Math.random() * 0.5) };
+        fallChunk = { vx: dir * 55, vy: -50, dx: 0, dy: 0, rot: 0, vrot: dir * (1.3 + Math.random() * 0.5) };
         cupLevel = 0;
         playSfx('game.icecreamDrop', { volume: 0.75 });
         floats.push({ x: CONE.x, y: 150, text: '哗啦——斜倒啦!', color: '#D9825F', life: 1.4 });
       }
     }
-    // v764: 整根塌落物理 —— 加速下坠+翻倒, 掉出画面才清层
-    if (towerFall) {
-      towerFall.vy += 1100 * dt;
-      towerFall.dx += towerFall.vx * dt;
-      towerFall.dy += towerFall.vy * dt;
-      towerFall.rot += towerFall.vrot * dt;
-      if (towerFall.dy > GAME_H + 240) { layers.length = 0; towerFall = null; }
+    // v779: 塌落物理 —— 雪糕坨加速下坠+翻倒, 掉出画面才清层
+    if (fallChunk) {
+      fallChunk.vy += 1100 * dt;
+      fallChunk.dx += fallChunk.vx * dt;
+      fallChunk.dy += fallChunk.vy * dt;
+      fallChunk.rot += fallChunk.vrot * dt;
+      if (fallChunk.dy > GAME_H + 240) { layers.length = 0; fallChunk = null; }
     }
     for (let i = bits.length - 1; i >= 0; i--) {
       const b = bits[i];
@@ -11902,11 +11904,7 @@ function buildBlender(stage) {
     // 蛋筒
     ctx.save();
     ctx.translate(CONE.x, 0);
-    // v764: 整根掉落 —— 连蛋筒带雪糕一起翻着掉下去
-    if (towerFall) {
-      ctx.translate(towerFall.dx, towerFall.dy);
-      ctx.translate(CONE.x, CONE.tip); ctx.rotate(towerFall.rot); ctx.translate(-CONE.x, -CONE.tip);
-    }
+    // v779: 蛋筒不再跟着掉 —— 只把塌落位移/旋转套在下面的雪糕绘制上
     // v570: 手绘感蛋筒(圆头尖 + 微鼓侧弧, 不再是硬直线三角)
     wcShadow(ctx, 3, CONE.tip + 6, 34, 7, 0.16);
     const conePath = gg => {
@@ -11940,6 +11938,12 @@ function buildBlender(stage) {
     wcRoundRect(ctx, -CONE.w / 2 - 4, CONE.top - 6, CONE.w + 8, 12, 5, 7, 0.55); ctx.fill();
 
     // 软雪糕(v566 卡片同款水彩层: 外晕→3段渐变→叠染→积色→高光白点)
+    // v779: 塌落时雪糕整坨绕蛋筒顶翻着掉下去, 蛋筒原地不动
+    ctx.save();
+    if (fallChunk) {
+      ctx.translate(fallChunk.dx, fallChunk.dy);
+      ctx.translate(0, CONE.top); ctx.rotate(fallChunk.rot); ctx.translate(0, -CONE.top);
+    }
     let y = CONE.top - 2;
     const kF = swirlK();
     layers.forEach((L, i) => {
@@ -12014,6 +12018,7 @@ function buildBlender(stage) {
       ctx.lineWidth = 2;
       ctx.beginPath(); ctx.moveTo(tOff - 2, topY - 3); ctx.quadraticCurveTo(tOff + 3, topY - 7, tOff - 1, topY - 11); ctx.stroke();
     }
+    ctx.restore();   // v779: 收掉雪糕塌落变换
     ctx.restore();
 
     // 咬痕(白齿印闪烁)
