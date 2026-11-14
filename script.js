@@ -3,7 +3,7 @@
    ============================================ */
 
 /* ---------- 版本号（缓存击穿用，修改音频资源后必须递增）---------- */
-const AUDIO_VERSION = '754' /* v754: 八宠改版——新增狐狸(成体+宝宝), 松鼠蓬蓬尾, 猪耳贴头, 兔去额纹, 猫绿眼胡须/狗舌头/熊小眼/仓鼠豆豆眼, 嘴部上移融合, 眨眼锚点修复(fill-box) | v753: 登录/注册提示文案修正(网络 vs 密码分开)+阻止云端注册失败时静默建本地假号 | v752: 七宠宝宝版+成长系统 —— 领养即宝宝(chibi 小小一只), 浇水/成功喂饭每天记 1 天喂养, 攒满 10 天长成成体; 老档宠物视为已成年 */
+const AUDIO_VERSION = '755' /* v755: 存量宠物一次性重置为宝宝 | 群主特权(换宠物/变大变小) | 成长只认正确料理(浇水/黑暗料理不算) | 音频多源CDN加速(jsDelivr, 治GitHub慢崩) | 吹泡泡每次按键都有吹气声 | 冰激凌限高12层塌落 '啊哦～冰激凌掉了' */
 
 /* v631: 全站清零重启 —— 每台设备第一次加载本版本时, 清掉本地旧账号与云端登录会话 */
 const MA_WIPE_FLAG = 'ma_wiped_v631';
@@ -654,9 +654,9 @@ let _cmBgBlob = null;
 function preloadCmBgAudio() {
   const el = document.getElementById('cmBgAudio');
   if (!el) return;
-  fetch('long.mp3?v=' + AUDIO_VERSION)
-    .then(r => { if (!r.ok) throw new Error(r.status); return r.blob(); })
+  fetchAudioData('long.mp3', true, 30000)
     .then(b => {
+      if (!b) throw new Error('audio all failed');
       const t = el.currentTime, wasPlaying = !el.paused && !el.ended;
       _cmBgBlob = URL.createObjectURL(b);
       el.src = _cmBgBlob;
@@ -1800,15 +1800,14 @@ let _healAudio = { music: null, voice: null };
 let _healBlob = { music: null, voice: null };
 function preloadHealAudio() {
   ['music', 'voice'].forEach(k => {
-    const src = k === 'music' ? 'heal-music.mp3?v=597' : 'heal-voice.mp3?v=597';
-    fetch(src)
-      .then(r => { if (!r.ok) throw new Error(r.status); return r.blob(); })
-      .then(b => { _healBlob[k] = URL.createObjectURL(b); })
+    const src = k === 'music' ? 'heal-music.mp3' : 'heal-voice.mp3';
+    fetchAudioData(src, true, 30000)
+      .then(b => { if (!b) throw new Error('audio all failed'); _healBlob[k] = URL.createObjectURL(b); })
       .catch(() => { /* 预加载失败不阻塞 —— 播放时回退普通 URL */ });
   });
 }
 function healSrc(k) {
-  return (_healBlob && _healBlob[k]) || (k === 'music' ? 'heal-music.mp3?v=597' : 'heal-voice.mp3?v=597');
+  return (_healBlob && _healBlob[k]) || audioFileUrl(k === 'music' ? 'heal-music.mp3' : 'heal-voice.mp3');
 }
 
 function playHealAudio() {
@@ -3183,17 +3182,56 @@ function playFileBuffer(buf, volume, rate, opts) {
   if (hardEnd < buf.duration) { try { src.stop(t0 + dur + 0.02); } catch (e) {} }
 }
 
-/* v546: 音频文件统一缓存版本(内容更新后强制刷新) */
-function slotFileUrl(slot) { return slot.file + (slot.file.indexOf('?') >= 0 ? '&' : '?') + 'v=' + AUDIO_VERSION; }
+/* v546: 音频文件统一缓存版本(内容更新后强制刷新)
+   v755: 音频多源加速 —— GitHub Pages 直连国内拉大 mp3 慢/容易断流崩溃, 自动按序尝试 jsDelivr CDN,
+   成功的源记进 localStorage 下次直连; 四个源全部失败才放弃(走合成兜底) */
+/* 实测(2026-11-14): fastly/cdn.jsdelivr.net 对本仓文件一律 301 → raw.githubusercontent.com(国内被墙, 白等),
+   testingcf 大文件偶发 403 —— 只有 gcore 稳定直接 200(4MB 约 5s), 故 gcore 打头, 同站兜底收尾 */
+const AUDIO_BASES = [
+  'https://gcore.jsdelivr.net/gh/rosa0207-dev/music-aroma@main/',
+  'https://testingcf.jsdelivr.net/gh/rosa0207-dev/music-aroma@main/',
+  ''   /* 同站兜底 */
+];
+let _audioBaseIdx = 0;
+try {
+  const saved = localStorage.getItem('ma_audio_base');
+  if (saved) { const i = AUDIO_BASES.indexOf(saved); if (i >= 0) _audioBaseIdx = i; }
+} catch (e) {}
+function audioFileUrl(file, idx) {
+  const base = AUDIO_BASES[(idx == null ? _audioBaseIdx : idx)] || '';
+  return base + file + (file.indexOf('?') >= 0 ? '&' : '?') + 'v=' + AUDIO_VERSION;
+}
+function slotFileUrl(slot) { return audioFileUrl(slot.file); }
+async function fetchAudioData(file, asBlob, timeoutMs) {
+  for (let n = 0; n < AUDIO_BASES.length; n++) {
+    const idx = (_audioBaseIdx + n) % AUDIO_BASES.length;
+    const ctl = (typeof AbortController === 'function') ? new AbortController() : null;
+    const timer = ctl ? setTimeout(() => { try { ctl.abort(); } catch (e) {} }, timeoutMs || 20000) : null;
+    try {
+      const res = await fetch(audioFileUrl(file, idx), ctl ? { signal: ctl.signal } : undefined);
+      if (!res.ok) throw new Error('audio ' + res.status);
+      const data = asBlob ? await res.blob() : await res.arrayBuffer();
+      if (timer) clearTimeout(timer);
+      if (idx !== _audioBaseIdx) {
+        _audioBaseIdx = idx;
+        try { localStorage.setItem('ma_audio_base', AUDIO_BASES[idx]); } catch (e) {}
+      }
+      return data;
+    } catch (e) {
+      if (timer) clearTimeout(timer);
+    }
+  }
+  return null;
+}
 
 /* v728: 采样加载/预热统一走这里 —— 解码完顺手算出前导静音, 播放时就能跳过 */
 function _loadSfxBuffer(slotId) {
   const slot = AUDIO_SLOTS[slotId];
   if (!slot || !slot.file || slot._loading || _fileBufs[slotId]) return;
   slot._loading = true;
-  fetch(slotFileUrl(slot))
-    .then(r => { if (!r.ok) throw new Error('file ' + r.status); return r.arrayBuffer(); })
+  fetchAudioData(slot.file)
     .then(ab => {
+      if (!ab) throw new Error('audio all failed');
       const ctx = ensureAudioCtx();
       if (!ctx) throw new Error('no ctx');
       return new Promise((ok, bad) => {
@@ -3287,9 +3325,9 @@ async function _buildLoop(slotId) {
   if (!buf && slot.file) {
     try {
       if (!_fileBufs[slotId]) {
-        const res = await fetch(slotFileUrl(slot));
-        if (!res.ok) throw new Error('file ' + res.status);
-        _fileBufs[slotId] = await ctx.decodeAudioData(await res.arrayBuffer());
+        const ab = await fetchAudioData(slot.file);
+        if (!ab) throw new Error('audio all failed');
+        _fileBufs[slotId] = await ctx.decodeAudioData(ab);
       }
       buf = _fileBufs[slotId];
     } catch (e) { buf = null; }
@@ -3393,9 +3431,9 @@ async function preloadLoopSound(slotId) {
     const slot = AUDIO_SLOTS[slotId];
     if (!slot || !slot.file || _fileBufs[slotId] || _customBufs[slotId]) return;
     const ctx = ensureAudioCtx(); if (!ctx) return;
-    const res = await fetch(slotFileUrl(slot));
-    if (!res.ok) throw new Error('file ' + res.status);
-    _fileBufs[slotId] = await ctx.decodeAudioData(await res.arrayBuffer());
+    const ab = await fetchAudioData(slot.file);
+    if (!ab) throw new Error('audio all failed');
+    _fileBufs[slotId] = await ctx.decodeAudioData(ab);
   } catch (e) {}
 }
 
@@ -4761,14 +4799,17 @@ function buildBlow(stage) {
       s.start(t); s.stop(t + 0.06);
     } catch (e) {}
   }
+  let blowGen = 0;   // v755: 每次按键一个代号, 旧按键的异步回调绝不污染新一轮
   function blowSoundStart() {
     try {
-      if (blowLoop || blowStopping) return;
-      blowStopping = false;
+      blowGen++;
+      const my = blowGen;
+      blowStopping = false;   // v755: 上一次松手留下的停止标记必须清掉(旧版这里被挡 return, 导致只有第一声有吹气)
+      if (blowLoop) return;
       // v539: 真实吹气采样(sfx-blow.mp3), fetch 未完成时松手 → 竞态防护
       startLoopSound('game.blow').then(n => {
         if (!n) return;
-        if (blowStopping) smoothStop(n);
+        if (blowStopping || my !== blowGen) smoothStop(n);
         else blowLoop = n;
       }).catch(() => {});
     } catch (e) {}
@@ -11537,7 +11578,8 @@ function buildBlender(stage) {
   let raf = 0;
   const CONE = { x: 280, top: 262, tip: 372, w: 80 };
   const NOZZLE = { x: 280, y: 258 };   // 出料嘴尖端
-  /* v749: 冰激凌无限制 —— 想挤多高挤多高(通天塔); 塔越高越晃, 歪过头顶端会斜着塌下来 */
+  /* v755: 冰激凌限高 —— 到达极限高度整根塌落掉下去(不再无限叠通天塔); 塔越高越晃, 歪过头顶端会斜着塌下来 */
+  const ICE_MAX_LAYERS = 12; // v755: 极限层数(约到画面上沿), 再往上整根塌掉
   const tumbles = [];        // 塌落的雪糕段(翻滚掉落动画)
 
   function mixHex(a, b, t) {
@@ -11602,11 +11644,36 @@ function buildBlender(stage) {
 
   const status = document.createElement('span');
   status.className = 'game-status';
-  status.textContent = '选配料倒进机器, 按住挤出冰激凌, 点雪糕咬一口 · 堆太高会斜着倒哦';
+  status.textContent = '选配料倒进机器, 按住挤出冰激凌, 点雪糕咬一口 · 堆太高会塌掉哦';
   stage.appendChild(status);
 
+  /* v755: 整根塌落 —— 全部雪糕层翻滚掉落, 松手后需重新按住再挤 */
+  function collapseTower() {
+    const kF = swirlK();
+    let yy = swirlTopY();
+    let dir = Math.random() < 0.5 ? -1 : 1;
+    while (layers.length) {
+      const L = layers.pop();
+      tumbles.push({
+        x: CONE.x + (L.dx || 0) * 0.6, y: yy,
+        vx: dir * (60 + Math.random() * 110), vy: -20 - Math.random() * 80,
+        rot: 0, vrot: dir * (1.4 + Math.random() * 2.6),
+        color: L.color, h: Math.max(10, 14 * L.h * kF), life: 1,
+      });
+      yy += 14 * L.h * kF;
+      if (Math.random() < 0.4) dir = -dir;
+    }
+    cupLevel = 0;
+    blending = false;
+    blendBtn.classList.remove('on');
+    doneMsg = false;
+    playSfx('game.icecreamDrop', { volume: 0.9 });
+    floats.push({ x: CONE.x, y: 150, text: '啊哦～冰激凌掉了！', color: '#D9825F', life: 2 });
+  }
   function openLayer() {
     if (!queue.length) return;
+    /* v755: 到达极限高度 → 整根塌落掉下去 */
+    if (layers.length >= ICE_MAX_LAYERS) { collapseTower(); return; }
     const t = queue.shift();
     const next = queue[0] || t;
     const col = mixHex(BLENDER_FRUITS[t].pulp, BLENDER_FRUITS[next].pulp, 0.25);
@@ -18222,7 +18289,7 @@ function petSay(text, dur) {
 }
 
 /* v752: 宝宝版七只 —— chibi 小小一只(大头圆身/小短耳/大眼睛), 与成体形态明显不同;
-   领养即宝宝, 浇水或成功喂饭每天记 1 天喂养, 攒满 10 天长成成体; 老档宠物直接视为已成年 */
+   领养即宝宝, 每天喂一道正确料理记 1 天(浇水/黑暗料理不算, v755 收紧), 攒满 10 天长成成体 */
 const PET_SVG_BABY = {
   rabbit: "<svg class=\"pet-creature\" viewBox=\"0 0 240 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"宝宝\">\n  <defs>\n    <radialGradient id=\"p2rbBody\" cx=\"42%\" cy=\"30%\" r=\"80%\">\n      <stop offset=\"0%\" stop-color=\"#ffffff\"/>\n      <stop offset=\"42%\" stop-color=\"#faf6fe\"/>\n      <stop offset=\"74%\" stop-color=\"#f0e6f9\"/>\n      <stop offset=\"100%\" stop-color=\"#e3d3f3\"/>\n    </radialGradient>\n    <radialGradient id=\"p2rbEarIn\" cx=\"50%\" cy=\"35%\" r=\"75%\">\n      <stop offset=\"0%\" stop-color=\"#f8d0e4\"/>\n      <stop offset=\"100%\" stop-color=\"#eeb0cc\"/>\n    </radialGradient>\n    <radialGradient id=\"p2rbBlush\" cx=\"50%\" cy=\"50%\" r=\"50%\">\n      <stop offset=\"0%\" stop-color=\"#f0a0c0\" stop-opacity=\".55\"/>\n      <stop offset=\"100%\" stop-color=\"#f0a0c0\" stop-opacity=\"0\"/>\n    </radialGradient>\n    <radialGradient id=\"p2rbHalo\" cx=\"50%\" cy=\"50%\" r=\"50%\">\n      <stop offset=\"0%\" stop-color=\"#faf6fe\" stop-opacity=\".6\"/>\n      <stop offset=\"100%\" stop-color=\"#faf6fe\" stop-opacity=\"0\"/>\n    </radialGradient>\n    <filter id=\"p2rbEdge\" x=\"-25%\" y=\"-25%\" width=\"150%\" height=\"150%\">\n      <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"1.5\" result=\"soft\"/>\n      <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.024\" numOctaves=\"3\" seed=\"21\" result=\"n\"/>\n      <feDisplacementMap in=\"soft\" in2=\"n\" scale=\"10\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n    </filter>\n    <filter id=\"p2rbSoft\" x=\"-60%\" y=\"-60%\" width=\"220%\" height=\"220%\">\n      <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"9\"/>\n    </filter>\n  </defs>\n  <ellipse cx=\"120\" cy=\"212\" rx=\"34\" ry=\"6\" fill=\"#d8c8e8\" opacity=\".22\"/>\n  <circle cx=\"120\" cy=\"148\" r=\"76\" fill=\"url(#p2rbHalo)\" opacity=\".55\" filter=\"url(#p2rbSoft)\"/>\n  <g filter=\"url(#p2rbEdge)\">\n    <g class=\"pt2-ear-l\"><ellipse cx=\"94\" cy=\"80\" rx=\"11\" ry=\"24\" fill=\"url(#p2rbBody)\" transform=\"rotate(-8 94 80)\"/><ellipse cx=\"94\" cy=\"84\" rx=\"5\" ry=\"14\" fill=\"url(#p2rbEarIn)\" opacity=\".9\" transform=\"rotate(-8 94 84)\"/></g>\n  <g class=\"pt2-ear-r\"><ellipse cx=\"146\" cy=\"80\" rx=\"11\" ry=\"24\" fill=\"url(#p2rbBody)\" transform=\"rotate(8 146 80)\"/><ellipse cx=\"146\" cy=\"84\" rx=\"5\" ry=\"14\" fill=\"url(#p2rbEarIn)\" opacity=\".9\" transform=\"rotate(8 146 84)\"/></g>\n    <circle cx=\"120\" cy=\"150\" r=\"56\" fill=\"url(#p2rbBody)\"/>\n    <ellipse cx=\"120\" cy=\"180\" rx=\"27\" ry=\"19\" fill=\"#ffffff\" opacity=\".38\"/>\n    <ellipse cx=\"72\" cy=\"168\" rx=\"9\" ry=\"13\" fill=\"url(#p2rbBody)\" transform=\"rotate(12 72 168)\"/>\n    <ellipse cx=\"168\" cy=\"168\" rx=\"9\" ry=\"13\" fill=\"url(#p2rbBody)\" transform=\"rotate(-12 168 168)\"/>\n  </g>\n  <g filter=\"url(#p2rbEdge)\">\n    <ellipse cx=\"100\" cy=\"205\" rx=\"12\" ry=\"6.5\" fill=\"#faf6fe\"/>\n    <ellipse cx=\"140\" cy=\"205\" rx=\"12\" ry=\"6.5\" fill=\"#faf6fe\"/>\n  </g>\n  <g class=\"pt2-eyes\">\n    <circle cx=\"98\" cy=\"140\" r=\"10\" fill=\"#5a4a66\"/>\n    <circle cx=\"101.5\" cy=\"136.5\" r=\"3.6\" fill=\"#fff\"/>\n    <circle cx=\"95\" cy=\"143\" r=\"1.6\" fill=\"#fff\" opacity=\".8\"/>\n    <circle cx=\"142\" cy=\"140\" r=\"10\" fill=\"#5a4a66\"/>\n    <circle cx=\"145.5\" cy=\"136.5\" r=\"3.6\" fill=\"#fff\"/>\n    <circle cx=\"139\" cy=\"143\" r=\"1.6\" fill=\"#fff\" opacity=\".8\"/>\n  </g>\n  <ellipse cx=\"76\" cy=\"156\" rx=\"12\" ry=\"7.5\" fill=\"url(#p2rbBlush)\"/>\n  <ellipse cx=\"164\" cy=\"156\" rx=\"12\" ry=\"7.5\" fill=\"url(#p2rbBlush)\"/>\n  <g class=\"pt2-mouth-closed\">\n    <path d=\"M 115 156 Q 117.5 159.5 120 156 Q 122.5 159.5 125 156\" fill=\"none\" stroke=\"#8a7498\" stroke-width=\"2\" stroke-linecap=\"round\" opacity=\".8\"/>\n  </g>\n  <g class=\"pt2-mouth-open\">\n    <ellipse cx=\"120\" cy=\"163\" rx=\"5.5\" ry=\"7\" fill=\"#8a7498\" opacity=\".85\"/>\n  </g>\n  <g transform=\"translate(178 104) scale(.75)\"><path class=\"pt2-spark\" style=\"animation-delay:.6s\" d=\"M 0 -7 L 1.8 -1.8 L 7 0 L 1.8 1.8 L 0 7 L -1.8 1.8 L -7 0 L -1.8 -1.8 Z\" fill=\"#f5d9a8\" opacity=\".85\"/></g>\n  <g transform=\"translate(56 112) scale(.65)\"><path class=\"pt2-spark\" style=\"animation-delay:1.6s\" d=\"M 0 -7 L 1.8 -1.8 L 7 0 L 1.8 1.8 L 0 7 L -1.8 1.8 L -7 0 L -1.8 -1.8 Z\" fill=\"#f0c9b0\" opacity=\".85\"/></g>\n  <circle class=\"pt2-spark\" style=\"animation-delay:1.1s\" cx=\"170\" cy=\"196\" r=\"2.2\" fill=\"#fff\"/>\n</svg>",
   bear: "<svg class=\"pet-creature\" viewBox=\"0 0 240 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"宝宝\">\n  <defs>\n    <radialGradient id=\"p2brBody\" cx=\"42%\" cy=\"30%\" r=\"80%\">\n      <stop offset=\"0%\" stop-color=\"#f8efe4\"/>\n      <stop offset=\"42%\" stop-color=\"#f0dcc4\"/>\n      <stop offset=\"74%\" stop-color=\"#e8d2b4\"/>\n      <stop offset=\"100%\" stop-color=\"#d9bd97\"/>\n    </radialGradient>\n    <radialGradient id=\"p2brEarIn\" cx=\"50%\" cy=\"35%\" r=\"75%\">\n      <stop offset=\"0%\" stop-color=\"#e8c8a8\"/>\n      <stop offset=\"100%\" stop-color=\"#d8b088\"/>\n    </radialGradient>\n    <radialGradient id=\"p2brBlush\" cx=\"50%\" cy=\"50%\" r=\"50%\">\n      <stop offset=\"0%\" stop-color=\"#e8a888\" stop-opacity=\".55\"/>\n      <stop offset=\"100%\" stop-color=\"#e8a888\" stop-opacity=\"0\"/>\n    </radialGradient>\n    <radialGradient id=\"p2brHalo\" cx=\"50%\" cy=\"50%\" r=\"50%\">\n      <stop offset=\"0%\" stop-color=\"#f0dcc4\" stop-opacity=\".6\"/>\n      <stop offset=\"100%\" stop-color=\"#f0dcc4\" stop-opacity=\"0\"/>\n    </radialGradient>\n    <filter id=\"p2brEdge\" x=\"-25%\" y=\"-25%\" width=\"150%\" height=\"150%\">\n      <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"1.5\" result=\"soft\"/>\n      <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.024\" numOctaves=\"3\" seed=\"21\" result=\"n\"/>\n      <feDisplacementMap in=\"soft\" in2=\"n\" scale=\"10\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n    </filter>\n    <filter id=\"p2brSoft\" x=\"-60%\" y=\"-60%\" width=\"220%\" height=\"220%\">\n      <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"9\"/>\n    </filter>\n  </defs>\n  <ellipse cx=\"120\" cy=\"212\" rx=\"34\" ry=\"6\" fill=\"#c8a888\" opacity=\".22\"/>\n  <circle cx=\"120\" cy=\"148\" r=\"76\" fill=\"url(#p2brHalo)\" opacity=\".55\" filter=\"url(#p2brSoft)\"/>\n  <g filter=\"url(#p2brEdge)\">\n    <g class=\"pt2-bear-ear-l\"><circle cx=\"88\" cy=\"104\" r=\"15\" fill=\"url(#p2brBody)\"/><circle cx=\"88\" cy=\"104\" r=\"7.5\" fill=\"url(#p2brEarIn)\"/></g>\n  <g class=\"pt2-bear-ear-r\"><circle cx=\"152\" cy=\"104\" r=\"15\" fill=\"url(#p2brBody)\"/><circle cx=\"152\" cy=\"104\" r=\"7.5\" fill=\"url(#p2brEarIn)\"/></g>\n    <circle cx=\"120\" cy=\"150\" r=\"56\" fill=\"url(#p2brBody)\"/>\n    <ellipse cx=\"120\" cy=\"180\" rx=\"27\" ry=\"19\" fill=\"#f8efe4\" opacity=\".38\"/>\n    <ellipse cx=\"72\" cy=\"168\" rx=\"9\" ry=\"13\" fill=\"url(#p2brBody)\" transform=\"rotate(12 72 168)\"/>\n    <ellipse cx=\"168\" cy=\"168\" rx=\"9\" ry=\"13\" fill=\"url(#p2brBody)\" transform=\"rotate(-12 168 168)\"/>\n  </g>\n  <g filter=\"url(#p2brEdge)\">\n    <ellipse cx=\"100\" cy=\"205\" rx=\"12\" ry=\"6.5\" fill=\"#f0dcc4\"/>\n    <ellipse cx=\"140\" cy=\"205\" rx=\"12\" ry=\"6.5\" fill=\"#f0dcc4\"/>\n  </g>\n  <g class=\"pt2-eyes\">\n    <circle cx=\"98\" cy=\"140\" r=\"10\" fill=\"#4a3c30\"/>\n    <circle cx=\"101.5\" cy=\"136.5\" r=\"3.6\" fill=\"#fff\"/>\n    <circle cx=\"95\" cy=\"143\" r=\"1.6\" fill=\"#fff\" opacity=\".8\"/>\n    <circle cx=\"142\" cy=\"140\" r=\"10\" fill=\"#4a3c30\"/>\n    <circle cx=\"145.5\" cy=\"136.5\" r=\"3.6\" fill=\"#fff\"/>\n    <circle cx=\"139\" cy=\"143\" r=\"1.6\" fill=\"#fff\" opacity=\".8\"/>\n  </g>\n  <ellipse cx=\"76\" cy=\"156\" rx=\"12\" ry=\"7.5\" fill=\"url(#p2brBlush)\"/>\n  <ellipse cx=\"164\" cy=\"156\" rx=\"12\" ry=\"7.5\" fill=\"url(#p2brBlush)\"/>\nundefined\n  <g class=\"pt2-mouth-closed\">\n    <path d=\"M 115 156 Q 117.5 159.5 120 156 Q 122.5 159.5 125 156\" fill=\"none\" stroke=\"#9a7858\" stroke-width=\"2\" stroke-linecap=\"round\" opacity=\".8\"/>\n  </g>\n  <g class=\"pt2-mouth-open\">\n    <ellipse cx=\"120\" cy=\"163\" rx=\"5.5\" ry=\"7\" fill=\"#9a7858\" opacity=\".85\"/>\n  </g>\n  <g transform=\"translate(178 104) scale(.75)\"><path class=\"pt2-spark\" style=\"animation-delay:.6s\" d=\"M 0 -7 L 1.8 -1.8 L 7 0 L 1.8 1.8 L 0 7 L -1.8 1.8 L -7 0 L -1.8 -1.8 Z\" fill=\"#f5d9a8\" opacity=\".85\"/></g>\n  <g transform=\"translate(56 112) scale(.65)\"><path class=\"pt2-spark\" style=\"animation-delay:1.6s\" d=\"M 0 -7 L 1.8 -1.8 L 7 0 L 1.8 1.8 L 0 7 L -1.8 1.8 L -7 0 L -1.8 -1.8 Z\" fill=\"#f0c9b0\" opacity=\".85\"/></g>\n  <circle class=\"pt2-spark\" style=\"animation-delay:1.1s\" cx=\"170\" cy=\"196\" r=\"2.2\" fill=\"#fff\"/>\n</svg>",
@@ -18269,6 +18336,7 @@ function petDefault() {
     unlocked: [],          // 数组, 存 recipe.name
     adult: false,          // v752: false=宝宝期, true=已长大
     fedDates: [],          // v752: 喂养过的日期('YYYY-MM-DD'), 攒满 10 天长大
+    v755Reset: true,       // v755: 一次性宝宝重置标记(新档直接带上, 不再触发重置)
   };
 }
 
@@ -18288,6 +18356,13 @@ function loadPet() {
     // v752: 老档宠物(没有成长字段)直接视为已成年, 不回退宝宝
     // 注意: merged 经 petDefault 合并后 adult 恒有值(false), 必须看原始解析对象 p
     if (merged.type && p.adult === undefined) { merged.adult = true; migrated = true; }
+    // v755: 一次性把存量宠物全部重置为宝宝期, 大家重新养一遍(名字/魔力/菜谱保留)
+    if (merged.type && !p.v755Reset) {
+      merged.adult = false;
+      merged.fedDates = [];
+      merged.v755Reset = true;
+      migrated = true;
+    }
     if (migrated) { try { localStorage.setItem('ma_pet', JSON.stringify(merged)); } catch (_) {} }
     return merged;
   } catch (e) { return petDefault(); }
@@ -18490,7 +18565,7 @@ function renderPetHome() {
     } else {
       const n = Math.min((p.fedDates || []).length, 10);
       gb.classList.remove('grown');
-      gb.innerHTML = '<span class="pgb-ico">🍼</span><span>宝宝期 · 喂养 <b>' + n + '</b>/10 天（浇水或喂饭, 每天记 1 天）</span>';
+      gb.innerHTML = '<span class="pgb-ico">🍼</span><span>宝宝期 · 喂养 <b>' + n + '</b>/10 天（每天喂一道正确料理记 1 天, 浇水/黑暗料理不算）</span>';
     }
   }
   renderPlant(p);
@@ -18516,6 +18591,9 @@ function renderPetHome() {
     wBtn.querySelector('.pa-text').textContent = '浇水';
     if (wTip) wTip.textContent = '今天还没浇过，+10 魔力值';
   }
+  // v755: 群主特权区(换宠物 / 变大变小) —— 仅机主可见
+  const oBox = document.getElementById('petOwnerBox');
+  if (oBox) oBox.hidden = !isOwnerUser();
 }
 
 /* ---------- 喂食：当前锅里食材 ---------- */
@@ -18658,14 +18736,32 @@ function waterPlant() {
   p.magic = (p.magic || 0) + 10;
   if (!savePet(p)) return;
   refreshPetGlobal();
-  const fed = markPetFed();
-  if (fed && fed.grown) {
-    celebrateGrown(p);
-  } else {
-    toast('💧 浇水成功，+10 魔力值');
-    petSay(pickTalk('watered', p), 3000);
-  }
+  // v755: 浇水不再计入喂养天数 —— 只有喂对料理才记 1 天
+  toast('💧 浇水成功，+10 魔力值');
+  petSay(pickTalk('watered', p), 3000);
   renderPetHome();
+}
+
+/* ---------- v755: 群主特权 —— 换宠物 / 变大变小 ---------- */
+const PET_CN_NAMES = { rabbit: '兔兔', bear: '熊熊', hamster: '仓鼠', squirrel: '松鼠', cat: '猫咪', dog: '狗狗', pig: '猪猪', fox: '狐狸' };
+let ownerSwitching = false;
+function ownerSwitchPet() {
+  const cur = loadPet();
+  if (!cur.type) return;
+  ownerSwitching = true;
+  document.getElementById('petPickWrap').hidden = false;
+  document.getElementById('petHome').hidden = true;
+  try { toast('🪄 点一只新伙伴, 名字/魔力/喂养进度都会保留'); } catch (e) {}
+}
+function ownerMorphPet() {
+  const p = loadPet();
+  if (!p.type) return;
+  p.adult = !p.adult;
+  if (!savePet(p)) return;
+  refreshPetGlobal();
+  renderPetHome();
+  toast(p.adult ? '🪄 一下子长大啦' : '🪄 变回宝宝啦');
+  try { petSay(p.adult ? '哇, 我一下子长大了!' : '咦, 我又变小了耶~', 2600); } catch (e) {}
 }
 
 /* ---------- 选择流程 ---------- */
@@ -18674,7 +18770,19 @@ let petRenaming = false;   // v690: true = 改名模式(只改名字不换宠)
 function startPickPet(type) {
   /* v690: 宠物只能选一次 —— 已有小伙伴就不再进选宠 */
   const cur = loadPet();
-  if (cur.type) { toast('已经有「' + cur.name + '」陪你啦, 小宠是一辈子的哦 🎀'); return; }
+  if (cur.type) {
+    // v755: 群主特权 —— 换宠物(保留名字/魔力/喂养进度/菜谱)
+    if (ownerSwitching && isOwnerUser()) {
+      cur.type = type;
+      savePet(cur); refreshPetGlobal();
+      ownerSwitching = false;
+      toast('🪄 已换成「' + (PET_CN_NAMES[type] || type) + '」');
+      renderPetHome();
+      return;
+    }
+    toast('已经有「' + cur.name + '」陪你啦, 小宠是一辈子的哦 🎀');
+    return;
+  }
   petRenaming = false;
   petPickingType = type;
   document.getElementById('pnmTitle').textContent = '给你的小宠起个名字';
@@ -18769,6 +18877,11 @@ function bindPets() {
   // 浇水 / 喂食
   document.getElementById('petWaterBtn').addEventListener('click', waterPlant);
   document.getElementById('petFeedBtn').addEventListener('click', openFeedModal);
+  // v755: 群主特权按钮
+  const oSwitchBtn = document.getElementById('petOwnerSwitch');
+  if (oSwitchBtn) oSwitchBtn.addEventListener('click', ownerSwitchPet);
+  const oMorphBtn = document.getElementById('petOwnerMorph');
+  if (oMorphBtn) oMorphBtn.addEventListener('click', ownerMorphPet);
   // v690: 「重新挑选」按钮已移除(宠物一次定终身); 名字牌点击 = 改名
   document.getElementById('petNameTag').addEventListener('click', startRenamePet);
   document.getElementById('petFeedClose').addEventListener('click', closeFeedModal);
@@ -19978,7 +20091,7 @@ function wishLuckyCelebrate() {
     const ok = playSongBgm('lucky-star.mp3', 0.9, () => wishVoiceDuck(false));
     if (!ok) {   // v717: 没有 WebAudio 的老浏览器 → 退回 <audio>(老设备可能仍被静音, 新设备可用)
       try {
-        const a = new Audio('lucky-star.mp3?v=' + AUDIO_VERSION);
+        const a = new Audio(audioFileUrl('lucky-star.mp3'));
         a.volume = 0.9; a.loop = false;
         a.onended = a.onerror = () => wishVoiceDuck(false);
         wishLuckyAudio = a;
