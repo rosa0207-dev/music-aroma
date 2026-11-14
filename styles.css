@@ -5798,3 +5798,11 @@ img.sc-img {
   background: rgba(248, 253, 249, 0.9);
 }
 .pet-grow-badge .pgb-ico { font-size: 14px; }
+
+/* v762: 幸运星可点击听歌 —— 光标+呼吸脉动提示可点 */
+.wish-view-star-song { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.wish-view-star-song svg { animation: wishLuckySongPulse 2s ease-in-out infinite; }
+@keyframes wishLuckySongPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
