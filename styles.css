@@ -4657,7 +4657,7 @@ img.pet-creature { object-fit: contain; }
    scaleY(.1) 时眼睛会朝锚点滑过去, 看起来"一只眼睛上下乱跳"; fill-box 后每只都原地眨 */
 .pt2-eyes { transform-box: fill-box; transform-origin: center; animation: pt2-blink 4.8s infinite; }
 @keyframes pt2-blink { 0%, 90%, 100% { transform: scaleY(1); } 92%, 94% { transform: scaleY(.1); } }
-.pt2-mouth-open { opacity: 0; transform-origin: 120px 145px; }
+.pt2-mouth-open { opacity: 0; transform-box: fill-box; transform-origin: center; } /* v760: 锚点曾写死 120px 145px, 宝宝嘴在 y163+ 会被 scaleY 拉得上下跳 —— fill-box 后围绕自身中心张合 */
 .pet-avatar.talking .pt2-mouth-open { opacity: 1; animation: pt2-talk .28s ease-in-out infinite alternate; }
 .pet-avatar.talking .pt2-mouth-closed { opacity: 0; }
 @keyframes pt2-talk { from { transform: scaleY(.55); } to { transform: scaleY(1.15); } }
