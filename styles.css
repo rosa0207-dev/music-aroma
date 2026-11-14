@@ -5340,6 +5340,17 @@ img.sc-img {
 .wish-mine-reply-head { display: block; font-size: 11px; color: var(--ink-soft); margin-bottom: 3px; }
 .wish-mine-date { margin: 5px 0 0; font-size: 11px; color: var(--ink-soft); }
 .wish-mine-empty { margin: 8px 0; font-size: 13px; color: var(--ink-soft); text-align: center; line-height: 1.8; }
+/* v757 有缘星星记录: 幸运星徽章 */
+.wish-mine-lucky {
+  display: inline-block;
+  margin: 0 0 4px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffe3f0, #e8f4ff, #fff3d6);
+  border: 1px solid rgba(220, 160, 200, 0.4);
+  font-size: 11px;
+  color: #a05a7e;
+}
 /* v685: 撤回纸星星按钮(两击确认) */
 .wish-revoke {
   margin: 8px 0 0;
