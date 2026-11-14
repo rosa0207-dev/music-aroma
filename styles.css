@@ -5806,3 +5806,7 @@ img.sc-img {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.1); }
 }
+
+/* v764: 有缘星星记录里的彩虹幸运星可点播 */
+.wish-mine-star-song { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.wish-mine-star-song svg { animation: wishLuckySongPulse 2s ease-in-out infinite; }
