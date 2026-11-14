@@ -3,7 +3,7 @@
    ============================================ */
 
 /* ---------- 版本号（缓存击穿用，修改音频资源后必须递增）---------- */
-const AUDIO_VERSION = '756' /* v755: 存量宠物一次性重置为宝宝 | 群主特权(换宠物/变大变小) | 成长只认正确料理(浇水/黑暗料理不算) | 音频多源CDN加速(jsDelivr, 治GitHub慢崩) | 吹泡泡每次按键都有吹气声 | 冰激凌限高12层塌落 '啊哦～冰激凌掉了' */
+const AUDIO_VERSION = '757' /* v757: 有缘星星 —— 被抽到过的星星不可撤回(原本就如此, 现在正名) + 「💫 有缘星星」个人记录: 抽到过的星星本地复制一份随时回看(星星仍在瓶子里, 云端永久去重不变) */ /* v755: 存量宠物一次性重置为宝宝 | 群主特权(换宠物/变大变小) | 成长只认正确料理(浇水/黑暗料理不算) | 音频多源CDN加速(jsDelivr, 治GitHub慢崩) | 吹泡泡每次按键都有吹气声 | 冰激凌限高12层塌落 '啊哦～冰激凌掉了' */
 
 /* v631: 全站清零重启 —— 每台设备第一次加载本版本时, 清掉本地旧账号与云端登录会话 */
 const MA_WIPE_FLAG = 'ma_wiped_v631';
@@ -20172,7 +20172,7 @@ function wishShowLuckyList() {
 
 /* ---------- 弹窗开关 ---------- */
 function wishShowModal(id) {
-  ['wishWriteModal', 'wishViewModal', 'wishMineModal', 'wishLuckyModal', 'wishCleanModal'].forEach(m => {
+  ['wishWriteModal', 'wishViewModal', 'wishMineModal', 'wishDestinyModal', 'wishLuckyModal', 'wishCleanModal'].forEach(m => {
     document.getElementById(m).hidden = m !== id;
   });
 }
@@ -20503,6 +20503,7 @@ async function wishDraw(forceNote, forceLucky) {
     }
     wish.drawn = data;
     try { sessionStorage.setItem('ma_wish_holding', JSON.stringify(data)); } catch (e) {}
+    try { wishDestinedAdd(data); } catch (e) {}   // v757: 抽到即有缘 —— 本地复制一份进「有缘星星」记录
     /* v722: 抽完立刻把 drew_today 置真(内存+缓存) —— v721 缓存的旧状态让普通疗友
        抽完后按钮还写着「抽一颗星星」, 再点才被云端拒绝, 很迷惑 */
     if (wish.state) wish.state.drew_today = true;
@@ -20694,6 +20695,80 @@ async function wishShowMine() {
   wishShowModal('wishMineModal');
 }
 
+/* ---------- v757 有缘星星(个人记录) ---------- */
+/* 星星被抽到后就成为「有缘的星星」: 云端永久去重(抽过的不会再抽到), 星星本身
+   留在瓶子里, 这里在本地复制一份完整内容(文字+语音链接+作者), 让每位疗友随时
+   回看自己抽到过的星星 —— 不然放下/放回后就再也找不到它了。 */
+const WISH_DESTINED_KEY = 'ma_wish_destined';
+function wishDestinedLoad() {
+  try { const a = JSON.parse(localStorage.getItem(WISH_DESTINED_KEY) || '[]'); return Array.isArray(a) ? a : []; }
+  catch (e) { return []; }
+}
+function wishDestinedAdd(d) {
+  if (!d || d.id == null) return;
+  const arr = wishDestinedLoad();
+  if (arr.some(x => x && x.id === d.id)) return;   // 同一颗只记一次(群主重复试抽也不刷屏)
+  arr.unshift({
+    id: d.id, color: d.color, content: d.content || '', voice: d.voice || '',
+    author_name: d.author_name || '', friend_code: d.friend_code || '', lucky: !!d.lucky,
+    at: new Date().toISOString(),
+  });
+  if (arr.length > 300) arr.length = 300;
+  try { localStorage.setItem(WISH_DESTINED_KEY, JSON.stringify(arr)); } catch (e) {}
+}
+function wishShowDestiny() {
+  const list = document.getElementById('wishDestinyList');
+  const arr = wishDestinedLoad();
+  list.innerHTML = '';
+  if (!arr.length) {
+    list.innerHTML = '<p class="wish-mine-empty">还没有抽到过星星<br>抽一颗, 遇见你的有缘星星吧 ✨</p>';
+  }
+  arr.forEach(n => {
+    const item = document.createElement('div');
+    item.className = 'wish-mine-item';
+    const star = document.createElement('span');
+    star.className = 'wish-mine-star';
+    star.innerHTML = wishStarSvg(n.color, 30);
+    const body = document.createElement('div');
+    body.className = 'wish-mine-body';
+    if (n.lucky) {
+      const lb = document.createElement('span');
+      lb.className = 'wish-mine-lucky';
+      lb.textContent = '🌈 大彩虹幸运星';
+      body.appendChild(lb);
+    }
+    const p = document.createElement('p');
+    p.className = 'wish-mine-content';
+    p.textContent = n.content || (n.voice ? '💌 这颗星星里装着一段声音' : '');
+    body.appendChild(p);
+    if (n.voice) {          // 语音存的是站内链接, 随时能重听
+      const pv = document.createElement('button');
+      pv.type = 'button';
+      pv.className = 'wish-voice-play mine';
+      pv.textContent = '▶ 听 TA 的声音';
+      pv.addEventListener('click', function () {
+        wishVoicePlaySrc(n.voice, this, '▶ 听 TA 的声音');
+      });
+      body.appendChild(pv);
+    }
+    const from = document.createElement('p');
+    from.className = 'wish-mine-date';
+    from.textContent = '来自 ' + (n.author_name || '匿名疗友') + (n.friend_code ? ' · 疗友号 ' + n.friend_code : '');
+    body.appendChild(from);
+    const d = document.createElement('p');
+    d.className = 'wish-mine-date';
+    const dd = new Date(n.at);
+    if (!isNaN(dd.getTime())) {
+      d.textContent = '抽于 ' + dd.getFullYear() + '-' + String(dd.getMonth() + 1).padStart(2, '0') + '-' + String(dd.getDate()).padStart(2, '0');
+      body.appendChild(d);
+    }
+    item.appendChild(star);
+    item.appendChild(body);
+    list.appendChild(item);
+  });
+  wishShowModal('wishDestinyModal');
+}
+
 /* ---------- 绑定 ---------- */
 /* v699: 群主测试特权 —— 点罐里任意一颗纸星星直接抽那颗; 点大彩虹星强制触发幸运星 */
 function wishJarTap(ev) {
@@ -20751,6 +20826,7 @@ function bindWishJar() {
   if (wcAll) wcAll.addEventListener('click', () => wishCleanRun(true));
   document.getElementById('wishWriteBtn').addEventListener('click', openWishWrite);
   document.getElementById('wishMineBtn').addEventListener('click', wishShowMine);
+  document.getElementById('wishDestinyBtn').addEventListener('click', wishShowDestiny);   // v757 有缘星星记录
   document.getElementById('wishJar').addEventListener('click', wishJarTap);          // v699: 群主点星星抽指定
   document.getElementById('wishLuckyBtn').addEventListener('click', wishShowLuckyList);   // v699
   document.getElementById('wishLuckyClose').addEventListener('click', wishHideModals);    // v699
@@ -20782,6 +20858,7 @@ function bindWishJar() {
   });
   document.getElementById('wishViewFind').addEventListener('click', wishGoFind);
   document.getElementById('wishMineClose').addEventListener('click', wishHideModals);
+  document.getElementById('wishDestinyClose').addEventListener('click', wishHideModals);   // v757
   window.addEventListener('resize', () => {
     if (!wish.open) return;
     wish.stars = []; wish.sparks = [];
