@@ -4773,6 +4773,8 @@ img.pet-creature { object-fit: contain; }
   font-size: 14px; color: var(--ink); cursor: pointer; font-family: inherit;
   transition: all .2s; box-shadow: 0 2px 8px rgba(180,160,140,.08);
 }
+/* v859: inline-flex 盖掉 [hidden] —— 魔法棒(未长大/无特权)必须真隐藏(v851 起一直漏显示) */
+.pet-action-btn[hidden] { display: none !important; }
 .pet-action-btn:hover { transform: translateY(-2px); border-color: var(--accent, #c9a98f); box-shadow: 0 6px 16px rgba(180,160,140,.18); }
 .pet-action-btn .pa-emoji { font-size: 22px; }
 .pet-action-btn.disabled { opacity: .55; cursor: not-allowed; }
