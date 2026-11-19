@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MUSIC AROMA · 音乐香氛疗愈</title>
   <meta name="description" content="一瓶精油 · 一首音乐 · 一段护肤操 —— 在香气与旋律中,给身心一场温柔的疗愈。" />
-  <link rel="stylesheet" href="styles.css?v=855" />
+  <link rel="stylesheet" href="styles.css?v=856" />
   <!-- 全站手写体: 霞鹜文楷(随性放松,治愈感) —— 异步加载, CDN 不通时自动用系统字体兜底, 页面绝不白屏 -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" media="print" onload="this.media='all'" />
@@ -2826,7 +2826,7 @@
           <div class="pet-name-modal">
             <div class="pnm-art" id="pnmArt"></div>
             <h3 class="pnm-title" id="pnmTitle">给你的小宠起个名字</h3>
-            <p class="pnm-tip" id="pnmTip">名字一旦确定，与它终身相伴</p>
+            <p class="pnm-tip" id="pnmTip">给它起个名字吧，一起慢慢长大</p>
             <input class="pnm-input" id="petNameInput" maxlength="10" placeholder="最多 10 个字" />
             <div class="pnm-btns">
               <button class="btn btn-ghost" id="petNameCancel" type="button">再想想</button>
@@ -2884,13 +2884,10 @@
                   <span class="pa-emoji">🔁</span><span class="pa-text">换宠物</span>
                 </button>
               </div>
-              <!-- v850: 图鉴解锁 —— 1元解锁全部宠物图鉴即可来回换宠(群主免付) -->
+              <!-- v856: 召唤所有宠物 —— 付 1 元解锁后即可随意切换全部小动物(群主免付, 用上面的 🔁换宠物) -->
               <div class="pet-owner-box pet-dex-box" id="petDexBox" hidden>
-                <button class="pet-action-btn pet-dex-btn" id="petDexSwitch" type="button" hidden>
-                  <span class="pa-emoji">📖</span><span class="pa-text">换只养</span>
-                </button>
                 <button class="pet-action-btn pet-dex-btn" id="petDexUnlock" type="button">
-                  <span class="pa-emoji">🔓</span><span class="pa-text">图鉴 1元解锁</span>
+                  <span class="pa-emoji">🐾</span><span class="pa-text">召唤所有宠物</span>
                 </button>
               </div>
             </div>
@@ -3217,8 +3214,8 @@
   <div class="toast" id="toast" hidden></div>
 
   <!-- v608: 疗愈社区专属环境音 —— 只在社区页面循环播放, 离开自动暂停保留进度 -->
-  <audio id="cmBgAudio" src="long.mp3?v=855" loop preload="auto" hidden></audio>
+  <audio id="cmBgAudio" src="long.mp3?v=856" loop preload="auto" hidden></audio>
 
-  <script src="script.js?v=855"></script>
+  <script src="script.js?v=856"></script>
 </body>
 </html>
