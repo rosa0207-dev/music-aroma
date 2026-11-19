@@ -3,7 +3,7 @@
    ============================================ */
 
 /* ---------- 版本号（缓存击穿用，修改音频资源后必须递增）---------- */
-const AUDIO_VERSION = '850' /* v850: 狮脚标准化对齐其他动物 + 大企鹅身体正梨形(上窄下宽) + 小狗头饰蝴蝶结+星星发卡(成体/宝宝) + 新功能造宝宝(成体出现·10天孵化·宝宝永不长大·随机色·群主可提前看) + 图鉴1元解锁(解锁后可来回换宠·群主免付·共用人工审核通道) */ /* v764: 歌曲多源CDN(修幸运星歌/游戏歌没声) + 彩虹幸运星进有缘星星置顶可点播 + 冰激凌整根塌落 + 猪鼻/猪宝宝耳/狐眼上挑/松鼠脸/象鼻卷 */ /* v762: 幸运星抽中独占展示(小星星让位)+点星星重播幸运星之歌 / 象去嘴 / 仓鼠豆豆眼加大 / 熊眼鼻回滚 v760 / 狐耳接回头部+缩短 / 狗耳内移 */ /* v761: 狐狸眼🦊上挑+尖耳(成体宝宝)/猫须去层/狗狗眼/猪月牙眼/熊眼鼻缩小/仓鼠豆豆眼鼓脸/松鼠双滤镜拆层 + 新增猴猴象象 + 展览柜保存失败修复(insert补uid) + 彩虹星不进有缘星星 */ /* v760: 狗成体耳 38°→22° 收窄 + 宝宝说话嘴跳修复(pt2-mouth-open 锚点写死 145px 改 fill-box 自身中心) */ /* v759: Rosa 修正 —— 猪成体耳圆钝(上次误改宝宝) 狐眼去眼线 狐尾 anchor 左移防 viewBox 裁剪 仓鼠/松鼠成体嘴=宝宝同形(删松鼠鼻上游离门牙) */ /* v758: 宠物视觉修订 —— 狐眼重画(魅惑上挑杏眼+眼线)/狐尾加大1.28/1.24 兔睫毛去除 仓鼠腮红收进脸内+成体不张嘴 松鼠成体不张嘴 狗耳外扩38° 猪宝宝去嘴+耳朵圆钝 */ /* v757: 有缘星星 —— 被抽到过的星星不可撤回(原本就如此, 现在正名) + 「💫 有缘星星」个人记录: 抽到过的星星本地复制一份随时回看(星星仍在瓶子里, 云端永久去重不变) */ /* v755: 存量宠物一次性重置为宝宝 | 群主特权(换宠物/变大变小) | 成长只认正确料理(浇水/黑暗料理不算) | 音频多源CDN加速(jsDelivr, 治GitHub慢崩) | 吹泡泡每次按键都有吹气声 | 冰激凌限高12层塌落 '啊哦～冰激凌掉了' */
+const AUDIO_VERSION = '851' /* v851: 造宝宝功能下线 + 新增魔法棒(宠物长大后随时变大变小, 群主变大变小特权并入) */ /* v850: 狮脚标准化对齐其他动物 + 大企鹅身体正梨形(上窄下宽) + 小狗头饰蝴蝶结+星星发卡(成体/宝宝) + 新功能造宝宝(成体出现·10天孵化·宝宝永不长大·随机色·群主可提前看) + 图鉴1元解锁(解锁后可来回换宠·群主免付·共用人工审核通道) */ /* v764: 歌曲多源CDN(修幸运星歌/游戏歌没声) + 彩虹幸运星进有缘星星置顶可点播 + 冰激凌整根塌落 + 猪鼻/猪宝宝耳/狐眼上挑/松鼠脸/象鼻卷 */ /* v762: 幸运星抽中独占展示(小星星让位)+点星星重播幸运星之歌 / 象去嘴 / 仓鼠豆豆眼加大 / 熊眼鼻回滚 v760 / 狐耳接回头部+缩短 / 狗耳内移 */ /* v761: 狐狸眼🦊上挑+尖耳(成体宝宝)/猫须去层/狗狗眼/猪月牙眼/熊眼鼻缩小/仓鼠豆豆眼鼓脸/松鼠双滤镜拆层 + 新增猴猴象象 + 展览柜保存失败修复(insert补uid) + 彩虹星不进有缘星星 */ /* v760: 狗成体耳 38°→22° 收窄 + 宝宝说话嘴跳修复(pt2-mouth-open 锚点写死 145px 改 fill-box 自身中心) */ /* v759: Rosa 修正 —— 猪成体耳圆钝(上次误改宝宝) 狐眼去眼线 狐尾 anchor 左移防 viewBox 裁剪 仓鼠/松鼠成体嘴=宝宝同形(删松鼠鼻上游离门牙) */ /* v758: 宠物视觉修订 —— 狐眼重画(魅惑上挑杏眼+眼线)/狐尾加大1.28/1.24 兔睫毛去除 仓鼠腮红收进脸内+成体不张嘴 松鼠成体不张嘴 狗耳外扩38° 猪宝宝去嘴+耳朵圆钝 */ /* v757: 有缘星星 —— 被抽到过的星星不可撤回(原本就如此, 现在正名) + 「💫 有缘星星」个人记录: 抽到过的星星本地复制一份随时回看(星星仍在瓶子里, 云端永久去重不变) */ /* v755: 存量宠物一次性重置为宝宝 | 群主特权(换宠物/变大变小) | 成长只认正确料理(浇水/黑暗料理不算) | 音频多源CDN加速(jsDelivr, 治GitHub慢崩) | 吹泡泡每次按键都有吹气声 | 冰激凌限高12层塌落 '啊哦～冰激凌掉了' */
 
 /* v631: 全站清零重启 —— 每台设备第一次加载本版本时, 清掉本地旧账号与云端登录会话 */
 const MA_WIPE_FLAG = 'ma_wiped_v631';
@@ -18332,8 +18332,7 @@ function petDefault() {
     fedDates: [],          // v752: 喂养过的日期('YYYY-MM-DD'), 攒满 10 天长大
     v755Reset: true,       // v755: 一次性宝宝重置标记(新档直接带上, 不再触发重置)
     v756Wipe: true,        // v756: 一次性抹宠重选标记(新档直接带上, 不再触发抹除)
-    babyReq: null,         // v850: 造宝宝发起日('YYYY-MM-DD'), null=还没造; 10 天后破壳
-    babyHue: 0,            // v850: 宝宝随机色相(0-359, hue-rotate), 开出来就固定
+    hasGrown: false,       // v851: 长成过就永远有魔法棒资格(变小也能随时变回来)
   };
 }
 
@@ -18353,6 +18352,8 @@ function loadPet() {
     // v752: 老档宠物(没有成长字段)直接视为已成年, 不回退宝宝
     // 注意: merged 经 petDefault 合并后 adult 恒有值(false), 必须看原始解析对象 p
     if (merged.type && p.adult === undefined) { merged.adult = true; migrated = true; }
+    // v851: 存量已成年宠物补发魔法棒资格 —— 长成过就永远有资格, 变小也能随时变回来
+    if (merged.type && merged.adult && !merged.hasGrown) { merged.hasGrown = true; migrated = true; }
     // v756: 一次性抹掉全部已选宠物(所有人重新走选宠流程; 名字/魔力/菜谱一并清零)
     if (merged.type && !p.v756Wipe) { return petDefault(); }
     // v755: 一次性把存量宠物全部重置为宝宝期, 大家重新养一遍(名字/魔力/菜谱保留)
@@ -18561,36 +18562,23 @@ function renderPetHome() {
     if (p.adult) {
       gb.classList.add('grown');
       gb.innerHTML = '<span class="pgb-ico">🎓</span><span>已经长大啦, 一直陪着你</span>';
+    } else if (p.hasGrown) {
+      gb.classList.remove('grown');
+      gb.innerHTML = '<span class="pgb-ico">🪄</span><span>魔法棒变小中 · 点「魔法棒」随时变回来</span>';
     } else {
       const n = Math.min((p.fedDates || []).length, 10);
       gb.classList.remove('grown');
       gb.innerHTML = '<span class="pgb-ico">🍼</span><span>宝宝期 · 喂养 <b>' + n + '</b>/10 天（每天喂一道正确料理记 1 天, 浇水/黑暗料理不算）</span>';
     }
   }
-  // v850: 造宝宝按钮 + 小宝宝展示
-  const bbBtn = document.getElementById('petBabyBtn');
-  const bbSlot = document.getElementById('petBabySlot');
-  if (bbBtn && bbSlot) {
-    const bi = petBabyInfo(p);
-    if (!bi) {                       // 还没长大: 造宝宝技能隐藏
-      bbBtn.hidden = true; bbSlot.hidden = true;
-    } else if (bi.state === 'none') {
-      bbBtn.hidden = false;
-      bbBtn.querySelector('.pa-emoji').textContent = '🍼';
-      bbBtn.querySelector('.pa-text').textContent = '造宝宝';
-      bbSlot.hidden = true;
-    } else if (bi.state === 'warming') {
-      bbBtn.hidden = false;
-      bbBtn.querySelector('.pa-emoji').textContent = '⏳';
-      bbBtn.querySelector('.pa-text').textContent = '孵化中 ' + bi.left + ' 天';
-      bbSlot.hidden = true;
-    } else {                         // born(含群主提前看)
-      bbBtn.hidden = false;
-      bbBtn.querySelector('.pa-emoji').textContent = '🤍';
-      bbBtn.querySelector('.pa-text').textContent = bi.early ? '宝宝(提前看)' : '我的宝宝';
-      renderPetBaby(p, bi, bbSlot);
-      bbSlot.hidden = false;
-    }
+  // v851: 魔法棒 —— 长大后解锁, 随时变大变小
+  const wdBtn = document.getElementById('petWandBtn');
+  if (wdBtn) {
+    wdBtn.hidden = !p.hasGrown;
+    const wdEm = wdBtn.querySelector('.pa-emoji');
+    const wdTx = wdBtn.querySelector('.pa-text');
+    if (wdEm) wdEm.textContent = '🪄';
+    if (wdTx) wdTx.textContent = p.adult ? '变小' : '变大';
   }
   renderPlant(p);
   renderCookbook(p);
@@ -18752,7 +18740,7 @@ function markPetFed() {
   if (p.fedDates.includes(today)) return { grown: false, count: p.fedDates.length };
   p.fedDates.push(today);
   const grown = p.fedDates.length >= 10;
-  if (grown) p.adult = true;
+  if (grown) { p.adult = true; p.hasGrown = true; }
   if (!savePet(p)) return null;
   refreshPetGlobal();
   return { grown, count: p.fedDates.length };
@@ -18762,41 +18750,17 @@ function celebrateGrown(p) {
   setTimeout(() => { try { petSay('我长大啦～以后也请多多关照 ♡', 3600); } catch (_) {} }, 800);
 }
 
-/* ---------- v850: 造宝宝 —— 长大后孕育小宝宝, 10 天破壳, 宝宝永远是宝宝(随机色) ---------- */
-const PET_BABY_DAYS = 10;
-function petParseDay(s) {
-  const a = (s || '').split('-').map(Number);
-  return new Date(a[0] || 2026, (a[1] || 1) - 1, a[2] || 1);
-}
-function petBabyInfo(p) {
-  if (!p || !p.adult || !p.type) return null;          // 宝宝期没有造宝宝技能
-  if (!p.babyReq) return { state: 'none' };
-  const days = Math.floor((Date.now() - petParseDay(p.babyReq).getTime()) / 86400000);
-  const born = days >= PET_BABY_DAYS;
-  if (born || isOwnerUser()) {                          // 群主特权: 随时看, 不用等十天
-    return { state: 'born', hue: p.babyHue || 0, early: !born };
-  }
-  return { state: 'warming', left: PET_BABY_DAYS - days };
-}
-function makeBaby() {
+/* ---------- v851: 魔法棒 —— 长大后解锁, 随时变大变小(资格跟 hasGrown 走, 变小不减资格) ---------- */
+function petWandMorph() {
   const p = loadPet();
-  if (!p.type || !p.adult) { toast('长大以后才能造宝宝哦 🍼'); return; }
-  if (p.babyReq) { renderPetHome(); return; }           // 已经在孵/已出生, 只刷新
-  p.babyReq = petToday();
-  p.babyHue = Math.floor(Math.random() * 360);
+  if (!p.type) return;
+  if (!p.hasGrown) { toast('🪄 长大以后才能拿到魔法棒哦'); return; }
+  p.adult = !p.adult;
   if (!savePet(p)) return;
   refreshPetGlobal();
-  toast('🤍 开始孕育小宝宝啦, 10 天后破壳!');
-  try { petSay('嘿嘿, 我要有个小宝宝啦~ 十天后见!', 3400); } catch (_) {}
   renderPetHome();
-}
-function renderPetBaby(p, bi, slot) {
-  slot.innerHTML = petSvgNs(p.type, '_bb', 'baby');     // 宝宝形态 + 独立 ID 后缀防串染
-  const svg = slot.querySelector('svg');
-  if (svg) {
-    svg.style.filter = 'hue-rotate(' + (bi.hue || 0) + 'deg) saturate(1.12)';
-    svg.setAttribute('role', 'img');
-  }
+  toast(p.adult ? '🪄 魔法棒一挥, 变大啦！' : '🪄 魔法棒一挥, 变小啦');
+  try { petSay(p.adult ? '哇, 我一下子变大了!' : '咦, 我又变小了耶~', 2600); } catch (e) {}
 }
 
 /* ---------- 浇水 ---------- */
@@ -18816,7 +18780,7 @@ function waterPlant() {
   renderPetHome();
 }
 
-/* ---------- v755: 群主特权 —— 换宠物 / 变大变小 ---------- */
+/* ---------- v755/v851: 群主特权 —— 换宠物(变大变小已并入长大后的魔法棒) ---------- */
 const PET_CN_NAMES = { rabbit: '兔兔', bear: '熊熊', hamster: '仓鼠', squirrel: '松鼠', cat: '猫咪', dog: '狗狗', pig: '猪猪', fox: '狐狸', monkey: '猴猴', elephant: '象象', lion: '狮狮', leopard: '豹豹', hedgehog: '刺猬', bird: '小鸟', penguin: '企鹅' };
 let ownerSwitching = false;
 function ownerSwitchPet() {
@@ -18827,17 +18791,6 @@ function ownerSwitchPet() {
   document.getElementById('petHome').hidden = true;
   try { toast('🪄 点一只新伙伴, 名字/魔力/喂养进度都会保留'); } catch (e) {}
 }
-function ownerMorphPet() {
-  const p = loadPet();
-  if (!p.type) return;
-  p.adult = !p.adult;
-  if (!savePet(p)) return;
-  refreshPetGlobal();
-  renderPetHome();
-  toast(p.adult ? '🪄 一下子长大啦' : '🪄 变回宝宝啦');
-  try { petSay(p.adult ? '哇, 我一下子长大了!' : '咦, 我又变小了耶~', 2600); } catch (e) {}
-}
-
 /* ---------- v850: 图鉴 1元解锁 —— 解锁后可来回换宠(群主免付) ---------- */
 const DEX_UNLOCK_KEY = 'ma_dex_unlocked';
 let dexSwitching = false;
@@ -19013,14 +18966,12 @@ function bindPets() {
   // 浇水 / 喂食
   document.getElementById('petWaterBtn').addEventListener('click', waterPlant);
   document.getElementById('petFeedBtn').addEventListener('click', openFeedModal);
-  // v755: 群主特权按钮
+  // v755: 群主特权按钮(换宠物; 变大变小 → v851 魔法棒人人可用)
   const oSwitchBtn = document.getElementById('petOwnerSwitch');
   if (oSwitchBtn) oSwitchBtn.addEventListener('click', ownerSwitchPet);
-  const oMorphBtn = document.getElementById('petOwnerMorph');
-  if (oMorphBtn) oMorphBtn.addEventListener('click', ownerMorphPet);
-  // v850: 造宝宝 + 图鉴解锁
-  const bbBtnBind = document.getElementById('petBabyBtn');
-  if (bbBtnBind) bbBtnBind.addEventListener('click', makeBaby);
+  // v851: 魔法棒 + 图鉴解锁
+  const wdBtnBind = document.getElementById('petWandBtn');
+  if (wdBtnBind) wdBtnBind.addEventListener('click', petWandMorph);
   const dxSwBind = document.getElementById('petDexSwitch');
   if (dxSwBind) dxSwBind.addEventListener('click', dexSwitchPet);
   const dxUlBind = document.getElementById('petDexUnlock');
