@@ -5817,3 +5817,26 @@ img.sc-img {
 /* v764: 有缘星星记录里的彩虹幸运星可点播 */
 .wish-mine-star-song { cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .wish-mine-star-song svg { animation: wishLuckySongPulse 2s ease-in-out infinite; }
+
+/* v870: 变色鸟 —— 黄(当前)→蓝→紫→粉 不停循环。
+   用 gradient 上的 class 选择器(不含宠物 id 前缀, 不受 petSvgNs 命名空间改写影响,
+   一套选择器同时命中成体/宝宝/主头像/选宠卡全部实例); 只变身体/翅膀/帽羽, 脸/嘴/腮红/眼不变。*/
+@keyframes bdCycB1{0%,100%{stop-color:#fff9e0}25%{stop-color:#f6fbff}50%{stop-color:#f9f4ff}75%{stop-color:#fff5f8}}
+@keyframes bdCycB2{0%,100%{stop-color:#f7e6b4}25%{stop-color:#dceefb}50%{stop-color:#e6d9f7}75%{stop-color:#fbd9e4}}
+@keyframes bdCycB3{0%,100%{stop-color:#eccf8c}25%{stop-color:#bcdcf2}50%{stop-color:#c9b0e8}75%{stop-color:#f2afc9}}
+@keyframes bdCycB4{0%,100%{stop-color:#d8ab5e}25%{stop-color:#9cc3e0}50%{stop-color:#9d7bc8}75%{stop-color:#e083a8}}
+@keyframes bdCycW1{0%,100%{stop-color:#f7e6b4}25%{stop-color:#dceefb}50%{stop-color:#e6d9f7}75%{stop-color:#fbd9e4}}
+@keyframes bdCycW2{0%,100%{stop-color:#e2bd7e}25%{stop-color:#a9cdea}50%{stop-color:#b99ade}75%{stop-color:#eeb2cc}}
+@keyframes bdCycW3{0%,100%{stop-color:#cfa05c}25%{stop-color:#8fb7d9}50%{stop-color:#9d78c4}75%{stop-color:#dd8fb2}}
+@keyframes bdCycC1{0%,100%{stop-color:#d8ab5e}25%{stop-color:#8fb7d9}50%{stop-color:#9d7bc8}75%{stop-color:#e083a8}}
+@keyframes bdCycC2{0%,100%{stop-color:#eccf8c}25%{stop-color:#a9cdea}50%{stop-color:#c9b0e8}75%{stop-color:#f2afc9}}
+.maBdBody stop:nth-child(1){animation:bdCycB1 10s ease infinite}
+.maBdBody stop:nth-child(2){animation:bdCycB2 10s ease infinite}
+.maBdBody stop:nth-child(3){animation:bdCycB3 10s ease infinite}
+.maBdBody stop:nth-child(4){animation:bdCycB4 10s ease infinite}
+.maBdWing stop:nth-child(1){animation:bdCycW1 10s ease infinite}
+.maBdWing stop:nth-child(2){animation:bdCycW2 10s ease infinite}
+.maBdWing stop:nth-child(3){animation:bdCycW3 10s ease infinite}
+.maBdCapLg stop:nth-child(1){animation:bdCycC1 10s ease infinite}
+.maBdCapLg stop:nth-child(2){animation:bdCycC2 10s ease infinite}
+.maBdCapLg stop:nth-child(3){animation:bdCycC2 10s ease infinite}
