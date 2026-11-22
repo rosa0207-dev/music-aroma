@@ -4756,6 +4756,60 @@ img.pet-creature { object-fit: contain; }
   0%, 100% { transform: scale(0.92); opacity: 0.7; }
   50%      { transform: scale(1.06); opacity: 1; }
 }
+
+/* v876: 拟人植物(Jellycat 风水彩盆栽 + 轻动画) */
+.pot-plant .pl-holder { position: absolute; inset: 0; z-index: 1; }
+.pot-plant .pl-holder svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 6px 14px rgba(120,90,60,.16)); }
+.pot-plant .pl-sway { transform-box: fill-box; transform-origin: 50% 100%; animation: plSway 4.6s ease-in-out infinite alternate; }
+@keyframes plSway { from { transform: rotate(-1.8deg); } to { transform: rotate(1.8deg); } }
+.pot-plant .pl-eyes { transform-box: fill-box; transform-origin: center; animation: plBlink 5.4s infinite; }
+@keyframes plBlink { 0%, 93%, 100% { transform: scaleY(1); } 95.5% { transform: scaleY(.12); } 98% { transform: scaleY(1); } }
+.pot-plant .pl-drop { opacity: 0; }
+.pot-plant.pl-watering .pl-drop { animation: plDrop 1.35s ease-in forwards; }
+.pot-plant.pl-watering .pl-drop.d2 { animation-delay: .18s; }
+.pot-plant.pl-watering .pl-drop.d3 { animation-delay: .36s; }
+.pot-plant.pl-watering .pl-drop.d4 { animation-delay: .1s; }
+@keyframes plDrop { 0% { opacity: 0; transform: translateY(-10px); } 22% { opacity: .9; } 100% { opacity: 0; transform: translateY(132px); } }
+.pot-plant.pl-watering .pl-sway { animation: plHappy 1.25s ease-in-out; }
+@keyframes plHappy { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-4deg) scale(1.03); } 55% { transform: rotate(4deg) scale(1.04); } 80% { transform: rotate(-2deg); } }
+.plant-pick-thumb .pl-sway { transform-box: fill-box; transform-origin: 50% 100%; animation: plSway 4.6s ease-in-out infinite alternate; }
+.plant-pick-thumb .pl-eyes { transform-box: fill-box; transform-origin: center; animation: plBlink 5.4s infinite; }
+/* v876: 换一株 */
+.plant-pick-btn {
+  border: 1.5px dashed #d9c6ab; background: #fffaf2; color: #8a6f52;
+  border-radius: 999px; padding: 6px 16px; font-size: 12.5px; cursor: pointer;
+  font-family: inherit; transition: all .2s;
+}
+.plant-pick-btn:hover { background: #f6ecdb; border-color: #c9ad86; }
+#plantPickMask {
+  position: fixed; inset: 0; z-index: 10025; background: rgba(40,32,52,.45);
+  backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .24s ease; padding: 20px;
+}
+#plantPickMask.show { opacity: 1; }
+.plant-pick-card {
+  position: relative; width: min(560px, 94vw); max-height: 88vh; overflow-y: auto;
+  background: linear-gradient(165deg, #FFFDF8, #FBF3E6);
+  border: 1px solid rgba(180,140,70,.25); border-radius: 22px;
+  padding: 24px 22px 22px; text-align: center;
+  box-shadow: 0 30px 70px -30px rgba(60,40,10,.5);
+  transform: translateY(14px) scale(.97);
+  transition: transform .24s cubic-bezier(.2,.9,.3,1.2);
+}
+#plantPickMask.show .plant-pick-card { transform: translateY(0) scale(1); }
+.plant-pick-card h3 { margin: 2px 0 6px; font-size: 19px; color: #7a5c3e; font-weight: 600; }
+.plant-pick-sub { margin: 0 0 16px; font-size: 12.5px; color: #a08a70; line-height: 1.65; }
+.plant-pick-x { position: absolute; top: 12px; right: 14px; width: 30px; height: 30px; border: 0; background: transparent; font-size: 18px; cursor: pointer; color: #a08a70; }
+.plant-pick-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.plant-pick-item { position: relative; background: #fff; border: 1.5px solid #ecdfcb; border-radius: 16px; padding: 6px 4px 10px; cursor: pointer; font-family: inherit; transition: all .2s; }
+.plant-pick-item:hover { border-color: #d9b98b; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(160,120,70,.16); }
+.plant-pick-item.cur { border-color: #e0a86c; background: #fff6e8; }
+.plant-pick-thumb { display: block; width: 100%; height: 104px; }
+.plant-pick-thumb svg { width: 100%; height: 100%; display: block; }
+.plant-pick-label { display: block; font-size: 13px; color: #7a5c3e; margin-top: 2px; }
+.plant-pick-cur { display: block; font-size: 10.5px; color: #c08a4b; margin-top: 2px; }
+@media (max-width: 420px) { .plant-pick-grid { gap: 8px; } .plant-pick-thumb { height: 86px; } }
+
 .pot-tip { font-size: 12.5px; color: var(--ink-soft); text-align: center; margin: 0; }
 
 .pet-actions { display: flex; gap: 14px; flex-wrap: wrap; }
