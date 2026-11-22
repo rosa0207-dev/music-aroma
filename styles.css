@@ -5894,3 +5894,14 @@ img.sc-img {
 .maBdCapLg stop:nth-child(1){animation:bdCycC1 10s ease infinite}
 .maBdCapLg stop:nth-child(2){animation:bdCycC2 10s ease infinite}
 .maBdCapLg stop:nth-child(3){animation:bdCycC2 10s ease infinite}
+
+@keyframes plCyc1{0%,100%{stop-color:#fdeaf1}25%{stop-color:#eaf6ff}50%{stop-color:#f6edff}75%{stop-color:#fff6df}}
+@keyframes plCyc2{0%,100%{stop-color:#ef9fbe}25%{stop-color:#a9d2f0}50%{stop-color:#c9aee8}75%{stop-color:#f5d59a}}
+@keyframes plCyc3{0%,100%{stop-color:#d87ca4}25%{stop-color:#7fb2dd}50%{stop-color:#9d7bc8}75%{stop-color:#e8b46f}}
+@keyframes plCycF{0%,100%{fill:#c26a88}25%{fill:#6fa8d6}50%{fill:#9070c0}75%{fill:#d8a860}}
+@keyframes plCycS{0%,100%{stroke:#d87ca4}25%{stroke:#7fb2dd}50%{stroke:#9d7bc8}75%{stroke:#e8b46f}}
+.maPlCap stop:nth-child(1){animation:plCyc1 10s ease infinite}
+.maPlCap stop:nth-child(2){animation:plCyc2 10s ease infinite}
+.maPlCap stop:nth-child(3){animation:plCyc3 10s ease infinite}
+.maPlAcc{animation:plCycF 10s ease infinite}
+.maPlLine{animation:plCycS 10s ease infinite}
