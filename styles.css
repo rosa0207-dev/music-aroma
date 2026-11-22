@@ -5905,3 +5905,15 @@ img.sc-img {
 .maPlCap stop:nth-child(3){animation:plCyc3 10s ease infinite}
 .maPlAcc{animation:plCycF 10s ease infinite}
 .maPlLine{animation:plCycS 10s ease infinite}
+
+/* v883: 五羽冠/宝宝呆毛加入变色循环(黄→蓝→紫→粉, 与身体同拍 10s) */
+@keyframes bdCycT1{0%,100%{stop-color:#d8ab5e}25%{stop-color:#8fb7d9}50%{stop-color:#9d7bc8}75%{stop-color:#e083a8}}
+@keyframes bdCycT2{0%,100%{stop-color:#f0cd86}25%{stop-color:#b6d7ef}50%{stop-color:#c7ade9}75%{stop-color:#f2b4ce}}
+@keyframes bdCycT3{0%,100%{stop-color:#fdecc6}25%{stop-color:#e8f4ff}50%{stop-color:#f3ecff}75%{stop-color:#ffecf3}}
+.maBdCrest stop:nth-child(1){animation:bdCycT1 10s ease infinite}
+.maBdCrest stop:nth-child(2){animation:bdCycT2 10s ease infinite}
+.maBdCrest stop:nth-child(3){animation:bdCycT3 10s ease infinite}
+@keyframes bdTuftS{0%,100%{stroke:#d8ab5e}25%{stroke:#8fb7d9}50%{stroke:#9d7bc8}75%{stroke:#e083a8}}
+@keyframes bdTuftTip{0%,100%{fill:#e8bd7c}25%{fill:#b9d6ec}50%{fill:#c3abe4}75%{fill:#eeb6cd}}
+.maBdTuft{animation:bdTuftS 10s ease infinite}
+.maBdTuftTip{animation:bdTuftTip 10s ease infinite}
